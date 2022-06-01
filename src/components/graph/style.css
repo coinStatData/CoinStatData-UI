@@ -1,0 +1,30 @@
+.chart-title {
+  text-align: center;
+}
+
+.chart-cont-inner {
+  width: 100vw;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+
+}
+
+.chart-cont {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.chart-btn {
+  width: 200px !important;
+  padding:5px !important;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.btn-cont {
+  display: flex;
+  flex-direction: row;
+}

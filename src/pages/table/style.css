@@ -1,0 +1,27 @@
+.table-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100vw;
+  margin-top: 20px;
+}
+
+.chart-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hr-cont {
+  margin: 50px 150px 50px 150px;
+}
+
+@media (max-width: 1050px) { 
+  .table-page {
+    flex-direction: column;
+    margin-top: 0;
+  }
+  .hr-cont {
+    margin: 40px 150px 20px 150px;
+  }
+ }
