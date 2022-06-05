@@ -7,20 +7,24 @@ import UserContext from '../../context/userContext';
 import { formatDate } from '../../util'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import { useSelector, useDispatch } from 'react-redux';
+import { update_chartData } from '../../redux/slices/chartData';
 import './style.css';
 
 function TablePage(props) {
-  const {coin_g, resp_g, cResp_g, interval_g, update_g } = useContext(UserContext);
+  const {coin_g, resp_g, interval_g, update_g } = useContext(UserContext);
   const [avgReturn, setAvgReturn] = useState({});
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
   const [hMinReturn, setHminReturn] = useState(0);
   const [hMaxReturn, setHMaxReturn] = useState(0);
-  const [chartData, setChartData] = useState([]);
   const [isDaily, setIsDaily] = useState(true);
   const [avgSumData, setAvgSumData] = useState([]);
   const [avgSumMData, setAvgSumMData] = useState([]);
   const [avgMReturn, setAvgMReturn] = useState({});
+  const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
+  const chartData = useSelector((state) => state.chartData.value)
+  const dispatch = useDispatch();
 
   const changeDailyHourly = () => {
     setIsDaily(!isDaily);
@@ -141,8 +145,7 @@ function TablePage(props) {
       setHMaxReturn(hmax);
       setHminReturn(hmin);
       console.log("### chardata = == ", chartD);
-      setChartData(chartD);
-      update_g(chartD, 'chartD');
+      dispatch(update_chartData(chartD));
       calAvg(chartD);
     }
   }, [resp_g]);
@@ -154,9 +157,9 @@ function TablePage(props) {
       let min = Number.MAX_SAFE_INTEGER;
       let hmax = -100;
       let hmin = 100;
-      let chartD = cResp_g.map((item, index) => {
-        if(index+2 < cResp_g.length) {
-          let ch = (cResp_g[index+1][1] - item[1])/item[1] * 100;
+      let chartD = coinGeckoResp.map((item, index) => {
+        if(index+2 < coinGeckoResp.length) {
+          let ch = (coinGeckoResp[index+1][1] - item[1])/item[1] * 100;
           let row = {
             name: interval_g == "hourly"? formatDate(new Date(item[0])) : new Date(item[0]),
             [coin_g]: item[1],
@@ -174,11 +177,10 @@ function TablePage(props) {
       setHMaxReturn(hmax);
       setHminReturn(hmin);
       console.log("### chardata = == ", chartD);
-      setChartData(chartD);
-      update_g(chartD, 'chartD');
+      dispatch(update_chartData(chartD));
       calAvg(chartD)
     }
-  }, [cResp_g]);
+  }, [coinGeckoResp]);
 
   return (
     <div>
