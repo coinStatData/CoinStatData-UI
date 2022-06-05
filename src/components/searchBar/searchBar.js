@@ -4,6 +4,9 @@ import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import { useSelector, useDispatch } from 'react-redux';
+import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
+import { update_tableData } from '../../redux/slices/tableData';
 import './style.css';
 
 function SearchBar(props) {
@@ -19,6 +22,7 @@ function SearchBar(props) {
   const [volprice, setVolprice] = useState("prices");
   const msg1 = "We don't have data for those dates. Please try another date range!";
   const msg2 = "Oopse, something went wrong. Please try again later!";
+  const dispatch = useDispatch()
 
   useEffect(() => {
     async function fetchData2() {
@@ -61,7 +65,7 @@ function SearchBar(props) {
     let resp = await fetchDataGecko(coin_g, days, interval);
     console.log("### resp = == ", resp);
     if(resp) {
-      update_g(resp, "cResp")
+      dispatch(update_gecko_resp(resp));
     } else {
       setErrorMessage(msg1);
       setShowAlert(true);
@@ -139,7 +143,7 @@ function SearchBar(props) {
         },
       });
       console.log("## resp = ", resp);
-      update_g(resp.data, "tableData")
+      update_tableData(resp.data)
       return resp.data[volprice];
     } catch(e) {
       console.log(e.message);

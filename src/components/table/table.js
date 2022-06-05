@@ -9,14 +9,16 @@ import { update_endDate } from '../../redux/slices/endDate';
 import './style.css';
 
 function Table2(props) {
-  const { resp_g, coin_g, chartData_g, tableData_g} = useContext(UserContext);
+  const { resp_g, coin_g } = useContext(UserContext);
   const [tableD, setTableD] = useState();
   const [isLambda, setIsLambda] = useState();
   const dispatch = useDispatch()
-  const sDate = useSelector((state) => state.startDate.value)
-  const eDate = useSelector((state) => state.endDate.value)
+  const sDate = useSelector((state) => state.startDate.value);
+  const eDate = useSelector((state) => state.endDate.value);
+  const tableData = useSelector((state) => state.tableData.value)
   
   useEffect(() => {
+    //this is for lambda resp
     setTableD(resp_g)
     setIsLambda(true);
     if(Array.isArray(resp_g) && resp_g.length>0) {
@@ -26,14 +28,15 @@ function Table2(props) {
   }, [resp_g]);
 
   useEffect(() => {
-    setTableD(tableData_g)
+    //this is coinGecko Resp
+    setTableD(tableData)
     setIsLambda(false);
-    console.log("##tableData: ",tableData_g );
-    if(Array.isArray(tableData_g.prices) && tableData_g.prices.length>5) {
-      dispatch(update_startDate(formatDate(new Date(tableData_g.prices[0][0]))));
-      dispatch(update_endDate(formatDate(new Date(tableData_g.prices[tableData_g.prices.length-1][0]))));
+    console.log("##tableData: ",tableData );
+    if(Array.isArray(tableData.prices) && tableData.prices.length>5) {
+      dispatch(update_startDate(formatDate(new Date(tableData.prices[0][0]))));
+      dispatch(update_endDate(formatDate(new Date(tableData.prices[tableData.prices.length-1][0]))));
     }
-  }, [tableData_g]);
+  }, [tableData]);
 
   const csvData = () => {
     let data = [];
