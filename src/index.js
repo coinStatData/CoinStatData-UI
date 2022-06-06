@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
-import DonatePage from './pages/donate';
+import PortFolioOpt from './pages/portfolioOpt';
 import FeaturePage from './pages/features';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,8 +17,8 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />
-          <Route path="/features" element={<FeaturePage></FeaturePage>} />
-          <Route path="/donate" element={<DonatePage></DonatePage>} />
+          {/* <Route path="/features" element={<FeaturePage></FeaturePage>} /> */}
+          <Route path="/optimization" element={<PortFolioOpt></PortFolioOpt>} />
         </Routes>
       </BrowserRouter>
     </Provider>

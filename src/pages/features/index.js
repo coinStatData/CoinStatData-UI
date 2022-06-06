@@ -3,13 +3,12 @@ import NavBarComp from '../../components/navBar/navBar';
 import './styles.css';
 
 function DonatePage(props) {
-
-    return (
-			<div>
-				<NavBarComp></NavBarComp>
-				<p>ayuda me por favor</p>
-			</div>
-    )
+	return (
+		<div>
+			<NavBarComp></NavBarComp>
+			<p>ayuda me por favor</p>
+		</div>
+	)
 }
 
 export default DonatePage;
