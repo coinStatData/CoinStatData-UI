@@ -2,17 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import NavBarComp from '../../components/navBar/navBar';
 import './styles.css';
 
-function FeaturePage(props) {
+function PortFolioOpt(props) {
 
 	return (
-		<div>
+		<div className="iframe-cont">
 			<NavBarComp></NavBarComp>
-			<div>
-				<h1></h1>
-			</div>
-			<p>ayuda me por favor</p>
+			<iframe src="/python/capm/index.html"/>
 		</div>
 	);
 }
 
-export default FeaturePage;
+export default PortFolioOpt;
