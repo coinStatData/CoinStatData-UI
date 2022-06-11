@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import UserContext from './context/userContext';
 import TablePage from './pages/table/tablePage';
 import NavBarComp from './components/navBar/navBar';
+import { useFetch } from "react-async"
 import './App.css';
+
+const APIEndPoint = "https://40rrfmjfvc.execute-api.us-east-1.amazonaws.com/v1/hello"
 
 function App() {
 
@@ -36,3 +39,12 @@ function App() {
 }
 
 export default App;
+
+const APIResult = () => {
+  const { data, error } = useFetch(APIEndPoint, {
+    headers: { accept: "application/json" },
+  })
+  if (error) return <p>{error.message}</p>
+  if (data) return <p>{data.message}</p>
+  return null
+}

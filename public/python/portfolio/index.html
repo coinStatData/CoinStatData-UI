@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+	<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  <link rel="stylesheet" href="styles.css">
+<py-env>
+- numpy
+- pandas
+- matplotlib
+</py-env>
+
+</head>
+<body>
+  <div class="main-body">
+    <h2>Crypto Portfolio Optimization</h2>
+    <hr/>
+    <div id="python-code">
+      <strong styles="margin-left:20px">Write python code here:</strong>
+      <py-repl>comparison_analysis(['bitcoin', 'ethereum', 'ripple', 'litecoin', 'dogecoin', 'monero'], 600)</py-repl>
+      <br>
+      <li>comparison_analysis(<i>array_of_coins</i>, <i>number_of_days_into_the_past</i>)</li>
+      <li>Variables: price_data, normalized_data, log_return</li>
+      <li>Example commands: log_return.describe().transpose(), log_return.cov()</li>
+    </div>
+    <hr/>
+    <h3>Efficient Frontier: Sharpe Ratio</h3>
+    <div class="flex-cont-row">
+      <div id="sharp-ratio">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div id="sharp-ratio-stat">
+        <b class="local-title">Optimal Portfolio Ratio</b>
+        <div id="optimal-portfolio">
+          <div class="spinner-cont">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+        <br/><br/>
+        <b class="local-title">Maximum Returns and Volitility</b>
+        <div id="maximum-perf">
+          <div class="spinner-cont">
+            <div class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<py-script>
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from pyodide.http import pyfetch
+import asyncio
+
+api_url = 'https://api.coingecko.com/api/v3/coins/{}/market_chart?vs_currency=usd&days={}&interval=daily'
+headers={'Content-type':'text/plain'}
+
+#global variables
+price_data = {}
+normalized_data = {}
+log_return = {}
+cryptos = []
+
+async def get_crypto_data(coin, days):
+  json_url = api_url.format(coin, days)
+  resp = await pyfetch(json_url, method="GET", headers=headers)
+  bjson = await resp.json()
+  prices = bjson["prices"]
+  df_price = pd.DataFrame(prices)  
+  df_price = df_price.rename({0: 'date', 1: 'price'}, axis=1)  # new method
+  df_price = df_price.set_index('date')
+  return df_price
+
+async def plotPriceComparison(crypto, days):
+  crypto_data = {}
+  for coin in crypto:
+    crypto_price_df = await get_crypto_data(coin, days)
+    crypto_data[coin] = crypto_price_df
+  dfp = pd.concat(crypto_data, axis=1)
+  dfp.columns = crypto
+  
+  global price_data
+  price_data = dfp
+  
+  global normalized_data
+  normalized_data = dfp/dfp.iloc[0]
+
+  crypto_daily_ret = dfp.pct_change(1)  # Daily return
+  log_ret = np.log(dfp/dfp.shift(1))  #Log return
+
+  global log_return 
+  log_return = log_ret
+  sharpRatio()
+
+  
+def comparison_analysis(crypto, days):
+  global cryptos
+  cryptos = crypto
+  try:
+    loop = asyncio.get_running_loop()
+  except RuntimeError:
+    loop = None
+  if loop and loop.is_running():
+    tsk = loop.create_task(plotPriceComparison(crypto, days))
+    tsk.add_done_callback(
+      lambda t: t.result()
+    )
+  else:
+    print('Starting new event loop')
+    asyncio.run(plotPriceComparison(crypto, days))
+  
+
+def sharpRatio():
+  global log_return
+  log_ret = log_return
+  global normalized_data
+  dfp = normalized_data
+  global cryptos
+  crypto = cryptos
+  
+  <!-- log_ret.describe().transpose()
+  log_ret.mean() * 600
+  log_ret.cov() -->
+  num_ports = 10000
+  all_weights = np.zeros((num_ports,len(dfp.columns)))
+  ret_arr = np.zeros(num_ports)
+  vol_arr = np.zeros(num_ports)
+  sharpe_arr = np.zeros(num_ports)
+
+  for ind in range(num_ports):
+    # Create Random Weights
+    weights = np.array(np.random.random(len(dfp.columns)))
+    # Rebalance Weights
+    weights = weights / np.sum(weights)
+    # Save Weights
+    all_weights[ind,:] = weights
+    # Expected Return
+    ret_arr[ind] = np.sum((log_ret.mean() * weights) *365)
+    # Expected Variance
+    vol_arr[ind] = np.sqrt(np.dot(weights.T, np.dot(log_ret.cov() * 365, weights)))
+    # Sharpe Ratio
+    sharpe_arr[ind] = ret_arr[ind]/vol_arr[ind]
+  sharpe_arr.max()
+  sharpe_arr.argmax()
+
+  optimal_ratio = list(all_weights[sharpe_arr.argmax(),:])
+  optimal_portfolio = {}
+  i = 0
+  for coin in crypto:
+    optimal_portfolio[coin] = str(round(optimal_ratio[i] * 100)) + '%'
+    i += 1
+  pyscript.write('optimal-portfolio', optimal_portfolio)
+
+  max_sr_ret = ret_arr[sharpe_arr.argmax()]
+  max_sr_vol = vol_arr[sharpe_arr.argmax()]
+  maxiums = {}
+  maxiums['Max_SharpeRatio_Return'] = max_sr_ret
+  maxiums['Max_SharpeRatio_Volitility'] = max_sr_vol
+  pyscript.write('maximum-perf', maxiums)
+
+  fig, ax = plt.subplots(figsize=(7, 4))
+  plt.scatter(vol_arr,ret_arr,c=sharpe_arr,cmap='plasma')
+  plt.colorbar(label='Sharpe Ratio')
+  plt.xlabel('Volatility')
+  plt.ylabel('Return')
+  plt.title('Efficient Frontier: Sharpe Ratio')
+  plt.scatter(max_sr_vol, max_sr_ret, c='red', s=50, edgecolors='black')
+  pyscript.write('sharp-ratio', fig)
+
+comparison_analysis(['bitcoin', 'ethereum', 'ripple', 'litecoin', 'dogecoin', 'monero'], 600)
+
+  </py-script>
+</body>
+</html>

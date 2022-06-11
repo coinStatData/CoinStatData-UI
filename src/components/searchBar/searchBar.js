@@ -24,29 +24,33 @@ function SearchBar(props) {
   const msg2 = "Oopse, something went wrong. Please try again later!";
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    async function fetchData2() {
-      let resp = await fetchDataLambda(coin_g, start, end);
-      console.log("### resp = == ", resp);
-      if(resp.count > 0) {
-        update_g(resp.Items, "resp");
-      }
-    }
-    fetchData2();
-  }, []);
-
   // useEffect(() => {
+  //   //for lambda
   //   async function fetchData2() {
-  //     let resp = await fetchDataGecko(coin_g, days, interval);
+  //     let resp = await fetchDataLambda(coin_g, start, end);
   //     console.log("### resp = == ", resp);
-  //     if(resp) {
-  //       setCResp_g(resp);
+  //     if(resp.count > 0) {
+  //       update_g(resp.Items, "resp");
   //     }
   //   }
   //   fetchData2();
   // }, []);
 
+  useEffect(() => {
+    async function fetchData2() {
+      let resp = await fetchDataGecko(coin_g, days, interval);
+      if(resp) {
+        dispatch(update_gecko_resp(resp));
+      } else {
+        setErrorMessage(msg1);
+        setShowAlert(true);
+      }
+    }
+    fetchData2();
+  }, []);
+
   const handleSubmitDates = async (e) => {
+    //for lambda
     e.preventDefault();
     update_g(coinName, "coin");
     let resp = await fetchDataLambda(coin_g, start, end);
@@ -143,7 +147,7 @@ function SearchBar(props) {
         },
       });
       console.log("## resp = ", resp);
-      update_tableData(resp.data)
+      dispatch(update_tableData(resp.data))
       return resp.data[volprice];
     } catch(e) {
       console.log(e.message);

@@ -51,7 +51,6 @@ function TablePage(props) {
         if(interval_g == "daily") {
           time = weekDic[(chartD[i]["name"].getDay())];
           mday = chartD[i]["name"].getDate();
-          console.log("%%%mday ", mday)
           //month dates
           mObj[mday] = 0;
           mObj[mday+"_count"] = 0;
@@ -85,7 +84,6 @@ function TablePage(props) {
       }
       setAvgReturn(dObj);
       setAvgMReturn(mObj);
-      console.log("### avg return: ", dObj);
       let avgSumData = [];
       //hourly and days of week
       for(let d in dic) {
@@ -111,7 +109,6 @@ function TablePage(props) {
           }
           marr.push(temp);
         }
-        console.log("### avg monthly sum data: ", marr);
         setAvgSumMData(marr);
       }
     }
@@ -144,7 +141,6 @@ function TablePage(props) {
       setMaxPrice(max);
       setHMaxReturn(hmax);
       setHminReturn(hmin);
-      console.log("### chardata = == ", chartD);
       dispatch(update_chartData(chartD));
       calAvg(chartD);
     }
@@ -152,13 +148,13 @@ function TablePage(props) {
 
   useEffect(() => {
      //this is for coin gecko api
-    if(Array.isArray(resp_g)) {
+    if(Array.isArray(coinGeckoResp)) {
       let max = 0;
       let min = Number.MAX_SAFE_INTEGER;
       let hmax = -100;
       let hmin = 100;
       let chartD = coinGeckoResp.map((item, index) => {
-        if(index+2 < coinGeckoResp.length) {
+        if(index < coinGeckoResp.length-2) {
           let ch = (coinGeckoResp[index+1][1] - item[1])/item[1] * 100;
           let row = {
             name: interval_g == "hourly"? formatDate(new Date(item[0])) : new Date(item[0]),
@@ -176,7 +172,8 @@ function TablePage(props) {
       setMaxPrice(max);
       setHMaxReturn(hmax);
       setHminReturn(hmin);
-      console.log("### chardata = == ", chartD);
+      chartD.splice(chartD.length-2,2);
+      console.log("chartDDDD", chartD);
       dispatch(update_chartData(chartD));
       calAvg(chartD)
     }

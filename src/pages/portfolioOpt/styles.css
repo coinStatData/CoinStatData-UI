@@ -9,3 +9,11 @@ iframe {
   padding:0px;
   overflow:hidden
 }
+
+.disclaimer-p {
+  font-size: 11px;
+}
+
+.disclaimer-cont {
+  padding: 10px 30px 0 30px;
+}
