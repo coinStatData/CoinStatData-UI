@@ -7,6 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
+import { COIN_LIST } from '../../util/constants/coins'
 import './style.css';
 
 function SearchBar(props) {
@@ -169,19 +170,11 @@ function SearchBar(props) {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="input-text-box">Coin Name</Form.Label>
           <Form.Select onChange={(e)=>handleCoinChange(e)}>
-            <option>bitcoin</option>
-            <option>ethereum</option>
-            <option>solana</option>
-            <option>dogecoin</option>
-            <option>tether</option>
-            <option>bnb</option>
-            <option>ripple</option>
-            <option>cardano</option>
-            <option>tron</option>
-            <option>dai</option>
-            <option>litecoin</option>
-            <option>cronos</option>
-            <option>polygon</option>
+            {
+              COIN_LIST.map((record => {
+                return <option>{record}</option>
+              }))
+            }
           </Form.Select>
           <Form.Label className="input-text-box">Past Number of Days</Form.Label>
           <Form.Control type='number' value={days} onChange={(e)=>handleDaysChange(e)} placeholder={interval=="hourly"? "90 or less":"91 or greater"} />

@@ -13,7 +13,7 @@ function NavBarComp() {
         <Container>
          <Link className="navbar-brand" to="/">CoinStatData</Link>
           <Nav className="me-auto">
-            {/* <Link className="nav-link" to="/features">Features</Link> */}
+            <Link className="nav-link" to="/stat">Stat</Link>
             <Link className="nav-link" to="/optimization">Portfolio-Optimization</Link>
           </Nav>
         </Container>
