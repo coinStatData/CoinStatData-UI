@@ -22,6 +22,9 @@ function TablePage(props) {
   const [avgSumData, setAvgSumData] = useState([]);
   const [avgSumMData, setAvgSumMData] = useState([]);
   const [avgMReturn, setAvgMReturn] = useState({});
+  const [graphWidth, setGraphWidth] = useState();
+  const [graphWidthBar, setGraphWidthBar] = useState();
+  const [screenWidth, setScreenWidth] = useState();
   const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
   const chartData = useSelector((state) => state.chartData.value)
   const dispatch = useDispatch();
@@ -29,6 +32,32 @@ function TablePage(props) {
   const changeDailyHourly = () => {
     setIsDaily(!isDaily);
   }
+
+  useEffect(() => {
+    calculateSize();
+  },[])
+
+  const calculateSize = () => {
+    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    setScreenWidth(width);
+    if(width < 650) {
+      setGraphWidth(width * .85);
+      setGraphWidthBar(width * .85)
+    } else if(1000 >= width && width >= 650) {
+      setGraphWidth(width * .75);
+      setGraphWidthBar(width * .75)
+    } else if (1000 < width && width < 1200){
+      setGraphWidth(800);
+      setGraphWidthBar(800)
+    } else if (1200 < width){
+      setGraphWidth(1000);
+      setGraphWidthBar(800)
+    }
+  }
+
+  window.addEventListener("resize", ()=> {
+    calculateSize();
+  });
 
   const calAvg = (chartD) => {
     if(Array.isArray(chartD) && chartD.length>0) {
@@ -173,7 +202,6 @@ function TablePage(props) {
       setHMaxReturn(hmax);
       setHminReturn(hmin);
       chartD.splice(chartD.length-2,2);
-      console.log("chartDDDD", chartD);
       dispatch(update_chartData(chartD));
       calAvg(chartD)
     }
@@ -184,10 +212,10 @@ function TablePage(props) {
       <div className="chart-cont">
         <Tabs defaultActiveKey="Price" className="mb-3">
           <Tab eventKey="Price" title="Line Graph">
-            <LineChartBoy chartData={chartData} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />
+            <LineChartBoy graphWidth={graphWidth} chartData={chartData} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />
           </Tab>
           <Tab eventKey="Average Return" title="Avg Return Bar Chart">
-            <BarChartBoy chartSumMdata={avgSumMData} isDaily={isDaily} avgData={avgReturn} chartSumData={avgSumData}/>
+            <BarChartBoy graphWidth={graphWidthBar} chartSumMdata={avgSumMData} isDaily={isDaily} avgData={avgReturn} chartSumData={avgSumData}/>
           </Tab>
         </Tabs>
       </div>
@@ -199,7 +227,7 @@ function TablePage(props) {
           <SearchBar/>
         </div>
         <div>
-          <Table2 chartData={chartData}/>
+          <Table2 screenWidth={screenWidth} chartData={chartData}/>
         </div>
       </div>
     </div>

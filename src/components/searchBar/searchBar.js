@@ -54,7 +54,6 @@ function SearchBar(props) {
     e.preventDefault();
     update_g(coinName, "coin");
     let resp = await fetchDataLambda(coin_g, start, end);
-    console.log("### resp = == ", resp);
     if(resp.count > 0) {
       update_g(resp.Items, "resp");
     } else {
@@ -67,7 +66,6 @@ function SearchBar(props) {
     e.preventDefault();
     update_g(coinName, "coin");
     let resp = await fetchDataGecko(coin_g, days, interval);
-    console.log("### resp = == ", resp);
     if(resp) {
       dispatch(update_gecko_resp(resp));
     } else {
@@ -126,7 +124,6 @@ function SearchBar(props) {
           'Content-Type': 'text/plain'
         },
       });
-      console.log("## resp = ", resp);
       return resp.data;
     } catch(e) {
       console.log(e.message);
@@ -146,7 +143,6 @@ function SearchBar(props) {
           'Content-Type': 'text/plain'
         },
       });
-      console.log("## resp = ", resp);
       dispatch(update_tableData(resp.data))
       return resp.data[volprice];
     } catch(e) {
@@ -169,7 +165,7 @@ function SearchBar(props) {
           </Alert>
         </div>
       }
-        <h4>Search By Days into the Past</h4>
+        <h4 className="search-title">Search By Days into the Past</h4>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="input-text-box">Coin Name</Form.Label>
           <Form.Select onChange={(e)=>handleCoinChange(e)}>
