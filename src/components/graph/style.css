@@ -14,17 +14,42 @@
   display: flex;
   flex-direction: column;
   margin-top: 30px;
+  justify-content: center;
 }
 
 .chart-btn {
-  width: 200px !important;
+  width: 140px !important;
   padding:5px !important;
   margin-left: 15px;
   margin-right: 15px;
   margin-top: 15px;
+  font-size: 14px !important;
 }
 
 .btn-cont {
   display: flex;
   flex-direction: row;
 }
+
+@media (max-width: 650px) { 
+  .dateHeader{
+    font-size:13px;
+  }
+  .chart-cont-inner {
+    height: 20vh;
+  }
+  .chart-btn {
+    width: 120px !important;
+    padding:5px !important;
+    font-size: 12px !important;
+    padding:3px !important;
+  }
+  .coinHeader {
+    font-size: 19px;
+  }
+  
+ }
+
+ @media (max-width: 400px) { 
+
+ }
