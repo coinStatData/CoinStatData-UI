@@ -28,7 +28,9 @@ function HomeTable(props) {
         </td>
         <td>{item[1].usd}</td>
         <td>{Math.ceil(item[1].usd_market_cap)}</td>
-        <td>{Math.ceil(item[1].usd_24h_vol)}</td>
+        {props.screenWidth > 700 &&
+          <td>{Math.ceil(item[1].usd_24h_vol)}</td>
+        }
       </tr>
     )
   }
@@ -44,25 +46,24 @@ function HomeTable(props) {
 
   return (
     <div className="home-table-cont">
-      <div className="home-table">
-        <h3 className="home-table-title">Table</h3>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>Coin</th>
-              <th>Price</th>
-              <th>Market Cap</th>
-              <th>24_HR_Vol</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              makeTable(props.coinData)
+      <Table className="home-table" hover responsive>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Coin</th>
+            <th>Price</th>
+            <th>Market Cap</th>
+            {props.screenWidth > 700 &&
+              <th>24h Volume</th>
             }
-          </tbody>
-        </Table>
-      </div>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            makeTable(props.coinData)
+          }
+        </tbody>
+      </Table>
     </div>
   );
 }

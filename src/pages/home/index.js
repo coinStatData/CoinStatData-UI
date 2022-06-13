@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { COIN_LIST, COIN_STR } from '../../util/constants/coins';
 import HomeTable from '../../components/homeTable'
+import Trending from '../../components/trending'
 import axios from 'axios';
 import './styles.css';
 
 function HomePage(props) {
   const [coinData, setCoinData] = useState();
+  const [screenWidth, setScreenWidth] = useState();
 
   useEffect(()=> {
     async function fetchData2() {
@@ -17,6 +19,7 @@ function HomePage(props) {
       }
     }
     fetchData2();
+    calculateSize();
   }, [])
 
   const mutateResp = (resp) => {
@@ -27,12 +30,26 @@ function HomePage(props) {
     })
     console.log(data);
     return data;
-  } 
+  }
+
+  const calculateSize = () => {
+    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    setScreenWidth(width);
+  }
+
+  window.addEventListener("resize", ()=> {
+    calculateSize();
+  });
 
 
 	return (
-		<div>
-			<HomeTable coinData={coinData}/>
+		<div className="flex-cont">
+      <div className="homeTable-box">
+        <HomeTable screenWidth={screenWidth} coinData={coinData}/>
+      </div>
+      <div className="trending-box">
+        <Trending/>
+      </div>
 		</div>
 	)
 }
