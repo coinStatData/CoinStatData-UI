@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import NavBarComp from '../../components/navBar/navBar';
 import Alert from 'react-bootstrap/Alert'
 import './styles.css';
 
@@ -8,7 +7,6 @@ function PortFolioOpt(props) {
 	return (
 		<div>
 			<div className="iframe-cont">
-				<NavBarComp></NavBarComp>
 				<iframe src="/python/portfolio/index.html"/>
 			</div>
 			{showAlert &&

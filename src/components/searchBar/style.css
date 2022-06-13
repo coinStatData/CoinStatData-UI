@@ -10,8 +10,17 @@
   margin-right: auto;
 }
 
+.input-or {
+  text-align: center;
+  padding: 5px;
+}
+
 .input-text-box {
   margin-top: 10px;
+}
+
+.hr-input {
+  margin: 3px;
 }
 
 .alert-box {
