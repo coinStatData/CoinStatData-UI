@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import UserContext from './context/userContext';
 import TablePage from './pages/table/tablePage';
 import NavBarComp from './components/navBar/navBar';
+import Footer from './components/footer';
 import store from './redux/store'
 import { Provider } from 'react-redux'
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import PortFolioOpt from './pages/portfolioOpt';
-import FeaturePage from './pages/features';
+import DonatePage from './pages/donation';
 import HomePage from './pages/home';
 import { useFetch } from "react-async"
 import './App.css';
@@ -46,7 +47,9 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/stat" element={<TablePage />} />
               <Route path="/optimization" element={<PortFolioOpt />} />
+              <Route path="/donate" element={<DonatePage />} />
             </Routes>
+            <Footer></Footer>
           </BrowserRouter>
         </Provider>
       </UserContext.Provider>

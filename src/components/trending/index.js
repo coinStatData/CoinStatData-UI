@@ -37,7 +37,6 @@ function Trending(props) {
 
   const mutateResp = (resp) => {
     let data = resp.data.coins;
-    console.log(data);
     return data;
   } 
 
