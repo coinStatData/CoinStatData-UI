@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import './style.css';
 
 function Footer() {
@@ -16,9 +17,9 @@ function Footer() {
       <div className="aux-links-cont">
         <div className="link-cont">
           <h5>Donations</h5>
-          <a href="/donate">Bitcoin</a>
-          <a href="/donate">Ethereum</a>
-          <a href="/donate">USD Coin</a>
+          <Link to="/donate">Bitcoin</Link>
+          <Link to="/donate">Ethereum</Link>
+          <Link to="/donate">USD Coin</Link>
         </div>
         <div className="link-cont">
           <h5>Github</h5>
