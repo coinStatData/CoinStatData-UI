@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 import Alert from 'react-bootstrap/Alert'
 import './styles.css';
 
@@ -8,12 +8,14 @@ function DonatePage(props) {
 		<div className="donate-cont">
 			<div>
 				{showAlert &&
-					<Alert variant="primary" onClose={() => setShowAlert(false)} dismissible>
-						<Alert.Heading>Anything Helps!</Alert.Heading>
-						<p className="disclaimer-p">
-							Thank you for your support!!
-						</p>
-					</Alert>
+					<div className="alert-cont">
+						<Alert variant="primary" onClose={() => setShowAlert(false)} dismissible>
+							<Alert.Heading>Anything Helps!</Alert.Heading>
+							<p className="disclaimer-p">
+								Thank you for your support!!
+							</p>
+						</Alert>
+					</div>
 				}
 				<div className="single-item-cont">
 					<h4>Bitcoin</h4>

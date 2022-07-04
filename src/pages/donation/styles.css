@@ -2,6 +2,10 @@
   padding: 50px 20% 0 20%;
 }
 
+.alert-cont {
+  margin-bottom: 30px;
+}
+
 .single-item-cont {
   display: flex;
   flex-direction: row;
