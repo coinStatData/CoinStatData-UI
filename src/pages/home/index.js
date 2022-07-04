@@ -28,7 +28,6 @@ function HomePage(props) {
     data.sort((a,b) => {
       return b[1].usd_market_cap - a[1].usd_market_cap;
     })
-    console.log(data);
     return data;
   }
 
@@ -40,7 +39,6 @@ function HomePage(props) {
   window.addEventListener("resize", ()=> {
     calculateSize();
   });
-
 
 	return (
 		<div className="flex-cont">

@@ -1,0 +1,31 @@
+.donate-cont {
+  padding: 50px 20% 0 20%;
+}
+
+.single-item-cont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.single-item-cont:hover {
+  background-color: hsl(41, 100%, 80%)
+}
+
+@media (max-width: 1300px) { 
+  .donate-cont {
+    padding: 50px 10% 0 10%;
+  }
+}
+
+@media (max-width: 900px) { 
+  .single-item-cont {
+    flex-direction: column;
+    margin-bottom:40px;
+  }
+  .donate-cont {
+    padding: 50px 5% 0 5%;
+  }
+}
