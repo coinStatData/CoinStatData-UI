@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { COIN_LIST, COIN_STR } from '../../util/constants/coins';
+import React, { useState, useEffect } from 'react';
+import { COIN_STR } from '../../util/constants/coins';
 import HomeTable from '../../components/homeTable'
 import Trending from '../../components/trending'
 import axios from 'axios';
@@ -12,7 +12,8 @@ function HomePage(props) {
   useEffect(()=> {
     async function fetchData2() {
       try {
-        let resp = await axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${COIN_STR}&vs_currencies=usd&include_market_cap=true&include_last_updated_at=true&include_24hr_vol=true`);
+        const gurl = process.env['REACT_APP_GECKO_FETCH_COIN_URL'] + `ids=${COIN_STR}&vs_currencies=usd&include_market_cap=true&include_last_updated_at=true&include_24hr_vol=true`;
+        let resp = await axios.get(gurl);
         setCoinData(mutateResp(resp));
       } catch(e) {
         console.log(e);
