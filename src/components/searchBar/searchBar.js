@@ -121,7 +121,7 @@ function SearchBar(props) {
       beginDateTime: startTime,
       endDateTime: endTime
     }
-    let api_url = "https://u6tcfnqkac.execute-api.us-east-1.amazonaws.com/default/coin-api";
+    let api_url = process.env['REACT_APP_LAMBDA_HOURLY_FETCH_URL'];
     try {
       let resp = await axios.post(api_url, JSON.stringify(data), {
         headers: {
@@ -140,7 +140,7 @@ function SearchBar(props) {
     //interval = daily / hourly
     //days = hourly:<90 / daily:any:
     //market_caps/prices/total_volumes
-    let api_url = `https://api.coingecko.com/api/v3/coins/${coin1}/market_chart?vs_currency=usd&days=${days1}&interval=${interval1}`;
+    let api_url = process.env['REACT_APP_GECKO_FETCH_HOST'] + `/${coin1}/market_chart?vs_currency=usd&days=${days1}&interval=${interval1}`;
     try {
       let resp = await axios.get(api_url,  {
         headers: {
