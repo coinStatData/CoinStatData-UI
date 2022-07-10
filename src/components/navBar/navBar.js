@@ -8,13 +8,18 @@ import './style.css';
 function NavBarComp() {
 
   return (
-    <div className="">
+    <div className="nav-outer-cont">
       <Navbar bg="dark" variant="dark">
         <Container>
-         <Link className="navbar-brand" to="/">CoinStatData</Link>
+         <Link className="navbar-brand" to="/">
+            <div className="nav-logo-title-cont">
+              <img src="../../assets/csdLogo2.png" alt="" />
+              <span>CoinStatData</span>
+            </div>
+          </Link>
           <Nav className="me-auto">
-            <Link className="nav-link" to="/stat">Stat</Link>
-            <Link className="nav-link" to="/optimization">Portfolio-Optimization</Link>
+            <Link className="nav-link" to="/stat"><span>Stat</span></Link>
+            <Link className="nav-link" to="/optimization"><span>Portfolio-Optimization</span></Link>
           </Nav>
         </Container>
       </Navbar>

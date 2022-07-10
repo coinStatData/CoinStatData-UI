@@ -26,7 +26,7 @@ function Trending(props) {
   useEffect(()=> {
     async function fetchData2() {
       try {
-        let resp = await axios.get(`https://api.coingecko.com/api/v3/search/trending`);
+        let resp = await axios.get(process.env.REACT_APP_GECKO_FETCH_TRENDING_URL);
         setTrendingData(mutateResp(resp));
       } catch(e) {
         console.log(e);

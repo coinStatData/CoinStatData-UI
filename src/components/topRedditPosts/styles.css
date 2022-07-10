@@ -1,0 +1,45 @@
+.top-posts-cont {
+  margin-top: 40px;
+}
+.post-row-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  border-radius: 5px;
+}
+
+.post-row-cont:hover {
+  background-color: hsl(41, 100%, 80%) ;
+  cursor: pointer;
+}
+
+.post-content-title {
+  font-weight: bold;
+
+}
+
+.post-col-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-col-content .timestamp {
+  font-size: 12px;
+  color: grey;
+}
+
+.select-sub-dropdown {
+  border: none !important;
+  padding: 5px 30px 5px 5px !important;
+  cursor: pointer;
+  color: black !important;
+}
+
+.sub-select-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: solid black 2px;
+  margin-bottom: 15px;
+}
