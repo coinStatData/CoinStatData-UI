@@ -59,6 +59,7 @@ const ICON_PATHS = {
 function HomeTable(props) {
   const { update_g } = useContext(UserContext);
   let navigate = useNavigate();
+  const { screenWidth } = props;
 
   const clickCoin = (coin) => {
     update_g(coin, "coin");
@@ -77,7 +78,7 @@ function HomeTable(props) {
         </td>
         <td>{item[1].usd}</td>
         <td>{Math.ceil(item[1].usd_market_cap)}</td>
-        {props.screenWidth > 700 &&
+        {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
           <td>{Math.ceil(item[1].usd_24h_vol)}</td>
         }
       </tr>
@@ -102,7 +103,7 @@ function HomeTable(props) {
             <th>Coin</th>
             <th>Price</th>
             <th>Market Cap</th>
-            {props.screenWidth > 700 &&
+            {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
               <th>24h Volume</th>
             }
           </tr>
