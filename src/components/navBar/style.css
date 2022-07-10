@@ -1,0 +1,13 @@
+.nav-logo-title-cont {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-title-cont img {
+  width: 25px;
+  margin-right: 7px;
+}
+
+.nav-outer-cont span:hover {
+  color: #bd971b;
+}

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { COIN_STR } from '../../util/constants/coins';
 import HomeTable from '../../components/homeTable'
 import Trending from '../../components/trending'
+import TopRedditPosts from '../../components/topRedditPosts';
 import axios from 'axios';
 import './styles.css';
 
@@ -12,7 +13,7 @@ function HomePage(props) {
   useEffect(()=> {
     async function fetchData2() {
       try {
-        const gurl = process.env['REACT_APP_GECKO_FETCH_COIN_URL'] + `ids=${COIN_STR}&vs_currencies=usd&include_market_cap=true&include_last_updated_at=true&include_24hr_vol=true`;
+        const gurl = process.env['REACT_APP_GECKO_FETCH_COIN_URL'].replace('@COINS@', COIN_STR);
         let resp = await axios.get(gurl);
         setCoinData(mutateResp(resp));
       } catch(e) {
@@ -48,6 +49,7 @@ function HomePage(props) {
       </div>
       <div className="trending-box">
         <Trending/>
+        <TopRedditPosts/>
       </div>
 		</div>
 	)

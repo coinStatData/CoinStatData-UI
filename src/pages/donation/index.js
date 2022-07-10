@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert'
 import './styles.css';
 
 function DonatePage(props) {
 	const [showAlert, setShowAlert] = useState(true);
+	
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	}, [])
+
 	return (
 		<div className="donate-cont">
 			<div>

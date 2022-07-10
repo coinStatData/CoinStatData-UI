@@ -140,7 +140,7 @@ function SearchBar(props) {
     //interval = daily / hourly
     //days = hourly:<90 / daily:any:
     //market_caps/prices/total_volumes
-    let api_url = process.env['REACT_APP_GECKO_FETCH_HOST'] + `/${coin1}/market_chart?vs_currency=usd&days=${days1}&interval=${interval1}`;
+    let api_url = process.env['REACT_APP_GECKO_FETCH_HOST'].replace('@coin@', coin1).replace('@days@', days1).replace('@interval@', interval1);
     try {
       let resp = await axios.get(api_url,  {
         headers: {
