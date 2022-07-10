@@ -5,13 +5,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 22px;
+  margin-bottom: 12px;
   border-radius: 5px;
+  padding: 10px;
 }
 
 .post-row-cont:hover {
   background-color: hsl(41, 100%, 80%) ;
   cursor: pointer;
+}
+
+.post-col-img img {
+  margin-left: 10px;
 }
 
 .post-content-title {

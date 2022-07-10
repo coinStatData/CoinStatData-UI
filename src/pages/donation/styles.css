@@ -1,5 +1,5 @@
 .donate-cont {
-  padding: 50px 20% 0 20%;
+  padding: 30px 20% 0 20%;
 }
 
 .alert-cont {
@@ -11,7 +11,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 }
 
 .single-item-cont:hover {
