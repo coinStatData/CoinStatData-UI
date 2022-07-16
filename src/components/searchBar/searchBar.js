@@ -183,6 +183,7 @@ function SearchBar(props) {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="input-text-box">Coin Name</Form.Label>
           <Form.Select onChange={(e)=>handleCoinChange(e)}>
+            <option>{coin_g}</option>
             {
               COIN_LIST.map((record => {
                 return <option>{record}</option>
