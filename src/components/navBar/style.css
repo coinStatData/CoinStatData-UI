@@ -17,6 +17,10 @@ a:hover {
   align-items: center;
 }
 
+.nav-link {
+  margin-left: 25px !important;
+}
+
 .nav-logo-title-cont img {
   width: 25px;
   margin-right: 7px;
@@ -35,7 +39,7 @@ a:hover {
 }
 
 .nav-outer-cont span {
-  color: var(--primary-grey)
+  color: var(--primary-grey);
 }
 
 .nav-outer-cont span:hover {
@@ -46,4 +50,4 @@ a:hover {
   .nav-links-cont {
     justify-content: space-around !important;
   }
- }
+}
