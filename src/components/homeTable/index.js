@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import UserContext from '../../context/userContext';
+import UserContext from '../../hooks/userContext';
 import Table from 'react-bootstrap/Table'
 import { useNavigate  } from "react-router-dom";
 import './styles.css';
