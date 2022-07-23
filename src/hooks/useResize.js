@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useEffect } from 'react';
 
 const useResize = (myRef) => {
-  const [width, setWidth] = useState(0)
+  const [width, setWidth] = useState(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth)
   const [height, setHeight] = useState(0)
   
   const handleResize = useCallback(() => {

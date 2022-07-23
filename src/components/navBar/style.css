@@ -2,6 +2,10 @@ a:hover {
   color: var(--primary-orange) !important;
 }
 
+.nav-outer-cont {
+  width: 100%;
+}
+
 .nav-logo-title-cont {
   display: flex;
   align-items: center;
