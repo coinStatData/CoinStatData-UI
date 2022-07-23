@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import UserContext from './context/userContext';
+import UserContext from './hooks/userContext';
 import TablePage from './pages/table/tablePage';
 import NavBarComp from './components/navBar/navBar';
 import Footer from './components/footer';

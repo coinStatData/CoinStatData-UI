@@ -1,26 +1,52 @@
-import React from 'react';
-import Navbar from 'react-bootstrap/Navbar'
-import Container from 'react-bootstrap/Container'
-import Nav from 'react-bootstrap/Nav'
+import React, { useRef, useEffect } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import useResize from '../../hooks/useResize';
 import { Link } from "react-router-dom";
 import './style.css';
 
-function NavBarComp() {
+function NavBarComp(props) {
+
+  const navRef = useRef(null);
+  const { width, height } = useResize(navRef);
 
   return (
-    <div className="nav-outer-cont">
+    <div ref={navRef} className="nav-outer-cont">
       <Navbar bg="dark" variant="dark">
-        <Container>
-         <Link className="navbar-brand" to="/">
+        <Container className="nav-links-cont">
+          <Link className="navbar-brand" to="/">
             <div className="nav-logo-title-cont">
               <img src="../../assets/csdLogo2.png" alt="" />
               <span>CoinStatData</span>
             </div>
           </Link>
-          <Nav className="me-auto">
-            <Link className="nav-link" to="/stat"><span>Stat</span></Link>
-            <Link className="nav-link" to="/optimization"><span>Portfolio-Optimization</span></Link>
-          </Nav>
+          {width < 500 ? 
+            (
+              <NavDropdown title="Menu" className="custom-nav-dropdown" id="collasible-nav-dropdown">
+                <NavDropdown.Item>
+                  <Link className="drop-av-link" to="/stat">
+                    <span>Stat</span>
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link className="drop-nav-link" to="/optimization">
+                    <span>Portfolio-Opt</span>
+                  </Link>
+                </NavDropdown.Item>
+              </NavDropdown>
+            ) : (
+              <>
+                <Link className="nav-link" to="/stat">
+                  <span>Stat</span>
+                </Link>
+                <Link className="nav-link" to="/optimization">
+                  <span>Portfolio-Optimization</span>
+                </Link>
+              </>
+            )
+          }
         </Container>
       </Navbar>
     </div>
