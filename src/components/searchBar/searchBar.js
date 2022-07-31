@@ -25,6 +25,7 @@ function SearchBar(props) {
   const msg2 = "Oopse, something went wrong. Please try again later!";
   const coin = useSelector((state) => state.coin.value);
   const interval = useSelector((state) => state.interval.value);
+  const [tempInterval, setTempInterval] = useState(interval);
   const [coinName, setCoinName] = useState(coin);
   const dispatch = useDispatch()
 
@@ -71,7 +72,8 @@ function SearchBar(props) {
     dispatch(update_coin(coinName));
     dispatch(update_tableData([]));
     dispatch(update_gecko_resp([]));
-    let resp = await fetchDataGecko(coin, days, interval);
+    dispatch(update_interval(tempInterval));
+    let resp = await fetchDataGecko(coin, days, tempInterval);
     if(resp) {
       dispatch(update_gecko_resp(resp));
     } else {
@@ -93,21 +95,21 @@ function SearchBar(props) {
   const handleDaysChange = (e) => {
     setDays(e.target.value);
     if(e.target.value > 90) {
-      dispatch(update_interval("daily"));
+      setTempInterval("daily");
     } else {
-      dispatch(update_interval("hourly"));
+      setTempInterval("hourly");
     }
   }
   const handleIntervalChange = (e) => {
-    dispatch(update_interval(e.target.value));
-    if(e.target.value == "hourly") {
+    setTempInterval(e.target.value);
+    if(e.target.value === "hourly") {
       setDays(90);
     } else {
       setDays(100);
     }
   }
   const handleVolOrPriceChange = (e) => {
-    if(e.target.value == "price") {
+    if(e.target.value === "price") {
       setVolprice("prices");
     } else {
       setVolprice("total_volumes");
@@ -196,7 +198,7 @@ function SearchBar(props) {
           <Form.Label className="input-text-box">Past Number of Days</Form.Label>
           <Form.Control type='number' value={days} onChange={(e) => handleDaysChange(e)} placeholder={interval == "hourly"? "90 or less" : "91 or greater"} />
           <Form.Label className="input-text-box">Interval</Form.Label>
-          <Form.Select value={interval} onChange={(e) => handleIntervalChange(e)}>
+          <Form.Select value={tempInterval} onChange={(e) => handleIntervalChange(e)}>
             <option>daily</option>
             <option>hourly</option>
           </Form.Select>
