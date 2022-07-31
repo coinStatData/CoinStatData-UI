@@ -7,22 +7,25 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
+import { update_coin } from '../../redux/slices/coin';
+import { update_interval } from '../../redux/slices/interval';
 import { COIN_LIST } from '../../util/constants/coins'
 import './style.css';
 
 function SearchBar(props) {
 
-  const {update_g, coin_g } = useContext(UserContext);
+  const { update_g } = useContext(UserContext);
   const [start, setStart] = useState('2022.04.30');
   const [end, setEnd] = useState("2022.09.07" );
-  const [coinName, setCoinName] = useState("bitcoin");
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [days, setDays] = useState(90);
-  const [interval, setInterval] = useState("hourly");
+  const [days, setDays] = useState(100);
   const [volprice, setVolprice] = useState("prices");
   const msg1 = "We could not find the coin. Please try another!";
   const msg2 = "Oopse, something went wrong. Please try again later!";
+  const coin = useSelector((state) => state.coin.value);
+  const interval = useSelector((state) => state.interval.value);
+  const [coinName, setCoinName] = useState(coin);
   const dispatch = useDispatch()
 
   // useEffect(() => {
@@ -39,7 +42,7 @@ function SearchBar(props) {
 
   useEffect(() => {
     async function fetchData2() {
-      let resp = await fetchDataGecko(coin_g, days, interval);
+      let resp = await fetchDataGecko(coin, days, interval);
       if(resp) {
         dispatch(update_gecko_resp(resp));
       } else {
@@ -53,8 +56,8 @@ function SearchBar(props) {
   const handleSubmitDates = async (e) => {
     //for lambda
     e.preventDefault();
-    update_g(coinName, "coin");
-    let resp = await fetchDataLambda(coin_g, start, end);
+    dispatch(update_coin(coinName));
+    let resp = await fetchDataLambda(coin, start, end);
     if(resp.count > 0) {
       update_g(resp.Items, "resp");
     } else {
@@ -65,11 +68,10 @@ function SearchBar(props) {
 
   const handleSubmitDays = async (e) => {
     e.preventDefault();
-    update_g(coinName, "coin");
+    dispatch(update_coin(coinName));
     dispatch(update_tableData([]));
     dispatch(update_gecko_resp([]));
-    let resp = await fetchDataGecko(coinName, days, interval);
-    setCoinName("");
+    let resp = await fetchDataGecko(coin, days, interval);
     if(resp) {
       dispatch(update_gecko_resp(resp));
     } else {
@@ -91,16 +93,13 @@ function SearchBar(props) {
   const handleDaysChange = (e) => {
     setDays(e.target.value);
     if(e.target.value > 90) {
-      setInterval("daily");
-      update_g("daily", "interval");
+      dispatch(update_interval("daily"));
     } else {
-      setInterval("hourly");
-      update_g("hourly", "interval");
+      dispatch(update_interval("hourly"));
     }
   }
   const handleIntervalChange = (e) => {
-    setInterval(e.target.value);
-    update_g(e.target.value, "interval");
+    dispatch(update_interval(e.target.value));
     if(e.target.value == "hourly") {
       setDays(90);
     } else {
@@ -182,8 +181,8 @@ function SearchBar(props) {
         <h4 className="search-title">Search By Days into the Past</h4>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="input-text-box">Coin Name</Form.Label>
-          <Form.Select onChange={(e)=>handleCoinChange(e)}>
-            <option>{coin_g}</option>
+          <Form.Select onChange={(e) => handleCoinChange(e)}>
+            <option>{coin}</option>
             {
               COIN_LIST.map((record => {
                 return <option>{record}</option>
@@ -191,18 +190,18 @@ function SearchBar(props) {
             }
           </Form.Select>
           <div className="input-or">or</div>
-          <input onChange={(e)=>handleCoinChange(e)} type="text" className="form-control" placeholder="custom coin search" aria-label="coin" aria-describedby="basic-addon1"></input>
+          <input onChange={(e) => handleCoinChange(e)} type="text" className="form-control" placeholder="custom coin search" aria-label="coin" aria-describedby="basic-addon1"></input>
           <br/>
           <hr className="hr-input"/>
           <Form.Label className="input-text-box">Past Number of Days</Form.Label>
-          <Form.Control type='number' value={days} onChange={(e)=>handleDaysChange(e)} placeholder={interval=="hourly"? "90 or less":"91 or greater"} />
+          <Form.Control type='number' value={days} onChange={(e) => handleDaysChange(e)} placeholder={interval == "hourly"? "90 or less" : "91 or greater"} />
           <Form.Label className="input-text-box">Interval</Form.Label>
-          <Form.Select value={interval} onChange={(e)=>handleIntervalChange(e)}>
+          <Form.Select value={interval} onChange={(e) => handleIntervalChange(e)}>
             <option>daily</option>
             <option>hourly</option>
           </Form.Select>
           <Form.Label className="input-text-box">Volumn or Price</Form.Label>
-          <Form.Select onChange={(e)=>handleVolOrPriceChange(e)}>
+          <Form.Select onChange={(e) => handleVolOrPriceChange(e)}>
             <option>price</option>
             <option>volume</option>
           </Form.Select>

@@ -15,7 +15,8 @@ function Table2(props) {
   const dispatch = useDispatch()
   const sDate = useSelector((state) => state.startDate.value);
   const eDate = useSelector((state) => state.endDate.value);
-  const tableData = useSelector((state) => state.tableData.value)
+  const tableData = useSelector((state) => state.tableData.value);
+  const coin = useSelector((state) => state.coin.value)
   
   useEffect(() => {
     //this is for lambda resp
@@ -44,7 +45,7 @@ function Table2(props) {
       for(let i=0; i<cdata.length-2; i++)
         data.push({
           dateTime: cdata[i].name,
-          price: cdata[i][coin_g]
+          price: cdata[i][coin]
         });
       return data;
     } else {
@@ -55,7 +56,7 @@ function Table2(props) {
   return (
     <div className="table-cont">
       <div className="table">
-        <h3 className="table-title">Table of {coin_g.toUpperCase()}</h3>
+        <h3 className="table-title">Table of {coin.toUpperCase()}</h3>
         <p className="dateString">{sDate} ~ {eDate}</p>
         <CSVLink data={csvData()}>Download CSV</CSVLink>
         <Table striped bordered hover responsive>
@@ -78,7 +79,7 @@ function Table2(props) {
             })
           }
           {(!isLambda && Array.isArray(tableD?.prices)) &&
-            makeTableGecko(tableD.prices, tableD.total_volumes, coin_g, props)
+            makeTableGecko(tableD.prices, tableD.total_volumes, coin, props)
           }
           </tbody>
         </Table>

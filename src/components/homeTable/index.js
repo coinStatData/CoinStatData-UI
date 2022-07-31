@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
-import UserContext from '../../hooks/userContext';
+import React from 'react';
 import Table from 'react-bootstrap/Table'
 import { useNavigate  } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { update_coin } from '../../redux/slices/coin';
 import './styles.css';
 
 const ICON_PATHS = {
@@ -57,12 +58,13 @@ const ICON_PATHS = {
 }
 
 function HomeTable(props) {
-  const { update_g } = useContext(UserContext);
+
   let navigate = useNavigate();
   const { screenWidth } = props;
+  const dispatch = useDispatch();
 
   const clickCoin = (coin) => {
-    update_g(coin, "coin");
+    dispatch(update_coin(coin))
     navigate("/stat");
   }
 

@@ -1,18 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react';
-import UserContext from '../../hooks/userContext';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 import axios from 'axios';
 import { useNavigate  } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { update_coin } from '../../redux/slices/coin';
 import './styles.css';
 
 function Trending(props) {
+
   let navigate = useNavigate();
-  const { update_g } = useContext(UserContext);
   const [trendingData, setTrendingData] = useState();
+  const dispatch = useDispatch();
 
   function TableRow(item) {
     return (
-      <tr onClick={()=>clickCoin(item.id)} key={item.id}>
+      <tr onClick={() => clickCoin(item.id)} key={item.id}>
         <td>{item.score + 1}</td>
         <td className="coin-name">
           <img className="coin-icon" src={item.small}></img>
@@ -41,7 +43,7 @@ function Trending(props) {
   } 
 
   const clickCoin = (coin) => {
-    update_g(coin, "coin");
+    dispatch(update_coin(coin));
     navigate("/stat");
   }
 

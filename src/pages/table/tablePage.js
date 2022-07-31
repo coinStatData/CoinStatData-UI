@@ -12,7 +12,7 @@ import { update_chartData } from '../../redux/slices/chartData';
 import './style.css';
 
 function TablePage(props) {
-  const {coin_g, resp_g, interval_g, update_g } = useContext(UserContext);
+  const { resp_g } = useContext(UserContext);
   const [avgReturn, setAvgReturn] = useState({});
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
@@ -26,7 +26,9 @@ function TablePage(props) {
   const [graphWidthBar, setGraphWidthBar] = useState();
   const [screenWidth, setScreenWidth] = useState();
   const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
-  const chartData = useSelector((state) => state.chartData.value)
+  const chartData = useSelector((state) => state.chartData.value);
+  const interval = useSelector((state) => state.interval.value);
+  const coin = useSelector((state) => state.coin.value)
   const dispatch = useDispatch();
 
   const changeDailyHourly = () => {
@@ -77,7 +79,7 @@ function TablePage(props) {
       for(let i=0; i<chartD.length-2; i++) {
         let time = "";
         let mday = "";
-        if(interval_g == "daily") {
+        if(interval == "daily") {
           time = weekDic[(chartD[i]["name"].getDay())];
           mday = chartD[i]["name"].getDate();
           //month dates
@@ -97,7 +99,7 @@ function TablePage(props) {
       for(let i=0; i<chartD.length-2; i++) {
         let time = "";
         let mday = "";
-        if(interval_g == "daily") {
+        if(interval == "daily") {
           time = weekDic[(chartD[i]["name"].getDay())];
           mday = chartD[i]["name"].getDate();
           //month dates
@@ -126,7 +128,7 @@ function TablePage(props) {
       }
       setAvgSumData(avgSumData);
 
-      if(interval_g == "daily") {
+      if(interval == "daily") {
         //month days
         let marr = [];
         for(let d in mdic) {
@@ -156,7 +158,7 @@ function TablePage(props) {
           let ch = (resp_g[index+1].price - item.price)/item.price * 100;
           let row = {
             name: formatDate(new Date(item.datetime* 1000)),
-            [coin_g]: item.price,
+            [coin]: item.price,
             hourlyReturn: ch.toFixed(5)
           }
           max = max < item.price ? item.price : max;
@@ -186,8 +188,8 @@ function TablePage(props) {
         if(index < coinGeckoResp.length-2) {
           let ch = (coinGeckoResp[index+1][1] - item[1])/item[1] * 100;
           let row = {
-            name: interval_g == "hourly"? formatDate(new Date(item[0])) : new Date(item[0]),
-            [coin_g]: item[1],
+            name: interval == "hourly"? formatDate(new Date(item[0])) : new Date(item[0]),
+            [coin]: item[1],
             hourlyReturn: ch.toFixed(5)
           }
           max = max < item[1] ? item[1] : max;

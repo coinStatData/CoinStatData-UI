@@ -18,7 +18,7 @@ function App() {
 
   const [coin_g, setCoin_g] = useState('bitcoin');
   const [resp_g, setResp_g] = useState({});
-  const [interval_g, setInterval_g] = useState('hourly');
+  const [interval_g, setInterval_g] = useState('daily');
 
   const update_g = (change, what) => {
     // for useContext hook

@@ -4,6 +4,8 @@ import endDateReducer from './slices/endDate';
 import coinGeckoRespReducer from './slices/coinGeckoResp';
 import tableDataReducer from './slices/tableData';
 import chartDataReducer from './slices/chartData';
+import coinReducer from './slices/coin';
+import intervalReducer from './slices/interval';
 
 const customizedMiddleware = getDefaultMiddleware({
   serializableCheck: false
@@ -15,7 +17,9 @@ export default configureStore({
     endDate: endDateReducer,
     coinGeckoResp: coinGeckoRespReducer,
     tableData: tableDataReducer,
-    chartData: chartDataReducer
+    chartData: chartDataReducer,
+    coin: coinReducer,
+    interval: intervalReducer
   },
   middleware: customizedMiddleware
 })
