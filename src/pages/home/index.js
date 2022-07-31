@@ -4,11 +4,14 @@ import HomeTable from '../../components/homeTable'
 import Trending from '../../components/trending'
 import TopRedditPosts from '../../components/topRedditPosts';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { update_interval } from '../../redux/slices/interval';
 import './styles.css';
 
 function HomePage(props) {
   const [coinData, setCoinData] = useState();
   const [screenWidth, setScreenWidth] = useState();
+  const dispatch = useDispatch();
 
   useEffect(()=> {
     async function fetchData2() {
@@ -22,6 +25,7 @@ function HomePage(props) {
     }
     fetchData2();
     calculateSize();
+    dispatch(update_interval("daily"));
   }, [])
 
   const mutateResp = (resp) => {
