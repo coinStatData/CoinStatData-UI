@@ -35,7 +35,7 @@ function TablePage(props) {
 
   useEffect(() => {
     calculateSize();
-  },[])
+  }, [])
 
   const calculateSize = () => {
     let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

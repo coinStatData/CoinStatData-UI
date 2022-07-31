@@ -5,10 +5,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-	<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
   <link rel="stylesheet" href="styles.css">
+	<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+  <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+
 <py-env>
 - numpy
 - pandas
@@ -21,27 +21,37 @@
     <h2>Crypto Portfolio Optimization</h2>
     <hr/>
     <div id="python-code">
-      <strong styles="margin-left:20px">Write python code here:</strong>
-      <py-repl>comparison_analysis(['bitcoin', 'ethereum', 'ripple', 'litecoin', 'dogecoin', 'monero'], 600)</py-repl>
+      <strong id="code-editor-header" styles="margin-left:20px">Write python code here:</strong>
+      <py-repl class="python-code-input">
+#effcient frontier simulator for crypto portfolio
+efficientFrontier(['bitcoin', 'ethereum', 'ripple', 'litecoin', 'dogecoin'], 500)
+
+#example data mutation commands:
+log_return.cov()
+log_return.describe().transpose()
+
+#example data visualization commands: 
+plotPriceComparison(crypto: List[str], days: int): 
+barchart(log_return)
+      </py-repl>
       <br>
-      <li>comparison_analysis(<i>array_of_coins</i>, <i>number_of_days_into_the_past</i>)</li>
-      <li>Variables: price_data, normalized_data, log_return</li>
-      <li>Example commands: log_return.describe().transpose(), log_return.cov()</li>
+      <li><b>Main Function:</b> efficientFrontier(<i>array_of_coins</i>, <i>number_of_days_into_the_past</i>)</li>
+      <li><b>Variables:</b> price_data, normalized_data, log_return</li>
     </div>
     <hr/>
     <h3>Efficient Frontier: Sharpe Ratio</h3>
     <div class="flex-cont-row">
       <div id="sharp-ratio">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Loading...</span>
+        <div class="lds-hourglass">
+          <span>Calculating...</span>
         </div>
       </div>
       <div id="sharp-ratio-stat">
         <b class="local-title">Optimal Portfolio Ratio</b>
         <div id="optimal-portfolio">
           <div class="spinner-cont">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
+            <div class="lds-hourglass">
+              <span>Calculating...</span>
             </div>
           </div>
         </div>
@@ -49,8 +59,8 @@
         <b class="local-title">Maximum Returns and Volitility</b>
         <div id="maximum-perf">
           <div class="spinner-cont">
-            <div class="spinner-border" role="status">
-              <span class="sr-only">Loading...</span>
+            <div class="lds-hourglass">
+              <span>Calculating...</span>
             </div>
           </div>
         </div>
@@ -105,8 +115,24 @@ async def plotPriceComparison(crypto, days):
   log_return = log_ret
   sharpRatio()
 
+def barchart(log_ret):
+  fig, ax = plt.subplots(figsize=(10, 5))
+  plt.hist(log_ret, bins=100)
+  plt.tight_layout()
+  plt.title('Return Frequency')
+  plt.xlabel('Return %')
+  plt.ylabel('Frequency')
+  plt.legend(log_ret.columns)
+  pyscript.write('bar-chart', fig)
+  print("Basic Statistics:")
+  log_ret.describe().transpose()
+  print("Covariance:")
+  print(log_ret.cov())
+  global log_return
+  log_return = log_ret
+
   
-def comparison_analysis(crypto, days):
+def efficientFrontier(crypto, days):
   global cryptos
   cryptos = crypto
   try:
@@ -134,7 +160,7 @@ def sharpRatio():
   <!-- log_ret.describe().transpose()
   log_ret.mean() * 600
   log_ret.cov() -->
-  num_ports = 10000
+  num_ports = 1500
   all_weights = np.zeros((num_ports,len(dfp.columns)))
   ret_arr = np.zeros(num_ports)
   vol_arr = np.zeros(num_ports)
@@ -180,7 +206,7 @@ def sharpRatio():
   plt.scatter(max_sr_vol, max_sr_ret, c='red', s=50, edgecolors='black')
   pyscript.write('sharp-ratio', fig)
 
-comparison_analysis(['bitcoin', 'ethereum', 'ripple', 'litecoin', 'dogecoin', 'monero'], 600)
+efficientFrontier(['bitcoin', 'ethereum', 'ripple', 'litecoin', 'dogecoin'], 500)
 
   </py-script>
 </body>
