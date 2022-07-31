@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import UserContext from '../../hooks/userContext';
+import React from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, ResponsiveContainer } from 'recharts';
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux'
@@ -7,23 +6,23 @@ import './style.css';
 
 function LineChartBoy(props) {
 
-  const { coin_g } = useContext(UserContext);
   const sDate = useSelector((state) => state.startDate.value);
   const eDate = useSelector((state) => state.endDate.value)
+  const coin = useSelector((state) => state.coin.value)
 
   return (
     <div className="chart-cont">
-      <h3 className="coinHeader">{coin_g.toUpperCase()} {props.isDaily? "Pice":"Hourly Return"} Chart</h3>
+      <h3 className="coinHeader">{coin.toUpperCase()} {props.isDaily? "Pice" : "Hourly Return"} Chart</h3>
       <h6 className="dateHeader">{sDate} ~ {eDate}</h6>
       <div className="chart-cont-inner">
         <ResponsiveContainer width={props.graphWidth} height={"100%"}>
           <LineChart data={props.chartData}
             margin={{ top: 10, bottom: 10 }}>
-            <Line type="monotone" dataKey={props.isDaily? coin_g:"hourlyReturn"} stroke="#8884d8" />
+            <Line type="monotone" dataKey={props.isDaily? coin : "hourlyReturn"} stroke="#8884d8" />
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis tick={false} label="TimeStamp" dataKey="name" />
             {props.graphWidth > 650 &&
-              <YAxis tick={true} label={props.isDaily? "Price":"% Change"} domain={[props.isDaily?props.dMin:props.hMin, props.isDaily?props.dMax:props.hMax]}/>
+              <YAxis tick={true} label={props.isDaily? "Price":"% Change"} domain={[props.isDaily? props.dMin : props.hMin, props.isDaily? props.dMax : props.hMax]}/>
             }
             {props.graphWidth <= 650 &&
               //<YAxis tick={false} domain={[props.isDaily?props.dMin:props.hMin, props.isDaily?props.dMax:props.hMax]}/>

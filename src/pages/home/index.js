@@ -17,7 +17,7 @@ function HomePage(props) {
         let resp = await axios.get(gurl);
         setCoinData(mutateResp(resp));
       } catch(e) {
-        console.log(e);
+        console.error(e);
       }
     }
     fetchData2();
