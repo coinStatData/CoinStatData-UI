@@ -35,15 +35,18 @@ function Footer() {
             <h5>Donations</h5>
             <Link to="/donate">Bitcoin</Link>
             <Link to="/donate">Ethereum</Link>
-            <Link to="/donate">USD Coin</Link>
           </div>
           <div className="link-cont">
             <h5>Github</h5>
             <a target="_blank" href="https://github.com/coinStatData">Link</a>
           </div>
-          <div className="link-cont">
+          {/* <div className="link-cont">
             <h5>API's</h5>
             <a target="_blank" href="">Coming Soon</a>
+          </div> */}
+          <div className="link-cont">
+            <h5>Merchandise</h5>
+            <a target="_blank" href="https://alienvogue.com">AlienVogue</a>
           </div>
         </div>
       </div>
