@@ -22,7 +22,7 @@ function NavBarComp(props) {
               <span>CoinStatData</span>
             </div>
           </Link>
-          {width < 500 ? 
+          {width < 800 ? 
             (
               <NavDropdown title="Menu" className="custom-nav-dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item>
@@ -35,6 +35,11 @@ function NavBarComp(props) {
                     <span>Portfolio-Opt</span>
                   </Link>
                 </NavDropdown.Item>
+                <NavDropdown.Item target="_blank" href="https://www.alienvogue.com">
+                  <div className="drop-nav-link">
+                    <span>Merchandise</span>
+                  </div>
+                </NavDropdown.Item>
               </NavDropdown>
             ) : (
               <>
@@ -44,6 +49,9 @@ function NavBarComp(props) {
                 <Link className="nav-link" to="/optimization">
                   <span>Portfolio-Optimization</span>
                 </Link>
+                <a className="nav-link" target="_blank" href="https://www.alienvogue.com">
+                  <span>Store</span>
+                </a>
               </>
             )
           }
