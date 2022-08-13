@@ -187,7 +187,7 @@ function SearchBar(props) {
             <option>{coin}</option>
             {
               COIN_LIST.map((record => {
-                return <option>{record}</option>
+                return <option key={record}>{record}</option>
               }))
             }
           </Form.Select>
