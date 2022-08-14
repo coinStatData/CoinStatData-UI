@@ -9,7 +9,7 @@ import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
 import { update_coin } from '../../redux/slices/coin';
 import { update_interval } from '../../redux/slices/interval';
-import { COIN_LIST } from '../../util/constants/coins'
+import { COIN_LIST } from '../../util/constants/coins';
 import './style.css';
 
 function SearchBar(props) {
