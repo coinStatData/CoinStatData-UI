@@ -46,6 +46,10 @@ a:hover {
   color: var(--primary-orange);
 }
 
+.dropdown-menu {
+  left: -20px !important;
+}
+
 @media (max-width: 550px) { 
   .nav-links-cont {
     justify-content: space-around !important;

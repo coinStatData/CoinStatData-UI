@@ -1,22 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger'
-import startDateReducer from './slices/startDate';
-import endDateReducer from './slices/endDate';
+import searchReducer from './slices/search';
 import coinGeckoRespReducer from './slices/coinGeckoResp';
 import tableDataReducer from './slices/tableData';
 import chartDataReducer from './slices/chartData';
-import coinReducer from './slices/coin';
-import intervalReducer from './slices/interval';
+import chatReducer from './slices/chat';
 
 export default configureStore({
   reducer: {
-    startDate: startDateReducer,
-    endDate: endDateReducer,
+    search: searchReducer,
     coinGeckoResp: coinGeckoRespReducer,
     tableData: tableDataReducer,
     chartData: chartDataReducer,
-    coin: coinReducer,
-    interval: intervalReducer,
+    chat: chatReducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'development' ? 

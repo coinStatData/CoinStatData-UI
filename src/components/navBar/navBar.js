@@ -26,6 +26,11 @@ function NavBarComp(props) {
             (
               <NavDropdown title="Menu" className="custom-nav-dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item>
+                  <Link className="drop-av-link" to="/">
+                    <span>Home</span>
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
                   <Link className="drop-av-link" to="/stat">
                     <span>Stat</span>
                   </Link>
@@ -33,6 +38,11 @@ function NavBarComp(props) {
                 <NavDropdown.Item>
                   <Link className="drop-nav-link" to="/optimization">
                     <span>Portfolio-Opt</span>
+                  </Link>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <Link className="drop-nav-link" to="/chat">
+                    <span>Chat-Room</span>
                   </Link>
                 </NavDropdown.Item>
                 <NavDropdown.Item target="_blank" href="https://www.alienvogue.com">

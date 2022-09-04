@@ -1,21 +1,21 @@
 import React from 'react';
+import Chat from '../../components/chat';
 import NavBarComp from '../../components/navBar/navBar';
 import Footer from '../../components/footer';
 import './styles.css';
 
-function PortFolioOpt(props) {
-
+function ChatPage(props) {
 	return (
 		<>
 			<NavBarComp></NavBarComp>
-			<div>
-				<div className="iframe-cont">
-					<iframe src="/python/portfolio/index.html"/>
+			<div className="chat-page-outer-cont">
+				<div className="chat-page-inner-cont">
+					<Chat></Chat>
 				</div>
 			</div>
 			<Footer></Footer>
 		</>
-	);
+	)
 }
 
-export default PortFolioOpt;
+export default ChatPage;

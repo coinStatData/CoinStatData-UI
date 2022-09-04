@@ -1,14 +1,14 @@
 import React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Legend, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux'
 import './style.css';
 
 function LineChartBoy(props) {
 
-  const sDate = useSelector((state) => state.startDate.value);
-  const eDate = useSelector((state) => state.endDate.value)
-  const coin = useSelector((state) => state.coin.value)
+  const sDate = useSelector((state) => state.search.startDate);
+  const eDate = useSelector((state) => state.search.endDate)
+  const coin = useSelector((state) => state.search.coin)
 
   return (
     <div className="chart-cont">
