@@ -8,6 +8,7 @@ function ChatPage(props) {
 	return (
 		<>
 			<NavBarComp></NavBarComp>
+			<br></br>
 			<div className="chat-page-outer-cont">
 				<div className="chat-page-inner-cont">
 					<Chat></Chat>

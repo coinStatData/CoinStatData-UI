@@ -59,7 +59,8 @@ function HomePage(props) {
         <div className="trending-box">
           <Trending/>
           <TopRedditPosts/>
-          <Chat className="iframe-chat"></Chat>
+          <br></br>
+          <Chat className="coin-chat"></Chat>
         </div>
       </div>
       <Footer></Footer>
