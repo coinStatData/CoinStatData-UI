@@ -1,0 +1,14 @@
+
+.chat-outer-cont {
+  background-color: white;
+  border-radius: 6px;
+  border: solid #FFD700;
+}
+
+
+@media (min-width: 320px) and (max-width: 1200px) {
+  .textContainer {
+    display: none;
+  }
+}
+

@@ -4,8 +4,7 @@ import Table from 'react-bootstrap/Table'
 import { formatDate } from '../../util'
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
-import { update_startDate } from '../../redux/slices/startDate';
-import { update_endDate } from '../../redux/slices/endDate';
+import { update_startDate, update_endDate } from '../../redux/slices/search';
 import './style.css';
 
 function Table2(props) {
@@ -13,10 +12,10 @@ function Table2(props) {
   const [tableD, setTableD] = useState();
   const [isLambda, setIsLambda] = useState();
   const dispatch = useDispatch()
-  const sDate = useSelector((state) => state.startDate.value);
-  const eDate = useSelector((state) => state.endDate.value);
+  const sDate = useSelector((state) => state.search.startDate);
+  const eDate = useSelector((state) => state.search.endDate);
   const tableData = useSelector((state) => state.tableData.value);
-  const coin = useSelector((state) => state.coin.value)
+  const coin = useSelector((state) => state.search.coin)
   
   useEffect(() => {
     //this is for lambda resp

@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import UserContext from './hooks/userContext';
 import TablePage from './pages/table/tablePage';
-import NavBarComp from './components/navBar/navBar';
-import Footer from './components/footer';
-import store from './redux/store'
-import { Provider } from 'react-redux'
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PortFolioOpt from './pages/portfolioOpt';
 import DonatePage from './pages/donation';
+import ChatPage from './pages/chat';
 import HomePage from './pages/home';
 import { useFetch } from "react-async"
 import './App.css';
@@ -40,18 +37,18 @@ function App() {
   return (
     <>
       <UserContext.Provider value={{interval_g, update_g, coin_g, resp_g}}>
-        <Provider store={store}>
+
           <BrowserRouter>
-            <NavBarComp />
             <Routes>
+              {/* pages with navbar */}
               <Route path="/" element={<HomePage />} />
               <Route path="/stat" element={<TablePage />} />
               <Route path="/optimization" element={<PortFolioOpt />} />
               <Route path="/donate" element={<DonatePage />} />
+              <Route path="/chat" element={<ChatPage />} />
             </Routes>
-            <Footer></Footer>
           </BrowserRouter>
-        </Provider>
+
       </UserContext.Provider>
     </>
   );

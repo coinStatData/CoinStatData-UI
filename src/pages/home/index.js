@@ -4,8 +4,11 @@ import HomeTable from '../../components/homeTable'
 import Trending from '../../components/trending'
 import TopRedditPosts from '../../components/topRedditPosts';
 import axios from 'axios';
+import NavBarComp from '../../components/navBar/navBar';
+import Chat from '../../components/chat';
+import Footer from '../../components/footer';
 import { useDispatch } from 'react-redux';
-import { update_interval } from '../../redux/slices/interval';
+import { update_interval } from '../../redux/slices/search';
 import './styles.css';
 
 function HomePage(props) {
@@ -47,15 +50,20 @@ function HomePage(props) {
   });
 
 	return (
-		<div className="flex-cont">
-      <div className="homeTable-box">
-        <HomeTable screenWidth={screenWidth} coinData={coinData}/>
+    <>
+      <NavBarComp></NavBarComp>
+      <div className="flex-cont">
+        <div className="homeTable-box">
+          <HomeTable screenWidth={screenWidth} coinData={coinData}/>
+        </div>
+        <div className="trending-box">
+          <Trending/>
+          <TopRedditPosts/>
+          <Chat className="iframe-chat"></Chat>
+        </div>
       </div>
-      <div className="trending-box">
-        <Trending/>
-        <TopRedditPosts/>
-      </div>
-		</div>
+      <Footer></Footer>
+    </>
 	)
 }
 

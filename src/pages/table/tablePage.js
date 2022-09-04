@@ -7,6 +7,8 @@ import UserContext from '../../hooks/userContext';
 import { formatDate } from '../../util'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
+import NavBarComp from '../../components/navBar/navBar';
+import Footer from '../../components/footer';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_chartData } from '../../redux/slices/chartData';
 import './style.css';
@@ -27,8 +29,8 @@ function TablePage(props) {
   const [screenWidth, setScreenWidth] = useState();
   const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
   const chartData = useSelector((state) => state.chartData.value);
-  const interval = useSelector((state) => state.interval.value);
-  const coin = useSelector((state) => state.coin.value)
+  const interval = useSelector((state) => state.search.interval);
+  const coin = useSelector((state) => state.search.coin)
   const dispatch = useDispatch();
 
   const changeDailyHourly = () => {
@@ -79,7 +81,7 @@ function TablePage(props) {
       for(let i=0; i<chartD.length-2; i++) {
         let time = "";
         let mday = "";
-        if(interval == "daily") {
+        if(interval === "daily") {
           time = weekDic[(chartD[i]["name"].getDay())];
           mday = chartD[i]["name"].getDate();
           //month dates
@@ -99,7 +101,7 @@ function TablePage(props) {
       for(let i=0; i<chartD.length-2; i++) {
         let time = "";
         let mday = "";
-        if(interval == "daily") {
+        if(interval === "daily") {
           time = weekDic[(chartD[i]["name"].getDay())];
           mday = chartD[i]["name"].getDate();
           //month dates
@@ -128,7 +130,7 @@ function TablePage(props) {
       }
       setAvgSumData(avgSumData);
 
-      if(interval == "daily") {
+      if(interval === "daily") {
         //month days
         let marr = [];
         for(let d in mdic) {
@@ -210,29 +212,33 @@ function TablePage(props) {
   }, [coinGeckoResp]);
 
   return (
-    <div>
-      <div className="chart-cont">
-        <Tabs defaultActiveKey="Price" className="mb-3">
-          <Tab eventKey="Price" title="Line Graph">
-            <LineChartBoy graphWidth={graphWidth} chartData={chartData} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />
-          </Tab>
-          <Tab eventKey="Average Return" title="Avg Return Bar Chart">
-            <BarChartBoy graphWidth={graphWidthBar} chartSumMdata={avgSumMData} isDaily={isDaily} avgData={avgReturn} chartSumData={avgSumData}/>
-          </Tab>
-        </Tabs>
-      </div>
-      <div className="hr-cont">
-        <hr></hr>
-      </div>
-      <div className="table-page">
-        <div>
-          <SearchBar/>
+    <>
+      <NavBarComp></NavBarComp>
+      <div>
+        <div className="chart-cont">
+          <Tabs defaultActiveKey="Price" className="mb-3">
+            <Tab eventKey="Price" title="Line Graph">
+              <LineChartBoy graphWidth={graphWidth} chartData={chartData} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />
+            </Tab>
+            <Tab eventKey="Average Return" title="Avg Return Bar Chart">
+              <BarChartBoy graphWidth={graphWidthBar} chartSumMdata={avgSumMData} isDaily={isDaily} avgData={avgReturn} chartSumData={avgSumData}/>
+            </Tab>
+          </Tabs>
         </div>
-        <div>
-          <Table2 screenWidth={screenWidth} chartData={chartData}/>
+        <div className="hr-cont">
+          <hr></hr>
+        </div>
+        <div className="table-page">
+          <div>
+            <SearchBar/>
+          </div>
+          <div>
+            <Table2 screenWidth={screenWidth} chartData={chartData}/>
+          </div>
         </div>
       </div>
-    </div>
+      <Footer></Footer>
+    </>
   );
 }
 

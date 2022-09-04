@@ -7,8 +7,7 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
-import { update_coin } from '../../redux/slices/coin';
-import { update_interval } from '../../redux/slices/interval';
+import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
 import './style.css';
 
@@ -23,8 +22,8 @@ function SearchBar(props) {
   const [volprice, setVolprice] = useState("prices");
   const msg1 = "We could not find the coin. Please try another!";
   const msg2 = "Oopse, something went wrong. Please try again later!";
-  const coin = useSelector((state) => state.coin.value);
-  const interval = useSelector((state) => state.interval.value);
+  const coin = useSelector((state) => state.search.coin);
+  const interval = useSelector((state) => state.search.interval);
   const [tempInterval, setTempInterval] = useState(interval);
   const [coinName, setCoinName] = useState(coin);
   const dispatch = useDispatch()
@@ -60,7 +59,7 @@ function SearchBar(props) {
     dispatch(update_coin(coinName));
     let resp = await fetchDataLambda(coin, start, end);
     if(resp.count > 0) {
-      update_g(resp.Items, "resp");
+      //update_g(resp.Items, "resp");
     } else {
       setErrorMessage(msg1);
       setShowAlert(true);

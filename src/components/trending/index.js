@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table'
 import axios from 'axios';
 import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { update_coin } from '../../redux/slices/coin';
+import { update_coin } from '../../redux/slices/search';
 import './styles.css';
 
 function Trending(props) {

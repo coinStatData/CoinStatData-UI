@@ -6,9 +6,9 @@ import './style.css';
 
 function BarChartBoy(props) {
 
-  const sDate = useSelector((state) => state.startDate.value);
-  const eDate = useSelector((state) => state.endDate.value);
-  const interval = useSelector((state) => state.interval.value);
+  const sDate = useSelector((state) => state.search.startDate);
+  const eDate = useSelector((state) => state.search.endDate);
+  const interval = useSelector((state) => state.search.interval);
   const [isMDay, setIsMday] = useState(false);
 
   const renderGraph = () => {

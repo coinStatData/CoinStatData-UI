@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'react-bootstrap/Table'
 import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { update_coin } from '../../redux/slices/coin';
+import { update_coin } from '../../redux/slices/search';
 import './styles.css';
 
 const ICON_PATHS = {
