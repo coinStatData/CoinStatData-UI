@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import Message from './message/message';
 
 import './messages.css';
 
 const Messages = ({ messages, name }) => {
-  useEffect(() => {
-    console.log('messages', messages);
-  }, [messages])
 
   return (
     <div>

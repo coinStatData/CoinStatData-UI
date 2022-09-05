@@ -20,17 +20,15 @@ const Chat = (props) => {
     const [message, setMessage] = useState("");
 
   useEffect(() => {
-    console.log("asdfasdfasdfasd")
     socket = io(ENDPOINT);
     socket.emit('join', { name, room }, (error) => {
       if(error) {
         alert(error);
       }
     });
-  }, [ENDPOINT]);
+  }, [ENDPOINT, name]);
   
   useEffect(() => {
-    console.log("@@@@")
     socket.on('message', message => {
       setMessages(messages => [ ...messages, message ]);
     });

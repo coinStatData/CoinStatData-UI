@@ -1,4 +1,4 @@
-.infoBar {
+.info-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.leftInnerContainer {
+.left-inner-cont {
   flex: 0.5;
   display: flex;
   align-items: center;
@@ -16,13 +16,41 @@
   color: white;
 }
 
-.rightInnerContainer {
+.right-inner-cont {
   display: flex;
   flex: 0.5;
   justify-content: flex-end;
   margin-right: 5%;
 }
 
-.onlineIcon {
-  margin-right: 5%;
+.right-inner-cont a {
+  color: white;
+  text-decoration: none;
+}
+
+.right-inner-cont button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.right-inner-cont button:hover {
+  color: #008B8B;
+}
+
+
+.csd-icon {
+  width: 30px;
+  margin: auto 0 auto 15px;
+  display: block;
+}
+
+.join-cont {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
