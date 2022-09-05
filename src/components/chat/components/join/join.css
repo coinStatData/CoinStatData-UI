@@ -1,0 +1,57 @@
+.join-outer-cont {
+  position: absolute;
+  background-color: #fcfcfc;
+  padding: 20px;
+  height: 200px;
+  border: solid orange;
+  border-radius: 10px;
+  z-index: 100;
+
+}
+
+.join-inner-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.join-input {
+  width: 100%;
+  height: 40px;
+  border: solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 0 10px;
+}
+
+.join-input:focus {
+  border: solid orange;
+  background-color: yellow;
+}
+
+.join-button {
+  width: 50%;
+  height: 40px;
+  border: solid #ccc;
+  border-radius: 5px;
+  background-color: #fcfcfc;
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.join-button:hover {
+  background-color: yellow;
+  border: solid orange;
+}
+
+.join-close-btn {
+  position: absolute;
+  width: inherit;
+  cursor: pointer;
+  right: 15px;
+  top: 10px;
+  font-weight: bold;
+} 

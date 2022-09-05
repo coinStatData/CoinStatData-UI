@@ -1,11 +1,11 @@
 .form {
   display: flex;
-  border-top: 2px solid #D3D3D3;
+  border-top: 2px solid #DCDCDC;
 }
 
 .input {
   border: none;
-  border-radius: 0;
+  border-radius: 10px;
   padding: 10px;
   width: 80%;
   font-size: 14px;
@@ -19,9 +19,13 @@ input:focus, textarea:focus, select:focus{
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: #2979FF;
-  padding: 10spx;
+  background: rgb(255, 124, 63);
   display: inline-block;
   border: none;
   width: 20%;
+  border-bottom-right-radius: 6px;
+}
+
+.sendButton:hover {
+  background: #FF6347;
 }
