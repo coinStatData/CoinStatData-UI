@@ -108,14 +108,14 @@
     width:100%;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 40px;
+    margin-top: 20px;
   }
   .link-cont {
     margin-left: 0px;
   }
 
   .footer-outer-cont {
-    margin-top: 20px;
+    margin-top: 5px;
   }
   
  }
