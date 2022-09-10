@@ -9,6 +9,7 @@ import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
+import coinDataService from '../../services/coinData.service';
 import './style.css';
 
 function SearchBar(props) {
@@ -140,13 +141,8 @@ function SearchBar(props) {
     //interval = daily / hourly
     //days = hourly:<90 / daily:any:
     //market_caps/prices/total_volumes
-    let api_url = process.env['REACT_APP_GECKO_FETCH_HOST'].replace('@coin@', coin1).replace('@days@', days1).replace('@interval@', interval1);
     try {
-      let resp = await axios.get(api_url,  {
-        headers: {
-          'Content-Type': 'text/plain'
-        },
-      });
+      const resp = await coinDataService().fetchTableData(coin1, days1, interval1);
       dispatch(update_tableData(resp.data))
       return resp.data[volprice];
     } catch(e) {

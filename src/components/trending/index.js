@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
-import axios from 'axios';
 import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { update_coin } from '../../redux/slices/search';
+import topTrendingService from '../../services/topTrending.service';
 import './styles.css';
 
 function Trending(props) {
@@ -28,7 +28,7 @@ function Trending(props) {
   useEffect(()=> {
     async function fetchData2() {
       try {
-        let resp = await axios.get(process.env.REACT_APP_GECKO_FETCH_TRENDING_URL);
+        const resp = await topTrendingService().fetchCoins();
         setTrendingData(mutateResp(resp));
       } catch(e) {
         console.log(e);

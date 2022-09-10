@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
 import Form from 'react-bootstrap/Form';
 import { formatDate } from '../../util'
+import topTrendingService from '../../services/topTrending.service';
 import './styles.css';
 
 function TopRedditPosts() {
@@ -12,9 +12,8 @@ function TopRedditPosts() {
   useEffect(() => {
     async function fetchData2() {
       try {
-        const url = process.env['REACT_APP_FETECH_TOP_REDDIT'].replace('@sub@', subReddit);
-        let resp = await axios.get(url);
-        setTopPosts(mutateResp(resp.data?.data?.children));
+        const resp = await topTrendingService().fetchReddit(subReddit);
+        setTopPosts(mutateResp(resp.children));
       } catch(e) {
         console.log(e);
       }
@@ -41,7 +40,7 @@ function TopRedditPosts() {
         ups: resp[i].data?.ups,
         thumbnail: resp[i].data?.thumbnail,
         created: resp[i].data?.created,
-        url: resp[i].data?.url,
+        url: "https://www.reddit.com" + resp[i].data?.permalink,
         description: resp[i].data?.description
       };
       count++;

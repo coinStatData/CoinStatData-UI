@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { useSelector } from 'react-redux';
 import './styles.css';
 
-const ENDPOINT = process.env.REACT_APP_SERVER_URL || 'http://localhost:5000';
+const ENDPOINT = 'http://localhost:5000';
 let socket;
 
 const Chat = (props) => {
@@ -19,7 +19,7 @@ const Chat = (props) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState("");
 
-  useEffect(() => {
+  useEffect(() => { 
     socket = io(ENDPOINT);
     socket.emit('join', { name, room }, (error) => {
       if(error) {

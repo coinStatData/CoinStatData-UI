@@ -3,12 +3,12 @@ import { COIN_STR } from '../../util/constants/coins';
 import HomeTable from '../../components/homeTable'
 import Trending from '../../components/trending'
 import TopRedditPosts from '../../components/topRedditPosts';
-import axios from 'axios';
 import NavBarComp from '../../components/navBar/navBar';
 import Chat from '../../components/chat';
 import Footer from '../../components/footer';
 import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
+import coinDataService from '../../services/coinData.service';
 import './styles.css';
 
 function HomePage(props) {
@@ -16,15 +16,11 @@ function HomePage(props) {
   const [screenWidth, setScreenWidth] = useState();
   const dispatch = useDispatch();
 
-  useEffect(()=> {
+
+  useEffect(() => {
     async function fetchData2() {
-      try {
-        const gurl = process.env['REACT_APP_GECKO_FETCH_COIN_URL'].replace('@COINS@', COIN_STR);
-        let resp = await axios.get(gurl);
-        setCoinData(mutateResp(resp));
-      } catch(e) {
-        console.error(e);
-      }
+      const resp = await coinDataService().fetchHomeData(COIN_STR);
+      setCoinData(mutateResp(resp.data));
     }
     fetchData2();
     calculateSize();
