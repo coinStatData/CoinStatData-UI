@@ -3,7 +3,7 @@ import RestService from "./wrapper/restService";
 const topTrendingService = () => {
   
   const _serverUr = process.env.REACT_APP_NODE_ENV === "dev" ? 
-    process.env.REACT_APP_DEV_SERVER_URL : process.env.REACT_APP_SERVER_URL;
+    process.env.REACT_APP_DEV_SERVER_URL : process.env.SERVER_URL;
 
   const _fetchCoins = async () => {
     try {
