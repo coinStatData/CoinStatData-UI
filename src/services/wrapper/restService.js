@@ -7,6 +7,7 @@ const RestService = (defaultConfig={}) => {
     newConfig.url = url;
     newConfig.method = method;
     newConfig.headers = {...newConfig.headers, ...config.headers};
+    newConfig.headers['API-KEY'] = process.env.REACT_APP_API_KEY;
     return newConfig;
   };
 
