@@ -7,7 +7,7 @@ import io from "socket.io-client";
 import { useSelector } from 'react-redux';
 import './styles.css';
 
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = process.env['REACT_APP_SERVER_URL'] || 'http://localhost:5000';
 let socket;
 
 const Chat = (props) => {
