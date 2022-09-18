@@ -10,7 +10,7 @@ import Tab from 'react-bootstrap/Tab'
 import NavBarComp from '../../components/navBar/navBar';
 import Footer from '../../components/footer';
 import { useSelector, useDispatch } from 'react-redux';
-import { update_chartData } from '../../redux/slices/chartData';
+import { update_simpleData } from '../../redux/slices/chartData';
 import './style.css';
 
 function TablePage(props) {
@@ -28,7 +28,7 @@ function TablePage(props) {
   const [graphWidthBar, setGraphWidthBar] = useState();
   const [screenWidth, setScreenWidth] = useState();
   const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
-  const chartData = useSelector((state) => state.chartData.value);
+  const simpleChart = useSelector((state) => state.chartData.simpleChart);
   const interval = useSelector((state) => state.search.interval);
   const coin = useSelector((state) => state.search.coin)
   const dispatch = useDispatch();
@@ -174,7 +174,7 @@ function TablePage(props) {
       setMaxPrice(max);
       setHMaxReturn(hmax);
       setHminReturn(hmin);
-      dispatch(update_chartData(chartD));
+      dispatch(update_simpleData(chartD));
       calAvg(chartD);
     }
   }, [resp_g]);
@@ -206,7 +206,7 @@ function TablePage(props) {
       setHMaxReturn(hmax);
       setHminReturn(hmin);
       chartD.splice(chartD.length-2,2);
-      dispatch(update_chartData(chartD));
+      dispatch(update_simpleData(chartD));
       calAvg(chartD)
     }
   }, [coinGeckoResp]);
@@ -218,7 +218,7 @@ function TablePage(props) {
         <div className="chart-cont">
           <Tabs defaultActiveKey="Price" className="mb-3">
             <Tab eventKey="Price" title="Line Graph">
-              <LineChartBoy graphWidth={graphWidth} chartData={chartData} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />
+              <LineChartBoy graphWidth={graphWidth} simpleChart={simpleChart} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />
             </Tab>
             <Tab eventKey="Average Return" title="Avg Return Bar Chart">
               <BarChartBoy graphWidth={graphWidthBar} chartSumMdata={avgSumMData} isDaily={isDaily} avgData={avgReturn} chartSumData={avgSumData}/>
@@ -233,7 +233,7 @@ function TablePage(props) {
             <SearchBar/>
           </div>
           <div>
-            <Table2 screenWidth={screenWidth} chartData={chartData}/>
+            <Table2 screenWidth={screenWidth} simpleChart={simpleChart}/>
           </div>
         </div>
       </div>
