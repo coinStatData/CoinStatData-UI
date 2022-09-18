@@ -7,10 +7,13 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
+import { update_candleData } from '../../redux/slices/chartData';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
 import coinDataService from '../../services/coinData.service';
+import candleStickService from '../../services/candleStick.service';
 import './style.css';
+
 
 function SearchBar(props) {
 
@@ -41,24 +44,36 @@ function SearchBar(props) {
   //   fetchData2();
   // }, []);
 
-  useEffect(() => {
-    async function fetchData2() {
-      let resp = await fetchDataGecko(coin, days, interval);
-      if(resp) {
-        dispatch(update_gecko_resp(resp));
-      } else {
+  const errorResponse = (e) => {
+    if(e.response) {
+      if(e.response.status == 404) {
         setErrorMessage(msg1);
         setShowAlert(true);
+      } else {
+        setErrorMessage(msg2);
+        setShowAlert(true);
       }
+    } else {
+      setErrorMessage(msg2);
+      setShowAlert(true);
     }
-    fetchData2();
+  }
+
+  useEffect(() => {
+    // async function fetchData2() {
+    //   await fetchDataGecko(coin, days, interval);
+    //   await fetchCandleStickData(coin, days);
+    // }
+    // fetchData2();
+    fetchDataGecko(coin, days, interval);
+    fetchCandleStickData(coin, days);
   }, []);
 
   const handleSubmitDates = async (e) => {
     //for lambda
     e.preventDefault();
     dispatch(update_coin(coinName));
-    let resp = await fetchDataLambda(coin, start, end);
+    const resp = await fetchDataLambda(coin, start, end);
     if(resp.count > 0) {
       //update_g(resp.Items, "resp");
     } else {
@@ -67,19 +82,15 @@ function SearchBar(props) {
     }
   }
 
-  const handleSubmitDays = async (e) => {
+  const handleSubmitDays = (e) => {
     e.preventDefault();
     dispatch(update_coin(coinName));
     dispatch(update_tableData([]));
     dispatch(update_gecko_resp([]));
     dispatch(update_interval(tempInterval));
-    let resp = await fetchDataGecko(coin, days, tempInterval);
-    if(resp) {
-      dispatch(update_gecko_resp(resp));
-    } else {
-      setErrorMessage(msg1);
-      setShowAlert(true);
-    }
+    fetchDataGecko(coin, days, tempInterval);
+    fetchCandleStickData(coin, days);
+
   }
 
   const handleCoinChange = (e) => {
@@ -117,14 +128,14 @@ function SearchBar(props) {
   }
 
   const fetchDataLambda = async (coin, startTime, endTime) => {
-    let data = {
+    const data = {
       coin: coin,
       beginDateTime: startTime,
       endDateTime: endTime
     }
-    let api_url = process.env['REACT_APP_LAMBDA_HOURLY_FETCH_URL'];
+    const api_url = process.env['REACT_APP_LAMBDA_HOURLY_FETCH_URL'];
     try {
-      let resp = await axios.post(api_url, JSON.stringify(data), {
+      const resp = await axios.post(api_url, JSON.stringify(data), {
         headers: {
           'Content-Type': 'text/plain'
         },
@@ -132,8 +143,7 @@ function SearchBar(props) {
       return resp.data;
     } catch(e) {
       console.log(e.message);
-      setErrorMessage(msg2);
-      setShowAlert(true);
+      errorResponse(e);
     }
   }
 
@@ -144,21 +154,24 @@ function SearchBar(props) {
     try {
       const resp = await coinDataService().fetchTableData(coin1, days1, interval1);
       dispatch(update_tableData(resp.data))
-      return resp.data[volprice];
+      dispatch(update_gecko_resp(resp.data[volprice]));
     } catch(e) {
       console.log(e.message);
-      if(e.response) {
-        if(e.response.status == 404) {
-          setErrorMessage(msg1);
-          setShowAlert(true);
-        } else {
-          setErrorMessage(msg2);
-          setShowAlert(true);
-        }
-      } else {
-        setErrorMessage(msg2);
-        setShowAlert(true);
-      }
+      errorResponse(e);
+    }
+  }
+
+  const fetchCandleStickData = async (coin, days) => {
+    //interval = m1, m5, m15, m30, h1, h2, h4, h8, h12, d1, w1
+    try {
+      const end = Date.now()
+      const start = end - (days * 24 * 60 * 60 * 1000);
+      const resp = await candleStickService().fetchCandleData({coin, start, end});
+      dispatch(update_candleData(resp.data))
+      return resp.data;
+    } catch(e) {
+      console.log(e.message);
+      errorResponse(e)
     }
   }
 

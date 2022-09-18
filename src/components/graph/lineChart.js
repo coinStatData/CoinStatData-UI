@@ -16,7 +16,7 @@ function LineChartBoy(props) {
       <h6 className="dateHeader">{sDate} ~ {eDate}</h6>
       <div className="chart-cont-inner">
         <ResponsiveContainer width={props.graphWidth} height={"100%"}>
-          <LineChart data={props.chartData}
+          <LineChart data={props.simpleChart}
             margin={{ top: 10, bottom: 10 }}>
             <Line type="monotone" dataKey={props.isDaily? coin : "hourlyReturn"} stroke="#8884d8" />
             <CartesianGrid strokeDasharray="3 3" />
