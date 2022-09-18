@@ -38,8 +38,8 @@ function Table2(props) {
   }, [tableData]);
 
   const csvData = () => {
-    let data = [];
-    let cdata = props.simpleChart;
+    const data = [];
+    const cdata = props.simpleChart;
     if(Array.isArray(cdata)){
       for(let i=0; i<cdata.length-2; i++)
         data.push({

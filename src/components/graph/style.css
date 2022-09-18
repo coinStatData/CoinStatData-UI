@@ -17,6 +17,7 @@
   justify-content: center;
 }
 
+
 .chart-btn {
   width: 140px !important;
   padding:5px !important;
@@ -25,6 +26,11 @@
   margin-top: 15px;
   font-size: 14px !important;
 }
+
+#candle-chart-cont {
+  margin: 0 auto;
+}
+
 
 .btn-cont {
   display: flex;
