@@ -20,8 +20,8 @@ const prepCandleData = () => {
         align: 'left'
       },
       xaxis: {
+        // type: 'datetime',
         type: 'datetime',
-        // type: 'category',
         // labels: {
         //   formatter: function(val) {
         //     return dayjs(val).format('MMM DD HH:mm')
@@ -75,7 +75,7 @@ const prepCandleData = () => {
     rawRespData.forEach((item) => {
       data.push({
         x: new Date(item.period),
-        y: [item.open, item.high, item.low, item.close]
+        y: [Number(item.open).toFixed(5), Number(item.high).toFixed(5), Number(item.low).toFixed(5), Number(item.close).toFixed(5)]
       });
     });
     return data;
