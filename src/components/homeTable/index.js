@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Table from 'react-bootstrap/Table'
 import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { update_coin } from '../../redux/slices/search';
+import * as chartActions from '../../redux/actions/chartData';
 import './styles.css';
 
 const ICON_PATHS = {
@@ -63,8 +65,9 @@ function HomeTable(props) {
   const { screenWidth } = props;
   const dispatch = useDispatch();
 
-  const clickCoin = (coin) => {
-    dispatch(update_coin(coin))
+  const clickCoin = async (coin) => {
+    dispatch(update_coin(coin));
+    const respp = await props.fetchCandleData(coin, 100);
     navigate("/stat");
   }
 
@@ -89,7 +92,7 @@ function HomeTable(props) {
   
   function makeTable(coinData) {
     if(Array.isArray(coinData)) {
-      let arr = coinData.map((item, index)=> {
+      const arr = coinData.map((item, index)=> {
         return TableRow(item, index);
       })
       return arr;
@@ -119,4 +122,16 @@ function HomeTable(props) {
     </div>
   );
 }
-export default HomeTable;
+
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCandleData: (coin, days) => dispatch(chartActions.fetchCandleStickData(coin, days)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeTable);

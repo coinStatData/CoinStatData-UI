@@ -14,7 +14,7 @@ function BarChartBoy(props) {
   const renderGraph = () => {
     return (
       <div className="chart-cont">
-        <h3>Average Return by {interval == "hourly"? "Hours" : isMDay? "Days of Month" : "Week Days"}</h3>
+        <h4>Average Return by {interval == "hourly"? "Hours" : isMDay? "Days of Month" : "Week Days"}</h4>
         <h6 className="dateHeader">{sDate} ~ {eDate}</h6>
         <BarChart width={props.graphWidth} height={props.graphWidth > 600 ? props.graphWidth/2.5 : props.graphWidth/2} data={isMDay? props.chartSumMdata : props.chartSumData}>
           <XAxis dataKey="name" stroke="#8884d8" />

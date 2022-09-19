@@ -17,7 +17,6 @@
   justify-content: center;
 }
 
-
 .chart-btn {
   width: 140px !important;
   padding:5px !important;
@@ -52,6 +51,10 @@
   }
   .coinHeader {
     font-size: 19px;
+  }
+
+  .chart-cont h4 {
+    font-size: 16px;
   }
   
  }
