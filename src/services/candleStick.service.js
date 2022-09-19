@@ -16,9 +16,7 @@ const candleStickService = () => {
       throw e;
     }
   }
-
-
-
+  
   return {
     fetchCandleData: _fetchCandleData
   }
