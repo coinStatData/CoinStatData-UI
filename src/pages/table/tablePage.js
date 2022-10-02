@@ -71,8 +71,8 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
         let time = "";
         let mday = "";
         if(interval === "daily") {
-          time = weekDic[(chartD[i]["name"].getDay())];
-          mday = chartD[i]["name"].getDate();
+          time = weekDic[(new Date(chartD[i]["name"]).getDay())];
+          mday = new Date(chartD[i]["name"]).getDate();
           //month dates
           mObj[mday] = 0;
           mObj[mday+"_count"] = 0;
@@ -91,8 +91,8 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
         let time = "";
         let mday = "";
         if(interval === "daily") {
-          time = weekDic[(chartD[i]["name"].getDay())];
-          mday = chartD[i]["name"].getDate();
+          time = weekDic[(new Date(chartD[i]["name"]).getDay())];
+          mday = new Date(chartD[i]["name"]).getDate();
           //month dates
           mObj[mday] += parseFloat(chartD[i].hourlyReturn);
           mObj[mday+"_count"] += 1;
@@ -116,7 +116,6 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
           sum: dObj[d],
         }
         avgSumData.push(temp);
-        console.log("#######2 sum");
       }
       setAvgSumData(avgSumData);
 
@@ -149,7 +148,7 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
         if(index < coinGeckoResp.length-2) {
           let ch = (coinGeckoResp[index+1][1] - item[1])/item[1] * 100;
           let row = {
-            name: interval == "hourly"? formatDate(new Date(item[0])) : new Date(item[0]),
+            name: interval == "hourly"? formatDate(new Date(item[0])).toLocaleString() : new Date(item[0]).toLocaleString(),
             [coin]: item[1],
             hourlyReturn: ch.toFixed(5)
           }
