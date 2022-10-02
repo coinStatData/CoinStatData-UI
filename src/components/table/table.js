@@ -5,6 +5,7 @@ import { formatDate } from '../../util'
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import { update_startDate, update_endDate } from '../../redux/slices/search';
+import CoinGecko from '../coinGecko';
 import './style.css';
 
 function Table2(props) {
@@ -82,7 +83,9 @@ function Table2(props) {
           }
           </tbody>
         </Table>
+        
       </div>
+      <CoinGecko></CoinGecko>
     </div>
   );
 }

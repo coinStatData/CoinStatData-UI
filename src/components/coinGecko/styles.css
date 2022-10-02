@@ -1,0 +1,17 @@
+.coinGecko-cont {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  justify-content: flex-start;
+}
+
+.coinGecko-cont img {
+  width: 17px;
+  margin-left: 10px;
+}
+
+.coinGecko-cont a {
+  text-decoration: none;
+  margin-left: 7px;
+}
