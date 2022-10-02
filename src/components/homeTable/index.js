@@ -67,7 +67,7 @@ function HomeTable(props) {
 
   const clickCoin = async (coin) => {
     dispatch(update_coin(coin));
-    const respp = await props.fetchCandleData(coin, 100);
+    const respp = props.fetchCandleData(coin, 100);
     navigate("/stat");
   }
 

@@ -21,11 +21,11 @@ export const calculateGraphWidth = (newWidth) => {
   let newGraphWidth = 0;
   let newGraphWidthBar = 0;
   if(newWidth < 650) {
-    newGraphWidth = newWidth * .95
-    newGraphWidthBar = newWidth * .87
+    newGraphWidth = newWidth * .90;
+    newGraphWidthBar = newWidth * .87;
   } else if(1000 >= newWidth && newWidth >= 650) {
-    newGraphWidth = newWidth * .75
-    newGraphWidthBar = newWidth * .75
+    newGraphWidth = newWidth * .85;
+    newGraphWidthBar = newWidth * .80;
   } else if (1000 < newWidth && newWidth < 1200){
     newGraphWidth = 800;
     newGraphWidthBar = 800;

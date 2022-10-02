@@ -31,13 +31,11 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
   const [graphWidthBar, setGraphWidthBar] = useState(calculateGraphWidth(screenWidth)[1]);
 
   const interval = useSelector((state) => state.search.interval);
-  const coin = useSelector((state) => state.search.coin)
+  const coin = useSelector((state) => state.search.coin);
   const dispatch = useDispatch();
 
   const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
   const [coinGeckoRespCopy, setCoinGeckoRespCopy] = useState(coinGeckoResp); //copy due to double render
-  const simpleChart = useSelector((state) => state.chartData.line.data);
-  const candleChart = useSelector((state) => state.chartData.candle);
 
   const changeDailyHourly = () => {
     setIsDaily(!isDaily);
@@ -45,11 +43,9 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
 
   const calculateSize = () => {
     const newWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    if(screenWidth !== newWidth){
-      const [newGraphWidth, newGraphWidthBar] = calculateGraphWidth(newWidth);
-      if(graphWidth !== newGraphWidth) setGraphWidth(newGraphWidth);
-      if(graphWidthBar !== newGraphWidthBar) setGraphWidthBar(newGraphWidthBar);
-    }
+    const [newGraphWidth, newGraphWidthBar] = calculateGraphWidth(newWidth);
+    if(graphWidth !== newGraphWidth) setGraphWidth(newGraphWidth);
+    if(graphWidthBar !== newGraphWidthBar) setGraphWidthBar(newGraphWidthBar);
   }
 
   useEffect(() => {
@@ -58,10 +54,10 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
 
   const calAvg = (chartD) => {
     if(Array.isArray(chartD) && chartD.length>0) {
-      let dObj = {};
-      let mObj = {};
-      let mdic = {};
-      let dic = {};
+      const dObj = {};
+      const mObj = {};
+      const mdic = {};
+      const dic = {};
       const weekDic = {
         0: "Sunday",
         1: "Monday",
@@ -110,10 +106,10 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
       }
       setAvgReturn(dObj);
       setAvgMReturn(mObj);
-      let avgSumData = [];
+      const avgSumData = [];
       //hourly and days of week
       for(let d in dic) {
-        let temp = {
+        const temp = {
           name: dic[d],
           avg: dObj[d+"_avg"],
           count: dObj[d+"_count"],
@@ -127,8 +123,8 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
       if(interval === "daily") {
         //month days
         let marr = [];
-        for(let d in mdic) {
-          let temp = {
+        for(const d in mdic) {
+          const temp = {
             name: mdic[d],
             avg: mObj[d+"_avg"].toFixed(5),
             count: mObj[d+"_count"],
@@ -182,10 +178,19 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
         <div className="chart-cont">
           <Tabs defaultActiveKey="Price" className="mb-3">
             <Tab eventKey="Price" title="Price Chart">
-              {(Array.isArray(candleObj.data) && candleObj.data.length > 1) ? 
-                (<CandleStickChart candleData={candleObj} coin={coin} graphWidth={graphWidth} />) 
-                  :
-                (<LineChartBoy graphWidth={graphWidth} simpleChart={simpleChart} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />)
+              {candleObj.isLoading ? 
+                <div class="spinner-cont">
+                  <div class="lds-hourglass">
+                  </div>
+                </div>
+                :
+                <>
+                  {(Array.isArray(candleObj.data) && candleObj.data.length > 1) ? 
+                    (<CandleStickChart candleData={candleObj} coin={coin} graphWidth={graphWidth} />) 
+                      :
+                    (<LineChartBoy graphWidth={graphWidth} simpleChart={lineObj.data} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />)
+                  }
+                </>
               }
             </Tab>
             <Tab eventKey="Average Return" title="Avg Return Bar Chart">
@@ -201,7 +206,7 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
             <SearchBar fetchCandleData={fetchCandleData} />
           </div>
           <div>
-            <Table2 screenWidth={screenWidth} simpleChart={simpleChart}/>
+            <Table2 screenWidth={screenWidth} simpleChart={lineObj.data}/>
           </div>
         </div>
       </div>
@@ -213,13 +218,13 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
 function mapStateToProps(state) {
   return {
     candleObj: state.chartData.candle,
-    lineObj: state.chartData.line,
+    lineObj: state.chartData.line
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchCandleData: (coin, days) => dispatch(chartActions.fetchCandleStickData(coin, days)),
+    fetchCandleData: (coin, days) => dispatch(chartActions.fetchCandleStickData(coin, days))
   };
 }
 

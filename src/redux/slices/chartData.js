@@ -7,8 +7,8 @@ export const chartDataSlice = createSlice({
     line: {
       isError: false,
       isLoading: true,
-      data: [],
-      error: {}
+      error: {},
+      data: []
     },
     candle: {
       isError: false,
@@ -18,23 +18,12 @@ export const chartDataSlice = createSlice({
     }
   },
   reducers: {
-    begin_line_fetch: (state, action) => {
-      state.line.isLoading = true;
-      state.line.isError = false;
-      state.line.error = null;
-      state.line.data = action.payload;
-    },
+
     update_lineData_success: (state, action) => {
       state.line.isLoading = false;
       state.line.isError = false;
       state.line.error = null;
       state.line.data = action.payload;
-    },
-    update_lineData_fail: (state, action) => {
-      state.line.isLoading = false;
-      state.line.isError = true;
-      state.line.error = action.payload;
-      state.line.data = [];
     },
 
 // ---------------- candle data ----------------
@@ -43,7 +32,7 @@ export const chartDataSlice = createSlice({
       state.candle.isLoading = true;
       state.candle.isError = false;
       state.candle.error = null;
-      state.candle.data = action.payload;
+      state.candle.data = [{open: 0, close:0}];
     },
     update_candleData_success: (state, action) => {
       state.candle.isLoading = false;
@@ -60,6 +49,6 @@ export const chartDataSlice = createSlice({
   },
 })
 
-export const { begin_line_fetch, update_lineData_fail, begin_candle_fetch, update_lineData_success,update_candleData_fail, update_candleData_success } = chartDataSlice.actions
+export const {  update_lineData_success, begin_candle_fetch,update_candleData_fail, update_candleData_success } = chartDataSlice.actions
 
 export default chartDataSlice.reducer

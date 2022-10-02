@@ -8,6 +8,7 @@ export const coinGeckoRespSlice = createSlice({
     isFetching: true,
   },
   reducers: {
+    
     update_gecko_resp: (state, action) => {
       state.isFetching = false;
       state.value = action.payload

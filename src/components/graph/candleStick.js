@@ -7,9 +7,11 @@ import './style.css';
 function CandleStickChart({ graphWidth, coin, candleData }) {
 
   const [candleChartCopy, setCandleChartCopy] = useState([{open: 0, close: 0}]); //copy due to double render
+  const [mudatedDataCopy, setMudatedDataCopy] = useState([{x: 0, y: []}]); //copy due to double render
 
   const renderCandleChart = (data) => {
-    const mudatedData = prepCandleData().mutateData(data);
+    let mudatedData = (!checkIfSameArrayCandle(candleData.data, candleChartCopy)) ? prepCandleData().mutateData(data) : mudatedDataCopy; //reduce calls to mutateData
+    setMudatedDataCopy(mudatedData);
     const title = `${coin.toUpperCase()} Chart`;
     const options = prepCandleData().returnData(mudatedData, graphWidth, title);
     const chartNode = document.querySelector("#candle-chart-cont");
@@ -22,8 +24,7 @@ function CandleStickChart({ graphWidth, coin, candleData }) {
   }
   
   useEffect(() => {
-    if(!candleData.isLoading && !candleData.isError && Array.isArray(candleData.data) && !checkIfSameArrayCandle(candleChartCopy, candleData.data)) { //!checkIfSameArrayCandle(candleChart, candleChartCopy)
-      console.log("CANDLECHART USEEFFECT22222222222,")
+    if(!candleData.isLoading && !candleData.isError && Array.isArray(candleData.data) && candleData.data.length > 1) { //!checkIfSameArrayCandle(candleChart, candleChartCopy)
       setCandleChartCopy(candleData.data);
       renderCandleChart(candleData.data);
     }

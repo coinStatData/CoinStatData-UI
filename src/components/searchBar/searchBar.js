@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
-import UserContext from '../../hooks/userContext';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,16 +6,12 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
-import { update_candleData_success } from '../../redux/slices/chartData';
-import { fetchCandleStickData } from '../../redux/actions/chartData';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
 import coinDataService from '../../services/coinData.service';
-import candleStickService from '../../services/candleStick.service';
 import './style.css';
 
-
-function SearchBar({fetchCandleData}) {
+function SearchBar({ fetchCandleData }) {
 
   const [start, setStart] = useState('2022.04.30');
   const [end, setEnd] = useState("2022.09.07" );
@@ -28,7 +23,6 @@ function SearchBar({fetchCandleData}) {
   const msg2 = "Oopse, something went wrong. Please try again later!";
   const coin = useSelector((state) => state.search.coin);
   const interval = useSelector((state) => state.search.interval);
-  const candleData = useSelector((state) => state.chartData.candle);
   const [tempInterval, setTempInterval] = useState(interval);
   const [coinName, setCoinName] = useState(coin);
   const dispatch = useDispatch()
@@ -50,7 +44,7 @@ function SearchBar({fetchCandleData}) {
 
   useEffect(() => {
     // console.log("SEARCHBAR useEffect call candledata , ", candleData);
-    fetchDataGecko(coin, days, interval);
+    fetchDataGecko(coinName, days, tempInterval);
     // fetchCandleData(coin, days);
   }, []);
 
@@ -75,16 +69,18 @@ function SearchBar({fetchCandleData}) {
     if(tempInterval !== interval) {
       dispatch(update_interval(tempInterval));
     }
-    fetchDataGecko(coin, days, tempInterval);
-    fetchCandleData(coin, days);
+    fetchDataGecko(coinName, days, tempInterval);
+    fetchCandleData(coinName, days);
   }
 
   const handleCoinChange = (e) => {
     setCoinName(e.target.value.toLowerCase());
   }
+
   const handleStartChange = (e) => {
     setStart(e.target.value);
   }
+
   const handleEndChange = (e) => {
     setEnd(e.target.value);
   }
@@ -97,6 +93,7 @@ function SearchBar({fetchCandleData}) {
       setTempInterval("hourly");
     }
   }
+
   const handleIntervalChange = (e) => {
     setTempInterval(e.target.value);
     if(e.target.value === "hourly") {
@@ -105,6 +102,7 @@ function SearchBar({fetchCandleData}) {
       setDays(100);
     }
   }
+  
   const handleVolOrPriceChange = (e) => {
     if(e.target.value === "price") {
       setVolprice("prices");
@@ -137,10 +135,9 @@ function SearchBar({fetchCandleData}) {
     //interval = daily / hourly
     //days = hourly:<90 / daily:any:
     //market_caps/prices/total_volumes
-    console.log("*&&&&&&&&&&fetchdatagecko")
     try {
       const resp = await coinDataService().fetchTableData(coin1, days1, interval1);
-      dispatch(update_tableData(resp.data))
+      dispatch(update_tableData(resp.data));
       dispatch(update_gecko_resp(resp.data[volprice]));
     } catch(e) {
       console.log(e.message);
