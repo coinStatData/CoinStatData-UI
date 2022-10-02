@@ -43,9 +43,10 @@ function HomePage({screenWidth, fetchCandleData}) {
         </div>
         <div className="trending-box">
           <Trending/>
-          <TopRedditPosts/>
           <br></br>
           <Chat className="coin-chat"></Chat>
+          <TopRedditPosts/>
+
         </div>
       </div>
       <Footer></Footer>
