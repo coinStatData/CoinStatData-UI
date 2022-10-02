@@ -32,7 +32,29 @@ const prepCandleData = () => {
         tooltip: {
           enabled: true
         }
-      }
+      },
+      responsive: [
+        {
+          breakpoint: 700,
+          options: {
+            yaxis: {
+              labels: {
+                show: false
+              }
+            },
+          }
+        },
+        {
+          breakpoint: 800,
+          options: {
+            yaxis: {
+              labels: {
+                show: true
+              }
+            },
+          }
+        },
+      ]
     };
     return _CandleStickOptions;
   }
