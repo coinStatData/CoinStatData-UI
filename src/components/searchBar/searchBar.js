@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
-import UserContext from '../../hooks/userContext';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,17 +6,13 @@ import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
 import { update_tableData } from '../../redux/slices/tableData';
-import { update_candleData } from '../../redux/slices/chartData';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
 import coinDataService from '../../services/coinData.service';
-import candleStickService from '../../services/candleStick.service';
 import './style.css';
 
+function SearchBar({ fetchCandleData }) {
 
-function SearchBar(props) {
-
-  const { update_g } = useContext(UserContext);
   const [start, setStart] = useState('2022.04.30');
   const [end, setEnd] = useState("2022.09.07" );
   const [showAlert, setShowAlert] = useState(false);
@@ -31,18 +26,6 @@ function SearchBar(props) {
   const [tempInterval, setTempInterval] = useState(interval);
   const [coinName, setCoinName] = useState(coin);
   const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   //for lambda
-  //   async function fetchData2() {
-  //     let resp = await fetchDataLambda(coin_g, start, end);
-  //     console.log("### resp = == ", resp);
-  //     if(resp.count > 0) {
-  //       update_g(resp.Items, "resp");
-  //     }
-  //   }
-  //   fetchData2();
-  // }, []);
 
   const errorResponse = (e) => {
     if(e.response) {
@@ -60,13 +43,9 @@ function SearchBar(props) {
   }
 
   useEffect(() => {
-    // async function fetchData2() {
-    //   await fetchDataGecko(coin, days, interval);
-    //   await fetchCandleStickData(coin, days);
-    // }
-    // fetchData2();
-    fetchDataGecko(coin, days, interval);
-    fetchCandleStickData(coin, days);
+    // console.log("SEARCHBAR useEffect call candledata , ", candleData);
+    fetchDataGecko(coinName, days, tempInterval);
+    // fetchCandleData(coin, days);
   }, []);
 
   const handleSubmitDates = async (e) => {
@@ -84,21 +63,24 @@ function SearchBar(props) {
 
   const handleSubmitDays = (e) => {
     e.preventDefault();
-    dispatch(update_coin(coinName));
-    dispatch(update_tableData([]));
-    dispatch(update_gecko_resp([]));
-    dispatch(update_interval(tempInterval));
-    fetchDataGecko(coin, days, tempInterval);
-    fetchCandleStickData(coin, days);
-
+    if(coinName !== coin) {
+      dispatch(update_coin(coinName));
+    }
+    if(tempInterval !== interval) {
+      dispatch(update_interval(tempInterval));
+    }
+    fetchDataGecko(coinName, days, tempInterval);
+    fetchCandleData(coinName, days);
   }
 
   const handleCoinChange = (e) => {
     setCoinName(e.target.value.toLowerCase());
   }
+
   const handleStartChange = (e) => {
     setStart(e.target.value);
   }
+
   const handleEndChange = (e) => {
     setEnd(e.target.value);
   }
@@ -111,6 +93,7 @@ function SearchBar(props) {
       setTempInterval("hourly");
     }
   }
+
   const handleIntervalChange = (e) => {
     setTempInterval(e.target.value);
     if(e.target.value === "hourly") {
@@ -119,6 +102,7 @@ function SearchBar(props) {
       setDays(100);
     }
   }
+  
   const handleVolOrPriceChange = (e) => {
     if(e.target.value === "price") {
       setVolprice("prices");
@@ -153,7 +137,7 @@ function SearchBar(props) {
     //market_caps/prices/total_volumes
     try {
       const resp = await coinDataService().fetchTableData(coin1, days1, interval1);
-      dispatch(update_tableData(resp.data))
+      dispatch(update_tableData(resp.data));
       dispatch(update_gecko_resp(resp.data[volprice]));
     } catch(e) {
       console.log(e.message);
@@ -161,19 +145,19 @@ function SearchBar(props) {
     }
   }
 
-  const fetchCandleStickData = async (coin, days) => {
-    //interval = m1, m5, m15, m30, h1, h2, h4, h8, h12, d1, w1
-    try {
-      const end = Date.now()
-      const start = end - (days * 24 * 60 * 60 * 1000);
-      const resp = await candleStickService().fetchCandleData({coin, start, end});
-      dispatch(update_candleData(resp.data))
-      return resp.data;
-    } catch(e) {
-      console.log(e.message);
-      errorResponse(e)
-    }
-  }
+  // const fetchCandleStickData = async (coin, days) => {
+  //   //interval = m1, m5, m15, m30, h1, h2, h4, h8, h12, d1, w1
+  //   try {
+  //     const end = Date.now()
+  //     const start = end - (days * 24 * 60 * 60 * 1000);
+  //     const resp = await candleStickService().fetchCandleData({coin, start, end});
+  //     dispatch(update_candleData_success(resp.data))
+  //     return resp.data;
+  //   } catch(e) {
+  //     console.log(e.message);
+  //     errorResponse(e)
+  //   }
+  // }
 
   return (
     <div className="search-bar">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux'
@@ -8,7 +8,20 @@ function LineChartBoy(props) {
 
   const sDate = useSelector((state) => state.search.startDate);
   const eDate = useSelector((state) => state.search.endDate)
-  const coin = useSelector((state) => state.search.coin)
+  const coin = useSelector((state) => state.search.coin);
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="label">{`${label} : ${payload[0].value}`}</p>
+          <p className="intro">{`${payload}`}</p>
+          <p className="desc">label.</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="chart-cont">
@@ -28,7 +41,7 @@ function LineChartBoy(props) {
               //<YAxis tick={false} domain={[props.isDaily?props.dMin:props.hMin, props.isDaily?props.dMax:props.hMax]}/>
               <></>
             }
-            <Tooltip />
+            <Tooltip/>
           </LineChart>
         </ResponsiveContainer>
       </div>

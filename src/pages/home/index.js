@@ -9,13 +9,12 @@ import Footer from '../../components/footer';
 import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import coinDataService from '../../services/coinData.service';
+import { connect } from 'react-redux';
 import './styles.css';
 
-function HomePage(props) {
+function HomePage({screenWidth, fetchCandleData}) {
   const [coinData, setCoinData] = useState();
-  const [screenWidth, setScreenWidth] = useState();
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     async function fetchData2() {
@@ -23,7 +22,6 @@ function HomePage(props) {
       setCoinData(mutateResp(resp.data));
     }
     fetchData2();
-    calculateSize();
     dispatch(update_interval("daily"));
   }, [])
 
@@ -36,21 +34,12 @@ function HomePage(props) {
     return data;
   }
 
-  const calculateSize = () => {
-    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    setScreenWidth(width);
-  }
-
-  window.addEventListener("resize", ()=> {
-    calculateSize();
-  });
-
 	return (
     <>
       <NavBarComp></NavBarComp>
       <div className="flex-cont">
         <div className="homeTable-box">
-          <HomeTable screenWidth={screenWidth} coinData={coinData}/>
+          <HomeTable fetchCandleData={fetchCandleData} screenWidth={screenWidth} coinData={coinData}/>
         </div>
         <div className="trending-box">
           <Trending/>
@@ -64,4 +53,14 @@ function HomePage(props) {
 	)
 }
 
-export default HomePage;
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -1,21 +1,23 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import Table2 from '../../components/table/table';
 import SearchBar from '../../components/searchBar/searchBar';
 import LineChartBoy from '../../components/graph/lineChart';
 import BarChartBoy from '../../components/graph/barChart';
 import CandleStickChart from '../../components/graph/candleStick';
-import UserContext from '../../hooks/userContext';
-import { formatDate } from '../../util'
+import { formatDate, checkIfSameArray } from '../../util'
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import NavBarComp from '../../components/navBar/navBar';
 import Footer from '../../components/footer';
 import { useSelector, useDispatch } from 'react-redux';
-import { update_simpleData } from '../../redux/slices/chartData';
+import { update_lineData_success } from '../../redux/slices/chartData';
+import * as chartActions from '../../redux/actions/chartData';
+import { calculateGraphWidth } from '../../util';
 import './style.css';
 
-function TablePage(props) {
-  const { resp_g } = useContext(UserContext);
+function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
+
   const [avgReturn, setAvgReturn] = useState({});
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(0);
@@ -25,52 +27,37 @@ function TablePage(props) {
   const [avgSumData, setAvgSumData] = useState([]);
   const [avgSumMData, setAvgSumMData] = useState([]);
   const [avgMReturn, setAvgMReturn] = useState({});
-  const [graphWidth, setGraphWidth] = useState();
-  const [graphWidthBar, setGraphWidthBar] = useState();
-  const [screenWidth, setScreenWidth] = useState();
-  const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
-  const simpleChart = useSelector((state) => state.chartData.simpleChart);
-  const candleChart = useSelector((state) => state.chartData.candleChart);
+  const [graphWidth, setGraphWidth] = useState(calculateGraphWidth(screenWidth)[0]);
+  const [graphWidthBar, setGraphWidthBar] = useState(calculateGraphWidth(screenWidth)[1]);
+
   const interval = useSelector((state) => state.search.interval);
-  const coin = useSelector((state) => state.search.coin)
+  const coin = useSelector((state) => state.search.coin);
   const dispatch = useDispatch();
+
+  const coinGeckoResp = useSelector((state) => state.coinGeckoResp.value);
+  const [coinGeckoRespCopy, setCoinGeckoRespCopy] = useState(coinGeckoResp); //copy due to double render
 
   const changeDailyHourly = () => {
     setIsDaily(!isDaily);
   }
 
-  useEffect(() => {
-    calculateSize();
-  }, [])
-
   const calculateSize = () => {
-    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    setScreenWidth(width);
-    if(width < 650) {
-      setGraphWidth(width * .85);
-      setGraphWidthBar(width * .85)
-    } else if(1000 >= width && width >= 650) {
-      setGraphWidth(width * .75);
-      setGraphWidthBar(width * .75)
-    } else if (1000 < width && width < 1200){
-      setGraphWidth(800);
-      setGraphWidthBar(800)
-    } else if (1200 < width){
-      setGraphWidth(1000);
-      setGraphWidthBar(800)
-    }
+    const newWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    const [newGraphWidth, newGraphWidthBar] = calculateGraphWidth(newWidth);
+    if(graphWidth !== newGraphWidth) setGraphWidth(newGraphWidth);
+    if(graphWidthBar !== newGraphWidthBar) setGraphWidthBar(newGraphWidthBar);
   }
 
-  window.addEventListener("resize", ()=> {
+  useEffect(() => {
     calculateSize();
-  });
+  }, [screenWidth]);
 
   const calAvg = (chartD) => {
     if(Array.isArray(chartD) && chartD.length>0) {
-      let dObj = {};
-      let mObj = {};
-      let mdic = {};
-      let dic = {};
+      const dObj = {};
+      const mObj = {};
+      const mdic = {};
+      const dic = {};
       const weekDic = {
         0: "Sunday",
         1: "Monday",
@@ -84,8 +71,8 @@ function TablePage(props) {
         let time = "";
         let mday = "";
         if(interval === "daily") {
-          time = weekDic[(chartD[i]["name"].getDay())];
-          mday = chartD[i]["name"].getDate();
+          time = weekDic[(new Date(chartD[i]["name"]).getDay())];
+          mday = new Date(chartD[i]["name"]).getDate();
           //month dates
           mObj[mday] = 0;
           mObj[mday+"_count"] = 0;
@@ -104,8 +91,8 @@ function TablePage(props) {
         let time = "";
         let mday = "";
         if(interval === "daily") {
-          time = weekDic[(chartD[i]["name"].getDay())];
-          mday = chartD[i]["name"].getDate();
+          time = weekDic[(new Date(chartD[i]["name"]).getDay())];
+          mday = new Date(chartD[i]["name"]).getDate();
           //month dates
           mObj[mday] += parseFloat(chartD[i].hourlyReturn);
           mObj[mday+"_count"] += 1;
@@ -119,10 +106,10 @@ function TablePage(props) {
       }
       setAvgReturn(dObj);
       setAvgMReturn(mObj);
-      let avgSumData = [];
+      const avgSumData = [];
       //hourly and days of week
       for(let d in dic) {
-        let temp = {
+        const temp = {
           name: dic[d],
           avg: dObj[d+"_avg"],
           count: dObj[d+"_count"],
@@ -135,8 +122,8 @@ function TablePage(props) {
       if(interval === "daily") {
         //month days
         let marr = [];
-        for(let d in mdic) {
-          let temp = {
+        for(const d in mdic) {
+          const temp = {
             name: mdic[d],
             avg: mObj[d+"_avg"].toFixed(5),
             count: mObj[d+"_count"],
@@ -150,40 +137,9 @@ function TablePage(props) {
   }
 
   useEffect(() => {
-    //this is for lambda api
-    if(Array.isArray(resp_g)) {
-      let max = 0;
-      let min = Number.MAX_SAFE_INTEGER;
-      let hmax = -100;
-      let hmin = 100;
-
-      let chartD = resp_g.map((item, index) => {
-        if(index+2 < resp_g.length) {
-          let ch = (resp_g[index+1].price - item.price)/item.price * 100;
-          let row = {
-            name: formatDate(new Date(item.datetime* 1000)),
-            [coin]: item.price,
-            hourlyReturn: ch.toFixed(5)
-          }
-          max = max < item.price ? item.price : max;
-          min = min > item.price ? item.price : min;
-          hmax = hmax < row.hourlyReturn ? row.hourlyReturn : hmax;
-          hmin = hmin > row.hourlyReturn ? row.hourlyReturn : hmin;
-          return row;
-        }
-      });
-      setMinPrice(min);
-      setMaxPrice(max);
-      setHMaxReturn(hmax);
-      setHminReturn(hmin);
-      dispatch(update_simpleData(chartD));
-      calAvg(chartD);
-    }
-  }, [resp_g]);
-
-  useEffect(() => {
      //this is for coin gecko api
-    if(Array.isArray(coinGeckoResp)) {
+    if(Array.isArray(coinGeckoResp) && coinGeckoResp.length>1 && !checkIfSameArray(coinGeckoResp, coinGeckoRespCopy)) {
+      setCoinGeckoRespCopy(coinGeckoResp);
       let max = 0;
       let min = Number.MAX_SAFE_INTEGER;
       let hmax = -100;
@@ -192,7 +148,7 @@ function TablePage(props) {
         if(index < coinGeckoResp.length-2) {
           let ch = (coinGeckoResp[index+1][1] - item[1])/item[1] * 100;
           let row = {
-            name: interval == "hourly"? formatDate(new Date(item[0])) : new Date(item[0]),
+            name: interval == "hourly"? formatDate(new Date(item[0])).toLocaleString() : new Date(item[0]).toLocaleString(),
             [coin]: item[1],
             hourlyReturn: ch.toFixed(5)
           }
@@ -208,10 +164,11 @@ function TablePage(props) {
       setHMaxReturn(hmax);
       setHminReturn(hmin);
       chartD.splice(chartD.length-2,2);
-      dispatch(update_simpleData(chartD));
+      dispatch(update_lineData_success(chartD));
       calAvg(chartD)
     }
   }, [coinGeckoResp]);
+
 
   return (
     <>
@@ -219,12 +176,20 @@ function TablePage(props) {
       <div>
         <div className="chart-cont">
           <Tabs defaultActiveKey="Price" className="mb-3">
-
             <Tab eventKey="Price" title="Price Chart">
-              { (Array.isArray(candleChart) && candleChart.length > 1) ? 
-                (<CandleStickChart candleChart={candleChart} coin={coin} graphWidth={graphWidth} />) 
-                  :
-                (<LineChartBoy graphWidth={graphWidth} simpleChart={simpleChart} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />)
+              {candleObj.isLoading ? 
+                <div class="spinner-cont">
+                  <div class="lds-hourglass">
+                  </div>
+                </div>
+                :
+                <>
+                  {(Array.isArray(candleObj.data) && candleObj.data.length > 1) ? 
+                    (<CandleStickChart candleData={candleObj} coin={coin} graphWidth={graphWidth} />) 
+                      :
+                    (<LineChartBoy graphWidth={graphWidth} simpleChart={lineObj.data} setIsDaily={changeDailyHourly} isDaily={isDaily} dMin={minPrice} dMax={maxPrice} hMin={hMinReturn} hMax={hMaxReturn} />)
+                  }
+                </>
               }
             </Tab>
             <Tab eventKey="Average Return" title="Avg Return Bar Chart">
@@ -237,10 +202,10 @@ function TablePage(props) {
         </div>
         <div className="table-page">
           <div>
-            <SearchBar/>
+            <SearchBar fetchCandleData={fetchCandleData} />
           </div>
           <div>
-            <Table2 screenWidth={screenWidth} simpleChart={simpleChart}/>
+            <Table2 screenWidth={screenWidth} simpleChart={lineObj.data}/>
           </div>
         </div>
       </div>
@@ -249,4 +214,18 @@ function TablePage(props) {
   );
 }
 
-export default TablePage;
+function mapStateToProps(state) {
+  return {
+    candleObj: state.chartData.candle,
+    lineObj: state.chartData.line
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCandleData: (coin, days) => dispatch(chartActions.fetchCandleStickData(coin, days))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TablePage);
+

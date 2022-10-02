@@ -6,7 +6,8 @@ export const searchSlice = createSlice({
     endDate: "07/07/2027 07:00 PM",
     startDate: "07/07/2000 07:00 PM",
     coin: "bitcoin",
-    interval: "daily"
+    interval: "daily",
+    volumeOrPrice: "prices",
   },
   reducers: {
     update_endDate: (state, action) => {
@@ -21,9 +22,12 @@ export const searchSlice = createSlice({
     update_coin: (state, action) => {
       state.coin = action.payload
     },
+    update_volPrice: (state, action) => {
+      state.volumeOrPrice = action.payload
+    },
   },
 })
 
-export const { update_endDate, update_startDate, update_interval, update_coin } = searchSlice.actions
+export const { update_endDate, update_startDate, update_interval, update_coin, update_volPrice } = searchSlice.actions
 
 export default searchSlice.reducer
