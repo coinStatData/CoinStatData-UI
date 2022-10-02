@@ -29,6 +29,17 @@ td:hover {
   font-weight: 500;
 }
 
+.table-coinGecko {
+  padding-left: 10%;
+}
+
+.coinGecko-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 1050px) { 
   .home-table-cont {
     padding-top: 0px;

@@ -5,6 +5,7 @@ import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { update_coin } from '../../redux/slices/search';
 import * as chartActions from '../../redux/actions/chartData';
+import CoinGecko from '../coinGecko';
 import './styles.css';
 
 const ICON_PATHS = {
@@ -119,6 +120,9 @@ function HomeTable(props) {
           }
         </tbody>
       </Table>
+      <div className="coinGecko-row">
+        <CoinGecko></CoinGecko>
+      </div>
     </div>
   );
 }

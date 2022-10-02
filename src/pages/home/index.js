@@ -9,7 +9,9 @@ import Footer from '../../components/footer';
 import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import coinDataService from '../../services/coinData.service';
+import TreeMapChart from '../../components/graph/treeMap';
 import { connect } from 'react-redux';
+import CoinGecko from '../../components/coinGecko';
 import './styles.css';
 
 function HomePage({screenWidth, fetchCandleData}) {
@@ -37,12 +39,18 @@ function HomePage({screenWidth, fetchCandleData}) {
 	return (
     <>
       <NavBarComp></NavBarComp>
+
       <div className="flex-cont">
         <div className="homeTable-box">
           <HomeTable fetchCandleData={fetchCandleData} screenWidth={screenWidth} coinData={coinData}/>
         </div>
         <div className="trending-box">
+
+          {/* <div className="flex-item">
+            <TreeMapChart></TreeMapChart>
+          </div> */}
           <Trending/>
+          <CoinGecko></CoinGecko>
           <br></br>
           <Chat className="coin-chat"></Chat>
           <TopRedditPosts/>
