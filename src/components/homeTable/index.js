@@ -120,9 +120,6 @@ function HomeTable(props) {
           }
         </tbody>
       </Table>
-      <div className="coinGecko-row">
-        <CoinGecko></CoinGecko>
-      </div>
     </div>
   );
 }

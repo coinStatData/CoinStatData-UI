@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -11,7 +11,8 @@ import { COIN_LIST } from '../../util/constants/coins';
 import coinDataService from '../../services/coinData.service';
 import './style.css';
 
-function SearchBar({ fetchCandleData }) {
+
+function SearchBar({fetchCandleData}) {
 
   const [start, setStart] = useState('2022.04.30');
   const [end, setEnd] = useState("2022.09.07" );
@@ -44,7 +45,7 @@ function SearchBar({ fetchCandleData }) {
 
   useEffect(() => {
     // console.log("SEARCHBAR useEffect call candledata , ", candleData);
-    fetchDataGecko(coinName, days, tempInterval);
+    fetchDataGecko(coin, days, interval);
     // fetchCandleData(coin, days);
   }, []);
 
@@ -69,18 +70,16 @@ function SearchBar({ fetchCandleData }) {
     if(tempInterval !== interval) {
       dispatch(update_interval(tempInterval));
     }
-    fetchDataGecko(coinName, days, tempInterval);
-    fetchCandleData(coinName, days);
+    fetchDataGecko(coin, days, tempInterval);
+    fetchCandleData(coin, days);
   }
 
   const handleCoinChange = (e) => {
     setCoinName(e.target.value.toLowerCase());
   }
-
   const handleStartChange = (e) => {
     setStart(e.target.value);
   }
-
   const handleEndChange = (e) => {
     setEnd(e.target.value);
   }
@@ -93,7 +92,6 @@ function SearchBar({ fetchCandleData }) {
       setTempInterval("hourly");
     }
   }
-
   const handleIntervalChange = (e) => {
     setTempInterval(e.target.value);
     if(e.target.value === "hourly") {
@@ -102,7 +100,6 @@ function SearchBar({ fetchCandleData }) {
       setDays(100);
     }
   }
-  
   const handleVolOrPriceChange = (e) => {
     if(e.target.value === "price") {
       setVolprice("prices");
