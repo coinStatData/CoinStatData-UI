@@ -23,16 +23,17 @@
     <div id="python-code">
       <strong id="code-editor-header" styles="margin-left:20px">Write python code here:</strong>
       <py-repl class="python-code-input">
-#effcient frontier simulator for crypto portfolio
+#effcient frontier simulator for crypto portfolio:
+## efficientFrontier(crypto: List[str], days: int)
 efficientFrontier(['bitcoin', 'ethereum', 'ripple', 'litecoin', 'dogecoin'], 500)
 
 #example data mutation commands:
-log_return.cov()
-log_return.describe().transpose()
+## log_return.cov()
+## log_return.describe().transpose()
 
 #example data visualization commands: 
-plotPriceComparison(crypto: List[str], days: int): 
-barchart(log_return)
+## plotPriceComparison(crypto: List[str], days: int): 
+## barchart(log_return)
       </py-repl>
       <br>
       <li><b>Main Function:</b> efficientFrontier(<i>array_of_coins</i>, <i>number_of_days_into_the_past</i>)</li>

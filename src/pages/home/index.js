@@ -41,8 +41,11 @@ function HomePage({screenWidth, fetchCandleData}) {
       
       <NavBarComp></NavBarComp>
       <div id="gecko-price-widget">
-        <coingecko-coin-price-marquee-widget coin-ids="bitcoin,ethereum,ripple,binancecoin,cardano,solana,dogecoin,polkadot,tron,cosmos,stellar,monero,algorand" currency="usd" background-color="#ffffff" locale="en">
-        </coingecko-coin-price-marquee-widget>
+        <coingecko-coin-price-marquee-widget 
+          coin-ids="bitcoin,ethereum,ripple,binancecoin,cardano,solana,dogecoin,polkadot,tron,cosmos,stellar,monero,algorand" 
+          currency="usd" background-color="#ffffff" 
+          locale="en"
+        />
       </div>
       <div className="flex-cont">
         <div className="homeTable-box">
