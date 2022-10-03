@@ -9,6 +9,7 @@ export const fetchCandleStickData = (coin, days) => {
       const end = Date.now()
       const start = end - (days * 24 * 60 * 60 * 1000);
       const resp = await candleStickService().fetchCandleData({coin, start, end});
+      console.log("#################candel success")
       dispatch(update_candleData_success(resp.data))
       return resp.data;
     } catch(e) {
