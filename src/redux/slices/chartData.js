@@ -6,13 +6,13 @@ export const chartDataSlice = createSlice({
   initialState: {
     line: {
       isError: false,
-      isLoading: true,
+      isLoading: false,
       error: {},
       data: []
     },
     candle: {
       isError: false,
-      isLoading: true,
+      isLoading: false,
       data: [{open: 0, close:0}],
       error: {},
     }

@@ -9,6 +9,9 @@
   width:55%;
 }
 
+#gecko-price-widget {
+  pointer-events: none !important;
+}
 
 .trending-box {
   width:30%;

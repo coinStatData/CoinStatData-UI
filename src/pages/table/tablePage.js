@@ -178,8 +178,8 @@ function TablePage({candleObj, lineObj, fetchCandleData, screenWidth}) {
           <Tabs defaultActiveKey="Price" className="mb-3">
             <Tab eventKey="Price" title="Price Chart">
               {candleObj.isLoading ? 
-                <div class="spinner-cont">
-                  <div class="lds-hourglass">
+                <div className="spinner-cont">
+                  <div className="lds-hourglass">
                   </div>
                 </div>
                 :
