@@ -77,7 +77,7 @@ function App() {
             </Routes>
           </BrowserRouter>
 
-      </UserContext.Provider>
+      </UserContext.Provider> 
     </>
   );
 }
