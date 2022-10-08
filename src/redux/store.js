@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger'
 import searchReducer from './slices/search';
-import coinGeckoRespReducer from './slices/coinGeckoResp';
+import lineDataReducer from './slices/lineData';
 import tableDataReducer from './slices/tableData';
-import chartDataReducer from './slices/chartData';
+import candleDataReducer from './slices/candleData';
 import chatReducer from './slices/chat';
 
 export default configureStore({
   reducer: {
     search: searchReducer,
-    coinGeckoResp: coinGeckoRespReducer,
+    lineData: lineDataReducer,
     tableData: tableDataReducer,
-    chartData: chartDataReducer,
+    candleData: candleDataReducer,
     chat: chatReducer
   },
   middleware: (getDefaultMiddleware) => {

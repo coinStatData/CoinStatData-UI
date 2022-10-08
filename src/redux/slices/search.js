@@ -11,23 +11,30 @@ export const searchSlice = createSlice({
   },
   reducers: {
     update_endDate: (state, action) => {
-      state.endDate = action.payload
+      state.endDate = action.payload;
     },
     update_startDate: (state, action) => {
-      state.startDate = action.payload
+      state.startDate = action.payload;
     },
     update_interval: (state, action) => {
-      state.interval = action.payload
+      state.interval = action.payload;
     },
     update_coin: (state, action) => {
-      state.coin = action.payload
+      state.coin = action.payload;
     },
     update_volPrice: (state, action) => {
-      state.volumeOrPrice = action.payload
+      state.volumeOrPrice = action.payload;
+    },
+    update_all: (state, action) => {
+      state.volumeOrPrice = action.payload.volumeOrPrice || 'prices';
+      state.coin = action.payload.coin || 'bitcoin';
+      state.interval = action.payload.interval || 'daily';
+      state.startDate = action.payload.startDate;
+      state.endDate = action.payload.endDate;
     },
   },
 })
 
-export const { update_endDate, update_startDate, update_interval, update_coin, update_volPrice } = searchSlice.actions
+export const { update_endDate, update_startDate, update_interval, update_coin, update_volPrice, update_all } = searchSlice.actions
 
 export default searchSlice.reducer

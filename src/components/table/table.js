@@ -15,8 +15,8 @@ function Table2(props) {
   const dispatch = useDispatch()
   const sDate = useSelector((state) => state.search.startDate);
   const eDate = useSelector((state) => state.search.endDate);
-  const tableData = useSelector((state) => state.tableData.value);
-  const coin = useSelector((state) => state.search.coin)
+  const tableData = useSelector((state) => state.lineData.resp.data);
+  const coin = useSelector((state) => state.search.coin);
   
   useEffect(() => {
     //this is for lambda resp
@@ -30,7 +30,7 @@ function Table2(props) {
 
   useEffect(() => {
     //this is coinGecko Resp
-    setTableD(tableData)
+    setTableD(tableData);
     setIsLambda(false);
     if(Array.isArray(tableData.prices) && tableData.prices.length>5) {
       dispatch(update_startDate(formatDate(new Date(tableData.prices[0][0]))));
@@ -40,7 +40,7 @@ function Table2(props) {
 
   const csvData = () => {
     const data = [];
-    const cdata = props.simpleChart;
+    const cdata = props.lineData.price.chart.data;
     if(Array.isArray(cdata)){
       for(let i=0; i<cdata.length-2; i++)
         data.push({

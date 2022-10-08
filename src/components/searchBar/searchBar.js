@@ -4,15 +4,12 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
-import { update_gecko_resp } from '../../redux/slices/coinGeckoResp';
-import { update_tableData } from '../../redux/slices/tableData';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
-import coinDataService from '../../services/coinData.service';
 import './style.css';
 
 
-function SearchBar({fetchCandleData}) {
+function SearchBar({ fetchCandleData, fetchLineData }) {
 
   const [start, setStart] = useState('2022.04.30');
   const [end, setEnd] = useState("2022.09.07" );
@@ -45,9 +42,13 @@ function SearchBar({fetchCandleData}) {
 
   useEffect(() => {
     // console.log("SEARCHBAR useEffect call candledata , ", candleData);
-    fetchDataGecko(coin, days, interval);
+    fetchDataGecko(coin, days, tempInterval);
     // fetchCandleData(coin, days);
   }, []);
+
+  useEffect(() => {
+    console.log("SEARCHBAR useEffect call candledata , ", interval);
+  });
 
   const handleSubmitDates = async (e) => {
     //for lambda
@@ -133,28 +134,12 @@ function SearchBar({fetchCandleData}) {
     //days = hourly:<90 / daily:any:
     //market_caps/prices/total_volumes
     try {
-      const resp = await coinDataService().fetchTableData(coin1, days1, interval1);
-      dispatch(update_tableData(resp.data));
-      dispatch(update_gecko_resp(resp.data[volprice]));
+      await fetchLineData(coin1, days1, interval1);
     } catch(e) {
       console.log(e.message);
       errorResponse(e);
     }
   }
-
-  // const fetchCandleStickData = async (coin, days) => {
-  //   //interval = m1, m5, m15, m30, h1, h2, h4, h8, h12, d1, w1
-  //   try {
-  //     const end = Date.now()
-  //     const start = end - (days * 24 * 60 * 60 * 1000);
-  //     const resp = await candleStickService().fetchCandleData({coin, start, end});
-  //     dispatch(update_candleData_success(resp.data))
-  //     return resp.data;
-  //   } catch(e) {
-  //     console.log(e.message);
-  //     errorResponse(e)
-  //   }
-  // }
 
   return (
     <div className="search-bar">
@@ -191,7 +176,7 @@ function SearchBar({fetchCandleData}) {
             <option>daily</option>
             <option>hourly</option>
           </Form.Select>
-          <Form.Label className="input-text-box">Volumn or Price</Form.Label>
+          <Form.Label className="input-text-box">Volume or Price</Form.Label>
           <Form.Select onChange={(e) => handleVolOrPriceChange(e)}>
             <option>price</option>
             <option>volume</option>

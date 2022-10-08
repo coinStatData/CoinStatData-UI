@@ -1,4 +1,4 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
@@ -6,17 +6,26 @@ import './style.css';
 
 function BarChartBoy(props) {
 
-  const sDate = useSelector((state) => state.search.startDate);
-  const eDate = useSelector((state) => state.search.endDate);
-  const interval = useSelector((state) => state.search.interval);
+  const { startDate, endDate, interval, volumeOrPrice } = useSelector((state) => state.search);
+  const { graphWidth } = props;
   const [isMDay, setIsMday] = useState(false);
+  const { price, volume } = props.lineData;
+  const [data, setData] = useState(volumeOrPrice === "prices" ? price : volume);
+  
+  useEffect (() => {
+    setData(volumeOrPrice === "prices" ? price : volume);
+  }, [volumeOrPrice, volume, price]);
+
+  useEffect (() => {
+    console.log("RRRRRRRRRRRRRRRRRRr", props)
+  });
 
   const renderGraph = () => {
     return (
       <div className="chart-cont">
         <h4>Average Return by {interval == "hourly"? "Hours" : isMDay? "Days of Month" : "Week Days"}</h4>
-        <h6 className="dateHeader">{sDate} ~ {eDate}</h6>
-        <BarChart width={props.graphWidth} height={props.graphWidth > 600 ? props.graphWidth/2.5 : props.graphWidth/2} data={isMDay? props.chartSumMdata : props.chartSumData}>
+        <h6 className="dateHeader">{startDate} ~ {endDate}</h6>
+        <BarChart width={graphWidth} height={graphWidth > 600 ? graphWidth/2.5 : graphWidth/2} data={isMDay? data.stat.avgSumMData : data.stat.avgSumData}>
           <XAxis dataKey="name" stroke="#8884d8" />
           {props.graphWidth > 600 &&
             <YAxis />
