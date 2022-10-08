@@ -16,10 +16,6 @@ function BarChartBoy(props) {
     setData(volumeOrPrice === "prices" ? price : volume);
   }, [volumeOrPrice, volume, price]);
 
-  useEffect (() => {
-    console.log("RRRRRRRRRRRRRRRRRRr", props)
-  });
-
   const renderGraph = () => {
     return (
       <div className="chart-cont">

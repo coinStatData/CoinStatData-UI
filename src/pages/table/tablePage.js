@@ -43,7 +43,7 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
         <div className="chart-cont">
           <Tabs defaultActiveKey="Price" className="mb-3">
             <Tab eventKey="Price" title="Price Chart">
-              {candleData.resp.isLoading ? 
+              {candleData.resp.isLoading || lineData.resp.isLoading ? 
                 <div className="spinner-cont">
                   <div className="lds-hourglass">
                   </div>
@@ -51,9 +51,29 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
                 :
                 <>
                   {(Array.isArray(candleData.resp.data) && candleData.resp.data.length > 2) ? 
-                    (<CandleStickChart candleData={candleData} coin={coin} graphWidth={graphWidth} />) 
+                    (<>
+                      {candleData.resp.isError ? 
+                        <div className="spinner-cont">
+                          <div className="lds-hourglass-red">
+                            ERROR
+                          </div>
+                        </div>
+                        :
+                        <CandleStickChart candleData={candleData} coin={coin} graphWidth={graphWidth} />
+                      }
+                    </>)
                       :
-                    (<LineChartBoy graphWidth={graphWidth} lineData={lineData} setIsDaily={changeDailyHourly} isDaily={isDaily} />)
+                    (<>
+                      {lineData.resp.isError ? 
+                        <div className="spinner-cont">
+                          <div className="lds-hourglass-red">
+                            ERROR
+                          </div>
+                        </div>
+                        :
+                        <LineChartBoy graphWidth={graphWidth} lineData={lineData} setIsDaily={changeDailyHourly} isDaily={isDaily} />
+                      }
+                    </>)
                   }
                 </>
               }
@@ -67,10 +87,10 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
           <hr></hr>
         </div>
         <div className="table-page">
-          <div>
+          <div className="half-page-cont">
             <SearchBar fetchCandleData={fetchCandleData} fetchLineData={fetchLineData} />
           </div>
-          <div>
+          <div className="half-page-cont">
             <Table2 screenWidth={screenWidth} lineData={lineData}/>
           </div>
         </div>

@@ -1,7 +1,5 @@
 .table {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 580px;
+  max-width: 500px;
   max-height: 500px;
   overflow: auto;
 }
@@ -9,16 +7,41 @@
 .table-cont {
   width: 100%;
   padding: 0 20px 20px 20px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
 }
+
+.spinner-cont-table {
+  width: 500px;
+  display: block;
+  text-align: center;
+}
+
+.spinner-outer-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
 .table-title {
   font-size: 25px;
   border-bottom: 2px solid black;
 }
 
-@media (max-width: 1050px) { 
+@media (max-width: 1000px) { 
   .table-cont {
     padding-top: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+  .table-title {
+    text-align: center;
+  }
+  .table p {
+    text-align: center;
   }
  }
 

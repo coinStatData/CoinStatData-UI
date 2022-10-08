@@ -15,7 +15,7 @@ function Table2(props) {
   const dispatch = useDispatch()
   const sDate = useSelector((state) => state.search.startDate);
   const eDate = useSelector((state) => state.search.endDate);
-  const tableData = useSelector((state) => state.lineData.resp.data);
+  const lineData = useSelector((state) => state.lineData);
   const coin = useSelector((state) => state.search.coin);
   
   useEffect(() => {
@@ -30,13 +30,13 @@ function Table2(props) {
 
   useEffect(() => {
     //this is coinGecko Resp
-    setTableD(tableData);
+    setTableD(lineData.resp.data);
     setIsLambda(false);
-    if(Array.isArray(tableData.prices) && tableData.prices.length>5) {
-      dispatch(update_startDate(formatDate(new Date(tableData.prices[0][0]))));
-      dispatch(update_endDate(formatDate(new Date(tableData.prices[tableData.prices.length-1][0]))));
+    if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length>5) {
+      dispatch(update_startDate(formatDate(new Date(lineData.resp.data.prices[0][0]))));
+      dispatch(update_endDate(formatDate(new Date(lineData.resp.data.prices[lineData.resp.data.prices.length-1][0]))));
     }
-  }, [tableData]);
+  }, [lineData.resp.data]);
 
   const csvData = () => {
     const data = [];
@@ -54,39 +54,58 @@ function Table2(props) {
   }
 
   return (
-    <div className="table-cont">
-      <div className="table">
-        <h3 className="table-title">Table of {coin.toUpperCase()}</h3>
-        <p className="dateString">{sDate} ~ {eDate}</p>
-        <CSVLink data={csvData()}>Download CSV</CSVLink>
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              {props.screenWidth > 650 &&
-                <th>Coin</th>
-              }
-              <th>DateTime</th>
-              <th>Price</th>
-              {props.screenWidth > 450 &&
-                <th>{isLambda? "Market Cap":"24_HR_Vol"}</th>
-              }
-            </tr>
-          </thead>
-          <tbody>
-          {(isLambda && Array.isArray(tableD) && tableD.length > 0) &&
-            tableD.map((item) => {
-              return TableRow(item);
-            })
+    <>
+      {(lineData.resp.isLoading || lineData.resp.isError) ? (
+        <div className="spinner-outer-cont">
+          {lineData.resp.isLoading &&
+            <div className="spinner-cont-table">
+              <div className="lds-hourglass"></div>
+            </div>
           }
-          {(!isLambda && Array.isArray(tableD?.prices)) &&
-            makeTableGecko(tableD.prices, tableD.total_volumes, coin, props)
+          {lineData.resp.isError &&
+            <div className="spinner-cont-table">
+              <div className="lds-hourglass-red">
+                ERROR
+              </div>
+            </div>
           }
-          </tbody>
-        </Table>
-        
-      </div>
-      <CoinGecko></CoinGecko>
-    </div>
+        </div>
+        ) : (
+        <div className="table-cont">
+          <div className="table">
+            <h3 className="table-title">Table of {coin.toUpperCase()}</h3>
+            <p className="dateString">{sDate} ~ {eDate}</p>
+            <CSVLink data={csvData()}>Download CSV</CSVLink>
+            <Table striped bordered hover responsive>
+              <thead>
+                <tr>
+                  {props.screenWidth > 650 &&
+                    <th>Coin</th>
+                  }
+                  <th>DateTime</th>
+                  <th>Price</th>
+                  {props.screenWidth > 450 &&
+                    <th>{isLambda? "Market Cap":"24_HR_Vol"}</th>
+                  }
+                </tr>
+              </thead>
+              <tbody>
+              {(isLambda && Array.isArray(tableD) && tableD.length > 0) &&
+                tableD.map((item) => {
+                  return TableRow(item);
+                })
+              }
+              {(!isLambda && Array.isArray(tableD?.prices)) &&
+                makeTableGecko(tableD.prices, tableD.total_volumes, coin, props)
+              }
+              </tbody>
+            </Table>
+          </div>
+          {/* <CoinGecko></CoinGecko> */}
+        </div>
+        )
+      }
+    </>
   );
 }
 

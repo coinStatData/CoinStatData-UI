@@ -34,7 +34,7 @@ export const fetchLineData = (coin, days, interval) => {
     } catch(e) {
       console.log(e.message);
       dispatch(LineReducers.update_fail(e.messagee));
-      return false;
+      throw e;
     }
   }
 }
@@ -46,14 +46,11 @@ export const fetchLineDataAndCalculate_price = (coin, days, interval) => {
     dispatch(LineReducers.begin_price_calculation());
     try {
       const resp = await coinDataService().fetchTableData(coin, days, interval);
-      console.log("$$$$$$$$$resp", resp)
       dispatch(LineReducers.update_success(resp.data));
       const mutatedResp = mutateResp(resp.data['prices'], interval, coin);
-      console.log("##########mutatedResp", mutatedResp)
       dispatch(LineReducers.update_price_minMax(mutatedResp.minMax));
       dispatch(LineReducers.update_price_chart(mutatedResp.chart));
       const stat = calAvg(mutatedResp.chart, interval);
-      console.log("##########stat", stat)
       dispatch(LineReducers.update_price_stat(stat));
       return true;
     } catch(e) {
@@ -72,7 +69,7 @@ export const fetchLineDataAndCalculate_volume = (coin, days, interval) => {
     try {
       const resp = await coinDataService().fetchTableData(coin, days, interval);
       dispatch(LineReducers.update_success(resp.data));
-      const mutatedResp = mutateResp(resp.data['prices'], interval, coin);
+      const mutatedResp = mutateResp(resp.data['total_volumes'], interval, coin);
       dispatch(LineReducers.update_volume_minMax(mutatedResp.minMax));
       dispatch(LineReducers.update_volume_chart(mutatedResp.chart));
       const stat = calAvg(mutatedResp, interval);

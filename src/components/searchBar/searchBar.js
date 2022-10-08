@@ -46,10 +46,6 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
     // fetchCandleData(coin, days);
   }, []);
 
-  useEffect(() => {
-    console.log("SEARCHBAR useEffect call candledata , ", interval);
-  });
-
   const handleSubmitDates = async (e) => {
     //for lambda
     e.preventDefault();
@@ -71,8 +67,8 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
     if(tempInterval !== interval) {
       dispatch(update_interval(tempInterval));
     }
-    fetchDataGecko(coin, days, tempInterval);
-    fetchCandleData(coin, days);
+    fetchDataGecko(coinName, days, tempInterval);
+    fetchCandleData(coinName, days);
   }
 
   const handleCoinChange = (e) => {

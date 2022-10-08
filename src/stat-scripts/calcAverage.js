@@ -1,5 +1,4 @@
 export const calAvg = (chartD, interval) => {
-  console.log("########", chartD)
   let avgReturn = 0;
   let avgMReturn = 0;
   let avgSumData = 0;
