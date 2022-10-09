@@ -9,6 +9,22 @@
   width:55%;
 }
 
+.flex-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.trending-inner {
+  width: 100%;
+}
+
+.chat-inner {
+  width: 100%;
+}
+
 #gecko-price-widget {
   pointer-events: none !important;
 }
@@ -43,6 +59,16 @@
   .homeTable-box {
     width:100%;
   }
+  .flex-item {
+    flex-direction: row;
+  }
+  .trending-inner {
+    width: 50%;
+    margin-right: 40px;
+  }
+  .chat-inner {
+    width: 50%;
+  }
 }
 
 @media (max-width: 1250px) and (min-width: 1000px) { 
@@ -59,5 +85,18 @@
 @media (max-width: 600px) { 
   .flex-cont {
     padding: 10px;
+  }
+}
+
+@media (max-width: 750px) { 
+  .flex-item {
+    flex-direction: column;
+  }
+  .trending-inner {
+    width: 100%;
+    margin-right: 0;
+  }
+  .chat-inner {
+    width: 100%;
   }
 }

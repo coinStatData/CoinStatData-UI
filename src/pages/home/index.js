@@ -57,10 +57,16 @@ function HomePage({screenWidth, fetchCandleData}) {
           {/* <div className="flex-item">
             <TreeMapChart></TreeMapChart>
           </div> */}
-          <Trending/>
-          <CoinGecko></CoinGecko>
-          <br></br>
-          <Chat className="coin-chat"></Chat>
+          <div className="flex-item">
+            <div className="trending-inner">
+              <Trending/>
+              <CoinGecko/>
+            </div>
+            <div className="chat-inner">
+              <br></br>
+              <Chat className="coin-chat" />
+            </div>
+          </div>
           <TopRedditPosts/>
 
         </div>
