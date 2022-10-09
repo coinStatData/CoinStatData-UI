@@ -51,7 +51,7 @@ function Trending(props) {
       <div className="trending-table-cont">
         <div className="trending-table">
           <h4>Top Trending Coins</h4>
-          <Table striped hover responsive>
+          <Table striped hover>
             <thead>
               <tr>
                 <th>Rank</th>
