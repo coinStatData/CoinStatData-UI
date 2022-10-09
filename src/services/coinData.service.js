@@ -2,10 +2,10 @@ import RestService from "./wrapper/restService";
 
 const coinDataService = () => {
   
-  // const _serverUr = process.env.REACT_APP_NODE_ENV === "dev" ? 
-  //   process.env.REACT_APP_DEV_SERVER_URL : process.env.REACT_APP_SERVER_URL;
+  const _serverUr = process.env.REACT_APP_NODE_ENV === "dev" ? 
+    process.env.REACT_APP_DEV_SERVER_URL : process.env.REACT_APP_SERVER_URL;
 
-  const _serverUr =  process.env.REACT_APP_SERVER_URL;
+  // const _serverUr =  process.env.REACT_APP_SERVER_URL;
 
   const _fetchHomeData = async (coins) => {
     try {

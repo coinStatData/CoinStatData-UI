@@ -113,9 +113,24 @@
   .link-cont {
     margin-left: 0px;
   }
-
   .footer-outer-cont {
-    margin-top: 5px;
+    margin-top: 50px;
   }
-  
+ }
+
+ @media (max-width: 500px) { 
+  .footer-outer-cont {
+    font-size: 13px;
+  }
+  .footer-cont h5 {
+    font-size: 15px;
+  }
+  .footer-cont h2 {
+    font-size: 23px;
+  }
+  .footer-cont img {
+    width: 25px;
+    height: 25px;
+    margin : 0 0 5px 7px;
+  }
  }

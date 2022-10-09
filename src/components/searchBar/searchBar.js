@@ -2,23 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Alert from 'react-bootstrap/Alert';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
+import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG } from '../../components/searchBar/constants';
+import ErrorModal from '../alertModal/error';
 import './style.css';
-
 
 function SearchBar({ fetchCandleData, fetchLineData }) {
 
   const [start, setStart] = useState('2022.04.30');
   const [end, setEnd] = useState("2022.09.07" );
-  const [showAlert, setShowAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const [days, setDays] = useState(100);
   const [volprice, setVolprice] = useState("prices");
-  const msg1 = "We could not find the coin. Please try another!";
-  const msg2 = "Oopse, something went wrong. Please try again later!";
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const coin = useSelector((state) => state.search.coin);
   const interval = useSelector((state) => state.search.interval);
   const [tempInterval, setTempInterval] = useState(interval);
@@ -28,14 +26,14 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   const errorResponse = (e) => {
     if(e.response) {
       if(e.response.status == 404) {
-        setErrorMessage(msg1);
+        setErrorMessage(INPUT_ERROR_MSG);
         setShowAlert(true);
       } else {
-        setErrorMessage(msg2);
+        setErrorMessage(NETWORK_ERROR_MSG);
         setShowAlert(true);
       }
     } else {
-      setErrorMessage(msg2);
+      setErrorMessage(NETWORK_ERROR_MSG);
       setShowAlert(true);
     }
   }
@@ -140,16 +138,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   return (
     <div className="search-bar">
       <form className="form-horizontal">
-      {showAlert && 
-        <div className="alert-box">
-          <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-            <Alert.Heading>Sorry!</Alert.Heading>
-            <p>
-              {errorMessage}
-            </p>
-          </Alert>
-        </div>
-      }
+        <ErrorModal errorMessage={errorMessage} setShowAlert={setShowAlert} showAlert={showAlert} />
         <h4 className="search-title">Search By Days into the Past</h4>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="input-text-box">Coin Name</Form.Label>

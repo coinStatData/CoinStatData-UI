@@ -12,6 +12,8 @@ import Footer from '../../components/footer';
 import { useSelector, useDispatch } from 'react-redux';
 import * as chartActions from '../../redux/actions/chartData';
 import { calculateGraphWidth } from '../../util';
+import LoadingSpinner from '../../components/spinner/loading';
+import ErrorSpinner from '../../components/spinner/error';
 import './style.css';
 
 function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLineData }) {
@@ -41,45 +43,32 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
       <NavBarComp></NavBarComp>
       <div>
         <div className="chart-cont">
-          <Tabs defaultActiveKey="Price" className="mb-3">
+          <Tabs defaultActiveKey="Price" id="chart-tabs" className="mb-3">
             <Tab eventKey="Price" title="Price Chart">
               {candleData.resp.isLoading || lineData.resp.isLoading ? 
-                <div className="spinner-cont">
-                  <div className="lds-hourglass">
-                  </div>
-                </div>
+                <LoadingSpinner />
                 :
                 <>
-                  {(Array.isArray(candleData.resp.data) && candleData.resp.data.length > 2) ? 
-                    (<>
-                      {candleData.resp.isError ? 
-                        <div className="spinner-cont">
-                          <div className="lds-hourglass-red">
-                            ERROR
-                          </div>
-                        </div>
-                        :
-                        <CandleStickChart candleData={candleData} coin={coin} graphWidth={graphWidth} />
-                      }
-                    </>)
-                      :
-                    (<>
-                      {lineData.resp.isError ? 
-                        <div className="spinner-cont">
-                          <div className="lds-hourglass-red">
-                            ERROR
-                          </div>
-                        </div>
-                        :
-                        <LineChartBoy graphWidth={graphWidth} lineData={lineData} setIsDaily={changeDailyHourly} isDaily={isDaily} />
-                      }
-                    </>)
+                  {(Array.isArray(candleData.resp.data) && candleData.resp.data.length > 2 && !candleData.resp.isError) ? 
+                      <CandleStickChart candleData={candleData} coin={coin} graphWidth={graphWidth} />
+                    :
+                      <>
+                        {lineData.resp.isError ? 
+                          <ErrorSpinner />
+                          :
+                          <LineChartBoy graphWidth={graphWidth} lineData={lineData} setIsDaily={changeDailyHourly} isDaily={isDaily} />
+                        }
+                      </>
                   }
                 </>
               }
             </Tab>
-            <Tab eventKey="Average Return" title="Avg Return Bar Chart">
-              <BarChartBoy graphWidth={graphWidthBar} lineData={lineData} isDaily={isDaily} />
+            <Tab eventKey="Average Return" title="Avg Return Chart">
+              {lineData.resp.isError ? 
+                <ErrorSpinner />
+                :
+                <BarChartBoy graphWidth={graphWidthBar} lineData={lineData} isDaily={isDaily} />
+              }
             </Tab>
           </Tabs>
         </div>

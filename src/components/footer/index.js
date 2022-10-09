@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert'
+import CoinGecko from '../coinGecko';
 import './style.css';
 
 function Footer() {
@@ -29,6 +30,7 @@ function Footer() {
             volume and market capitalisation.
           </p>
           <p className="name-sig">© 2022 CoinStatData. All Rights Reserved</p>
+          <CoinGecko></CoinGecko>
         </div>
         <div className="aux-links-cont">
           <div className="link-cont">
@@ -49,6 +51,7 @@ function Footer() {
             <a target="_blank" href="https://alienvogue.com">AlienVogue</a>
           </div>
         </div>
+
       </div>
     </div>
   );

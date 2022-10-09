@@ -47,11 +47,25 @@ td:hover {
  }
 
  @media (max-width: 650px) { 
-  td {
+  .home-table-cont td {
     font-size: 14px;
   }
   .home-table-title {
     text-align: center;
     font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) { 
+  .home-table-cont td {
+    font-size: 12px;
+  }
+  .home-table-cont th {
+    font-size: 12px;
+  }
+  .coin-icon {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px 0 0;
   }
 }
