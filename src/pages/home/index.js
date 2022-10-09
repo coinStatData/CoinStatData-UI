@@ -9,7 +9,6 @@ import Footer from '../../components/footer';
 import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import coinDataService from '../../services/coinData.service';
-import TreeMapChart from '../../components/graph/treeMap';
 import { connect } from 'react-redux';
 import CoinGecko from '../../components/coinGecko';
 import './styles.css';
@@ -40,13 +39,15 @@ function HomePage({screenWidth, fetchCandleData}) {
     <>
       
       <NavBarComp></NavBarComp>
-      <div id="gecko-price-widget">
-        <coingecko-coin-price-marquee-widget 
-          coin-ids="bitcoin,ethereum,ripple,binancecoin,cardano,solana,dogecoin,polkadot,tron,cosmos,stellar,monero,algorand" 
-          currency="usd" background-color="#ffffff" 
-          locale="en"
-        />
-      </div>
+      {process.env['REACT_APP_NODE_ENV'] !== 'dev' &&
+        <div id="gecko-price-widget">
+          <coingecko-coin-price-marquee-widget 
+            coin-ids="bitcoin,ethereum,ripple,binancecoin,cardano,solana,dogecoin,polkadot,tron,cosmos,stellar,monero,algorand" 
+            currency="usd" background-color="#ffffff" 
+            locale="en"
+          />
+        </div>
+      }
       <div className="flex-cont">
         <div className="homeTable-box">
           <HomeTable fetchCandleData={fetchCandleData} screenWidth={screenWidth} coinData={coinData}/>

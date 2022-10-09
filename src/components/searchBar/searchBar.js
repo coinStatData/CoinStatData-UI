@@ -23,7 +23,6 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   const [coinName, setCoinName] = useState(coin);
   const dispatch = useDispatch()
 
-
   const errorResponse = (e) => {
     if(e.response) {
       if(e.response.status == 404) {
