@@ -23,14 +23,6 @@
   margin: 3px;
 }
 
-.alert-box {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  top:50%;
-}
-
-
 @media (max-width: 1000px) { 
   .form-horizontal {
     margin-top: 0px;
