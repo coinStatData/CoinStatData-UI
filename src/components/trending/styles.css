@@ -8,13 +8,13 @@
 }
 
 @media (max-width: 1000px) { 
-  .trending-table h4{
+  .trending-table h4 {
     text-align: center;
   }
-}
-
-@media (max-width: 700px) { 
-  .trending-table h4{
-    text-align: left;
+  .trending-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 }
