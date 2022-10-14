@@ -5,6 +5,8 @@ import lineDataReducer from './slices/lineData';
 import tableDataReducer from './slices/tableData';
 import candleDataReducer from './slices/candleData';
 import chatReducer from './slices/chat';
+import trendingCoinsReducer from './slices/trendingCoins';
+import coinIndexReducer from './slices/coinIndex'
 
 export default configureStore({
   reducer: {
@@ -12,7 +14,9 @@ export default configureStore({
     lineData: lineDataReducer,
     tableData: tableDataReducer,
     candleData: candleDataReducer,
-    chat: chatReducer
+    chat: chatReducer,
+    trendingCoins: trendingCoinsReducer,
+    coinIndex: coinIndexReducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'dev' ? 

@@ -5,8 +5,100 @@ import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { update_coin } from '../../redux/slices/search';
 import * as chartActions from '../../redux/actions/chartData';
-import CoinGecko from '../coinGecko';
+import ErrorSpinner from '../spinner/error';
+import LoadingSpinner from '../spinner/loading';
 import './styles.css';
+
+function HomeTable(props) {
+
+  let navigate = useNavigate();
+  const { screenWidth, coinIndex } = props;
+  const dispatch = useDispatch();
+
+  const clickCoin = async (coin) => {
+    dispatch(update_coin(coin));
+    // const respp = props.fetchCandleData(coin, 100);
+    navigate("/stat");
+  }
+
+  function TableRow(item, index) {
+    return (
+      <tr onClick={()=>clickCoin(item[0])} key={item[0]}>
+        <td>
+          {index+1}
+        </td>
+        <td className="coin-name">
+          <img className="coin-icon" src={ICON_PATHS[item[0]]} alt="coin-icon"></img>
+          {item[0]}
+        </td>
+        <td>{item[1].usd}</td>
+        <td>{Math.ceil(item[1].usd_market_cap)}</td>
+        {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
+          <td>{Math.ceil(item[1].usd_24h_vol)}</td>
+        }
+      </tr>
+    )
+  }
+  
+  function makeTable(coinData) {
+    if(Array.isArray(coinData)) {
+      const arr = coinData.map((item, index)=> {
+        return TableRow(item, index);
+      })
+      return arr;
+    }
+  }
+
+  return (
+    <div className="home-table-cont">
+      <Table className="home-table" hover responsive>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Coin</th>
+            <th>Price</th>
+            <th>Market Cap</th>
+            {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
+              <th>24h Volume</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          {coinIndex.isError ? 
+            <tr>
+              <td colSpan="5">
+                <ErrorSpinner />
+                <br/><br/>
+              </td>
+            </tr>
+            : 
+            coinIndex.isLoading ? 
+              <tr>
+                <td colSpan="5">
+                  <LoadingSpinner />
+                </td>
+              </tr>
+              : 
+              makeTable(coinIndex.data)
+          }
+        </tbody>
+      </Table>
+    </div>
+  );
+}
+
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCandleData: (coin, days) => dispatch(chartActions.fetchCandleStickData(coin, days)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeTable);
 
 const ICON_PATHS = {
   'matic-network': require('../../assets/matic-network.webp'),
@@ -59,80 +151,3 @@ const ICON_PATHS = {
   'tron': require('../../assets/tron.webp'),
   'flow': require('../../assets/flow.webp'),
 }
-
-function HomeTable(props) {
-
-  let navigate = useNavigate();
-  const { screenWidth } = props;
-  const dispatch = useDispatch();
-
-  const clickCoin = async (coin) => {
-    dispatch(update_coin(coin));
-    const respp = props.fetchCandleData(coin, 100);
-    navigate("/stat");
-  }
-
-  function TableRow(item, index) {
-    return (
-      <tr onClick={()=>clickCoin(item[0])} key={item[0]}>
-        <td>
-          {index+1}
-        </td>
-        <td className="coin-name">
-          <img className="coin-icon" src={ICON_PATHS[item[0]]} alt="coin-icon"></img>
-          {item[0]}
-        </td>
-        <td>{item[1].usd}</td>
-        <td>{Math.ceil(item[1].usd_market_cap)}</td>
-        {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
-          <td>{Math.ceil(item[1].usd_24h_vol)}</td>
-        }
-      </tr>
-    )
-  }
-  
-  function makeTable(coinData) {
-    if(Array.isArray(coinData)) {
-      const arr = coinData.map((item, index)=> {
-        return TableRow(item, index);
-      })
-      return arr;
-    }
-  }
-
-  return (
-    <div className="home-table-cont">
-      <Table className="home-table" hover responsive>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Coin</th>
-            <th>Price</th>
-            <th>Market Cap</th>
-            {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
-              <th>24h Volume</th>
-            }
-          </tr>
-        </thead>
-        <tbody>
-          {
-            makeTable(props.coinData)
-          }
-        </tbody>
-      </Table>
-    </div>
-  );
-}
-
-function mapStateToProps(state) {
-  return {
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchCandleData: (coin, days) => dispatch(chartActions.fetchCandleStickData(coin, days)),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeTable);
