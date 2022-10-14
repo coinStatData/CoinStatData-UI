@@ -1,12 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
 import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG } from '../../components/searchBar/constants';
 import ErrorModal from '../alertModal/error';
+import TextField from '@mui/material/TextField';
+import Divider from '@mui/material/Divider';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Typography from '@mui/material/Typography';
 import './style.css';
 
 function SearchBar({ fetchCandleData, fetchLineData }) {
@@ -14,6 +20,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   const [start, setStart] = useState('2022.04.30');
   const [end, setEnd] = useState("2022.09.07" );
   const [days, setDays] = useState(100);
+  const [tempVolprice, setTempVolprice] = useState("price");
   const [volprice, setVolprice] = useState("prices");
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -97,8 +104,10 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   }
   const handleVolOrPriceChange = (e) => {
     if(e.target.value === "price") {
+      setTempVolprice("price");
       setVolprice("prices");
     } else {
+      setTempVolprice("volume");
       setVolprice("total_volumes");
     }
   }
@@ -139,34 +148,70 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
     <div className="search-bar">
       <form className="form-horizontal">
         <ErrorModal errorMessage={errorMessage} setShowAlert={setShowAlert} showAlert={showAlert} />
-        <h4 className="search-title">Search By Days into the Past</h4>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label className="input-text-box">Coin Name</Form.Label>
-          <Form.Select onChange={(e) => handleCoinChange(e)}>
-            <option>{coin}</option>
-            {
-              COIN_LIST.map((record => {
-                return <option key={record}>{record}</option>
-              }))
-            }
-          </Form.Select>
-          <div className="input-or">or</div>
-          <input onChange={(e) => handleCoinChange(e)} type="text" className="form-control" placeholder="custom coin search" aria-label="coin" aria-describedby="basic-addon1"></input>
-          <br/>
-          <hr className="hr-input"/>
-          <Form.Label className="input-text-box">Past Number of Days</Form.Label>
-          <Form.Control type='number' value={days} onChange={(e) => handleDaysChange(e)} placeholder={interval == "hourly"? "90 or less" : "91 or greater"} />
-          <Form.Label className="input-text-box">Interval</Form.Label>
-          <Form.Select value={tempInterval} onChange={(e) => handleIntervalChange(e)}>
-            <option>daily</option>
-            <option>hourly</option>
-          </Form.Select>
-          <Form.Label className="input-text-box">Volume or Price</Form.Label>
-          <Form.Select onChange={(e) => handleVolOrPriceChange(e)}>
-            <option>price</option>
-            <option>volume</option>
-          </Form.Select>
-        </Form.Group>
+          <Typography variant="h6">Search Bar</Typography>
+          <Divider sx={{ mt:"10px", color:'text.secondary'}}>Coin Name</Divider>
+          <FormControl sx={{ width: "100%", my:"10px"}} size="small">
+            <InputLabel id="coin-select-label">Coin</InputLabel>
+            <Select
+              labelId="coin-select-label"
+              id="coin-select"
+              value={coinName}
+              label="Coin"
+              onChange={(e) => handleCoinChange(e)}
+            >            
+              {
+                COIN_LIST.map((record => <MenuItem value={record}>{record}</MenuItem>))
+              }
+            </Select>
+          </FormControl>
+          <div className="input-or">OR</div>
+          <FormControl sx={{ width: "100%", my:"10px"}} size="small">
+            <TextField
+              labelId="custom-coin-label"
+              onChange={(e) => handleCoinChange(e)} 
+              label="Custom coin search" 
+              size="small" variant="outlined"
+            />
+          </FormControl>
+          <Divider sx={{ mt:"10px", color:'text.secondary'}}>Meta Params</Divider>
+          <FormControl sx={{ width: "100%", my:"15px"}} size="small">
+            <TextField
+              labelId="past-days-label"
+              id="past-days-select"
+              value={days}
+              label="Past # of Days"
+              onChange={handleDaysChange}
+              size="small" variant="outlined"
+            >
+            </TextField>
+          </FormControl>
+          <FormControl sx={{ width: "100%", my:"15px"}} size="small">
+            <InputLabel id="interval-label">Interval</InputLabel>
+            <Select
+              labelId="interval-label"
+              id="interval-select"
+              value={tempInterval}
+              label="Interval"
+              onChange={handleIntervalChange}
+            >
+              <MenuItem value={"daily"}>daily</MenuItem>
+              <MenuItem value={"hourly"}>hourly</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ width: "100%", my:"15px"}} size="small">
+            <InputLabel id="volPrice-label">Volume or Price</InputLabel>
+            <Select
+              labelId="volPrice-label"
+              id="volPrice-select"
+              label="Volume or Price"
+              onChange={handleVolOrPriceChange}
+              value={tempVolprice}
+              disabled={true}
+            >
+              <MenuItem value={"price"}>price</MenuItem>
+              <MenuItem value={"volume"}>volume</MenuItem>
+            </Select>
+          </FormControl>
         <Button onClick={handleSubmitDays} variant="primary" type="button">Submit</Button>
         {/* <hr/> */}
         {/* <h4>Search By Date Range </h4>

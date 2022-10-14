@@ -39,8 +39,8 @@
  }
 
  @media (max-width: 650px) { 
-  td {
-    font-size: 14px;
+  .table-cont .table tr {
+    font-size: 14px !important;
   }
   .dateString{
     font-size: 13px;;

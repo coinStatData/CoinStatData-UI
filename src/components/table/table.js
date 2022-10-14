@@ -7,6 +7,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { update_startDate, update_endDate } from '../../redux/slices/search';
 import ErrorSpinner from '../spinner/error';
 import LoadingSpinner from '../spinner/loading';
+import Typography from '@mui/material/Typography';
+import DownloadIcon from '@mui/icons-material/Download';
+import Box from '@mui/joy/Box';
+import Stack from '@mui/joy/Stack';
+import Divider from '@mui/material/Divider';
 import './style.css';
 
 function Table2(props) {
@@ -68,9 +73,20 @@ function Table2(props) {
         ) : (
         <div className="table-cont">
           <div className="table">
-            <h3 className="table-title">Table of {coin.toUpperCase()}</h3>
-            <p className="dateString">{sDate} ~ {eDate}</p>
-            <CSVLink data={csvData()}>Download CSV</CSVLink>
+          <Stack spacing={2} direction="row">
+            <Box sx={{ width:"50%" }}>
+              <Typography variant="h6">
+                {coin.toUpperCase()}
+              </Typography>
+            </Box>
+            <Box sx={{ width:"50%", textAlign:"right", pt:"20px"}}>
+              <CSVLink data={csvData()}>
+                {"CSV"}
+                <DownloadIcon fontSize="small"/>
+              </CSVLink>
+            </Box>
+          </Stack>
+            {/* <p className="dateString">{sDate} ~ {eDate}</p> */}
             <Table striped bordered hover responsive>
               <thead>
                 <tr>

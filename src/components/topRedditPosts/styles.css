@@ -45,6 +45,6 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: solid black 2px;
+  border-bottom: solid black 2.5px !important;
   margin-bottom: 15px;
 }

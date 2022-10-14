@@ -1,9 +1,42 @@
 import * as CandleReducers from '../slices/candleData';
 import * as LineReducers from '../slices/lineData';
-import { mutateResp } from './util';
 import { calAvg } from '../../stat-scripts/calcAverage';
 import candleStickService from '../../services/candleStick.service';
 import coinDataService from '../../services/coinData.service';
+import { formatDate } from '../../util';
+
+const _mutateResp = (resp, interval, coin) => {
+  if(Array.isArray(resp) && resp.length>1) {
+    let max = 0;
+    let min = Number.MAX_SAFE_INTEGER;
+    let hmax = -100;
+    let hmin = 100;
+    let chartD = resp.map((item, index) => {
+      if(index < resp.length-2) {
+        let ch = (resp[index+1][1] - item[1])/item[1] * 100;
+        let row = {
+          name: interval == "hourly"? formatDate(new Date(item[0])).toLocaleString() : new Date(item[0]).toLocaleString(),
+          [coin]: item[1],
+          hourlyReturn: ch.toFixed(5)
+        }
+        max = max < item[1] ? item[1] : max;
+        min = min > item[1] ? item[1] : min;
+        hmax = hmax < row.hourlyReturn ? row.hourlyReturn : hmax;
+        hmin = hmin > row.hourlyReturn ? row.hourlyReturn : hmin;
+        return row;
+      }
+    });
+    return {
+      chart: chartD,
+      minMax: {
+        max: max,
+        min: min,
+        hMaxReturn: hmax,
+        hMinReturn: hmin
+      }
+    }
+  }
+}
 
 export const fetchCandleStickData = (coin, days) => {
   return async dispatch => {
@@ -47,7 +80,7 @@ export const fetchLineDataAndCalculate_price = (coin, days, interval) => {
     try {
       const resp = await coinDataService().fetchTableData(coin, days, interval);
       dispatch(LineReducers.update_success(resp.data));
-      const mutatedResp = mutateResp(resp.data['prices'], interval, coin);
+      const mutatedResp = _mutateResp(resp.data['prices'], interval, coin);
       dispatch(LineReducers.update_price_minMax(mutatedResp.minMax));
       dispatch(LineReducers.update_price_chart(mutatedResp.chart));
       const stat = calAvg(mutatedResp.chart, interval);
@@ -69,7 +102,7 @@ export const fetchLineDataAndCalculate_volume = (coin, days, interval) => {
     try {
       const resp = await coinDataService().fetchTableData(coin, days, interval);
       dispatch(LineReducers.update_success(resp.data));
-      const mutatedResp = mutateResp(resp.data['total_volumes'], interval, coin);
+      const mutatedResp = _mutateResp(resp.data['total_volumes'], interval, coin);
       dispatch(LineReducers.update_volume_minMax(mutatedResp.minMax));
       dispatch(LineReducers.update_volume_chart(mutatedResp.chart));
       const stat = calAvg(mutatedResp, interval);

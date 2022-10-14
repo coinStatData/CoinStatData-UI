@@ -12,15 +12,10 @@
 
 .input-or {
   text-align: center;
-  padding: 5px;
 }
 
 .input-text-box {
   margin-top: 10px;
-}
-
-.hr-input {
-  margin: 3px;
 }
 
 @media (max-width: 1000px) { 
@@ -36,10 +31,6 @@
  }
 
  @media (max-width: 650px) { 
-  .search-title {
-    font-size: 20px;
-    text-align: center;
-  }
   .form-horizontal {
     width: 90%;
   }

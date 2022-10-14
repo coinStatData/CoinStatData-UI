@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import { connect } from 'react-redux';
 import CoinGecko from '../../components/coinGecko';
+import { COIN_IDS } from './constants';
 import './styles.css';
 
 function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
@@ -26,7 +27,7 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
       {process.env['REACT_APP_NODE_ENV'] !== 'dev' &&
         <div id="gecko-price-widget">
           <coingecko-coin-price-marquee-widget 
-            coin-ids="bitcoin,ethereum,ripple,binancecoin,cardano,solana,dogecoin,polkadot,tron,cosmos,stellar,monero,algorand" 
+            coin-ids={COIN_IDS}
             currency="usd" background-color="#ffffff" 
             locale="en"
           />
