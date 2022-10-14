@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_coin, update_interval } from '../../redux/slices/search';
@@ -14,7 +13,6 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
-import Chip from '@mui/material/Chip';
 import './style.css';
 
 function SearchBar({ fetchCandleData, fetchLineData }) {
@@ -162,15 +160,11 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
               onChange={(e) => handleCoinChange(e)}
             >            
               {
-                COIN_LIST.map((record => {
-                  return <MenuItem value={record}>{record}</MenuItem>
-                }))
+                COIN_LIST.map((record => <MenuItem value={record}>{record}</MenuItem>))
               }
             </Select>
           </FormControl>
-
           <div className="input-or">OR</div>
-        
           <FormControl sx={{ width: "100%", my:"10px"}} size="small">
             <TextField
               labelId="custom-coin-label"
@@ -179,9 +173,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
               size="small" variant="outlined"
             />
           </FormControl>
-
           <Divider sx={{ mt:"10px", color:'text.secondary'}}>Meta Params</Divider>
-
           <FormControl sx={{ width: "100%", my:"15px"}} size="small">
             <TextField
               labelId="past-days-label"
@@ -193,7 +185,6 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
             >
             </TextField>
           </FormControl>
-
           <FormControl sx={{ width: "100%", my:"15px"}} size="small">
             <InputLabel id="interval-label">Interval</InputLabel>
             <Select
@@ -207,7 +198,6 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
               <MenuItem value={"hourly"}>hourly</MenuItem>
             </Select>
           </FormControl>
-
           <FormControl sx={{ width: "100%", my:"15px"}} size="small">
             <InputLabel id="volPrice-label">Volume or Price</InputLabel>
             <Select
@@ -216,6 +206,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
               label="Volume or Price"
               onChange={handleVolOrPriceChange}
               value={tempVolprice}
+              disabled={true}
             >
               <MenuItem value={"price"}>price</MenuItem>
               <MenuItem value={"volume"}>volume</MenuItem>
