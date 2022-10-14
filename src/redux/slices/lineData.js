@@ -31,9 +31,6 @@ export const lineDataSlice = createSlice({
       interval: "daily",
       volumeOrPrice: "prices", //or total_volumes
     },
-    table: {
-      data: [],
-    },
     price: {
       chart: {
         data: [],
@@ -123,14 +120,13 @@ export const lineDataSlice = createSlice({
       state.price.isError = false;
     },
 
-    //---------------- table -----------------//
-    update_table: (state, action) => {
-      state.table.data = action.payload;
-    },
-
   },
 })
 
-export const { begin_volume_calculation, begin_price_calculation, update_volume_stat, update_volume_minMax, update_volume_chart, update_price_chart, begin_fetch, update_success, update_fail, update_price_stat, update_price_minMax, update_table } = lineDataSlice.actions
+export const { begin_volume_calculation, begin_price_calculation, 
+  update_volume_stat, update_volume_minMax, update_volume_chart, 
+  update_price_chart, begin_fetch, update_success, update_fail, 
+  update_price_stat, update_price_minMax 
+} = lineDataSlice.actions;
 
 export default lineDataSlice.reducer

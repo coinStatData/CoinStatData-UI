@@ -12,19 +12,12 @@
   flex-direction: column;
 }
 
-.spinner-cont-table {
-  width: 500px;
-  display: block;
-  text-align: center;
-}
-
 .spinner-outer-cont {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
 
 .table-title {
   font-size: 25px;

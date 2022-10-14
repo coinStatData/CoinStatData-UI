@@ -5,7 +5,8 @@ import { formatDate } from '../../util'
 import { CSVLink } from "react-csv";
 import { useSelector, useDispatch } from 'react-redux';
 import { update_startDate, update_endDate } from '../../redux/slices/search';
-import CoinGecko from '../coinGecko';
+import ErrorSpinner from '../spinner/error';
+import LoadingSpinner from '../spinner/loading';
 import './style.css';
 
 function Table2(props) {
@@ -58,16 +59,10 @@ function Table2(props) {
       {(lineData.resp.isLoading || lineData.resp.isError) ? (
         <div className="spinner-outer-cont">
           {lineData.resp.isLoading &&
-            <div className="spinner-cont-table">
-              <div className="lds-hourglass"></div>
-            </div>
+            <LoadingSpinner />
           }
           {lineData.resp.isError &&
-            <div className="spinner-cont-table">
-              <div className="lds-hourglass-red">
-                ERROR
-              </div>
-            </div>
+            <ErrorSpinner />
           }
         </div>
         ) : (

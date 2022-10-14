@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 import { useNavigate  } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { update_coin } from '../../redux/slices/search';
-import topTrendingService from '../../services/topTrending.service';
+import { connect } from 'react-redux';
+import ErrorSpinner from '../spinner/error';
+import LoadingSpinner from '../spinner/loading';
+import * as trendingActions from '../../redux/actions/trendingCoins';
 import './styles.css';
 
-function Trending(props) {
+function Trending({ trendingCoins, fetchTrending }) {
 
   let navigate = useNavigate();
-  const [trendingData, setTrendingData] = useState();
   const dispatch = useDispatch();
 
   function TableRow(item) {
@@ -26,21 +28,10 @@ function Trending(props) {
   }
 
   useEffect(()=> {
-    async function fetchData2() {
-      try {
-        const resp = await topTrendingService().fetchCoins();
-        setTrendingData(mutateResp(resp));
-      } catch(e) {
-        console.log(e);
-      }
+    if(trendingCoins.data.length === 0) {
+      fetchTrending();
     }
-    fetchData2();
   }, [])
-
-  const mutateResp = (resp) => {
-    let data = resp.data.coins;
-    return data;
-  } 
 
   const clickCoin = (coin) => {
     dispatch(update_coin(coin));
@@ -48,28 +39,53 @@ function Trending(props) {
   }
 
   return (
-      <div className="trending-table-cont">
-        <div className="trending-table">
-          <h4>Top Trending Coins</h4>
-          <Table striped hover>
-            <thead>
+    <div className="trending-table-cont">
+      <div className="trending-table">
+        <h4>Top Trending Coins</h4>
+        <Table striped hover>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>ID</th>
+              <th>MC Rank</th>
+            </tr>
+          </thead>
+          <tbody>
+          {trendingCoins.isError ?
+            <tr>
+              <td colSpan="3">
+                <ErrorSpinner />
+                <br/><br/>
+              </td>
+            </tr>
+          :
+            trendingCoins.isLoading ?
               <tr>
-                <th>Rank</th>
-                <th>ID</th>
-                <th>MC Rank</th>
+                <td colSpan="3">
+                  <LoadingSpinner />
+                </td>
               </tr>
-            </thead>
-            <tbody>
-            {(Array.isArray(trendingData) && trendingData.length > 0) &&
-              trendingData.map((item) => {
-                return TableRow(item.item);
-              })
-            }
-            </tbody>
-          </Table>
-        </div>
+            :
+            trendingCoins.data.length > 0 &&
+              trendingCoins.data.map((item) => TableRow(item.item))
+          }
+          </tbody>
+        </Table>
       </div>
+    </div>
   );
 }
 
-export default Trending;
+function mapStateToProps(state) {
+  return {
+    trendingCoins: state.trendingCoins
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchTrending: () => dispatch(trendingActions.fetchTrendingCoins()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Trending);

@@ -41,7 +41,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   useEffect(() => {
     // console.log("SEARCHBAR useEffect call candledata , ", candleData);
     fetchDataGecko(coin, days, tempInterval);
-    // fetchCandleData(coin, days);
+    fetchCandleData(coin, days);
   }, []);
 
   const handleSubmitDates = async (e) => {
