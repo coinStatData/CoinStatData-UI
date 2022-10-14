@@ -1,0 +1,1 @@
+export const COIN_IDS = "bitcoin,ethereum,ripple,binancecoin,cardano,solana,dogecoin,polkadot,tron,cosmos,stellar,monero,algorand";
