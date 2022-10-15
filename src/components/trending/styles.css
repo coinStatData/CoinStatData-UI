@@ -8,9 +8,6 @@
 }
 
 @media (max-width: 1000px) { 
-  .trending-table h4 {
-    text-align: center;
-  }
   .trending-table {
     display: flex;
     justify-content: center;
@@ -18,3 +15,21 @@
     flex-direction: column;
   }
 }
+
+@media (max-width: 750px) { 
+  .trending-table-cont h4 {
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 530px) { 
+  .trending-table-cont h4 {
+    text-align: left;
+    font-size: 1.2rem;
+  }
+  .trending-table tr {
+    font-size: 14px;
+  }
+}
+

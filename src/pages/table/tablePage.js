@@ -7,7 +7,6 @@ import BarChartBoy from '../../components/graph/barChart';
 import CandleStickChart from '../../components/graph/candleStick';
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-import NavBarComp from '../../components/navBar/navBar';
 import Footer from '../../components/footer';
 import { useSelector, useDispatch } from 'react-redux';
 import * as chartActions from '../../redux/actions/chartData';
@@ -40,7 +39,6 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
 
   return (
     <>
-      <NavBarComp></NavBarComp>
       <div>
         <div className="chart-cont">
           <Tabs defaultActiveKey="Price" id="chart-tabs" className="mb-3">

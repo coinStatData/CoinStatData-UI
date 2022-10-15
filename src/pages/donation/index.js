@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert'
-import NavBarComp from '../../components/navBar/navBar';
 import Footer from '../../components/footer';
 import './styles.css';
 
@@ -13,7 +12,6 @@ function DonatePage(props) {
 
 	return (
 		<>
-			<NavBarComp></NavBarComp>
 			<div className="donate-cont">
 				<div>
 					{showAlert &&
