@@ -3,7 +3,6 @@ import { fetchCoinIndex } from '../../redux/actions/coinIndex';
 import HomeTable from '../../components/homeTable'
 import Trending from '../../components/trending'
 import TopRedditPosts from '../../components/topRedditPosts';
-import NavBarComp from '../../components/navBar/navBar';
 import Chat from '../../components/chat';
 import Footer from '../../components/footer';
 import { useDispatch } from 'react-redux';
@@ -23,7 +22,6 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
 
 	return (
     <>
-      <NavBarComp></NavBarComp>
       {process.env['REACT_APP_NODE_ENV'] !== 'dev' &&
         <div id="gecko-price-widget">
           <coingecko-coin-price-marquee-widget 

@@ -40,8 +40,8 @@ function Trending({ trendingCoins, fetchTrending }) {
 
   return (
     <div className="trending-table-cont">
+      <h4>Top Trending Coins</h4>
       <div className="trending-table">
-        <h4>Top Trending Coins</h4>
         <Table striped hover>
           <thead>
             <tr>
