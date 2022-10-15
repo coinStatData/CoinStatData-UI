@@ -18,6 +18,7 @@ import './style.css';
 function SearchBar({ fetchCandleData, fetchLineData }) {
 
   const [start, setStart] = useState('2022.04.30');
+  const [isInteger, setIsInteger] = useState(true);
   const [end, setEnd] = useState("2022.09.07" );
   const [days, setDays] = useState(100);
   const [tempVolprice, setTempVolprice] = useState("price");
@@ -88,12 +89,18 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
 
   const handleDaysChange = (e) => {
     setDays(e.target.value);
-    if(e.target.value > 90) {
-      setTempInterval("daily");
+    if(Number.isInteger(Number(e.target.value))) {
+      setIsInteger(true);
+      if(e.target.value > 90) {
+        setTempInterval("daily");
+      } else {
+        setTempInterval("hourly");
+      }
     } else {
-      setTempInterval("hourly");
+      setIsInteger(false);
     }
   }
+
   const handleIntervalChange = (e) => {
     setTempInterval(e.target.value);
     if(e.target.value === "hourly") {
@@ -176,12 +183,14 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
           <Divider sx={{ mt:"10px", color:'text.secondary'}}>Meta Params</Divider>
           <FormControl sx={{ width: "100%", my:"15px"}} size="small">
             <TextField
+              error={isInteger? false : true}
               labelId="past-days-label"
               id="past-days-select"
               value={days}
               label="Past # of Days"
               onChange={handleDaysChange}
               size="small" variant="outlined"
+              helperText={isInteger? "" : "Must be an integer."}
             >
             </TextField>
           </FormControl>
