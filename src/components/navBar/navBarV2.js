@@ -50,7 +50,7 @@ const NavBarV2 = () => {
 
             {/* ----------------- mid up ----------------- */}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-              <img className="nav-bar-logo" src="../../assets/csdLogo2.png" alt="" />
+              <img className="nav-bar-logo-md" src="../../assets/csdLogo2.png" alt="" />
             </Box>
             <Typography
               variant="h6"
@@ -66,7 +66,8 @@ const NavBarV2 = () => {
                 textDecoration: 'none',
                 '&:hover': {
                   color: '#bd971b !important'
-                }
+                },
+                letterSpacing: "-1px"
               }}
             >
               CoinStatData
@@ -110,10 +111,10 @@ const NavBarV2 = () => {
               </Menu>
             </Box>
             <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
-              <img className="nav-bar-logo" src="../../assets/csdLogo2.png" alt="" />
+              <img className="nav-bar-logo-sm" src="../../assets/csdLogo2.png" alt="" />
             </Box>
             <Typography
-              variant="h5"
+              variant="h6"
               noWrap
               component="a"
               href="../"
@@ -127,7 +128,8 @@ const NavBarV2 = () => {
                 textDecoration: 'none',
                 '&:hover': {
                   color: '#bd971b !important'
-                }
+                },
+                letterSpacing: "-1px"
               }}
             >
               CoinStatData

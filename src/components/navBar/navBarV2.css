@@ -1,3 +1,7 @@
-.nav-bar-logo {
+.nav-bar-logo-md {
   width: 25px;
+}
+
+.nav-bar-logo-sm {
+  width: 20px;
 }
