@@ -23,6 +23,37 @@ function App() {
   const msg1 = "We could not find the coin. Please try another!";
   const msg2 = "Oopse, something went wrong. Please try again later!";
 
+  React.useEffect(() => {
+    console.log("%c Welcome to CoinStatData!", 
+    "background: #222; color:gold; font-size:40px; font-weight:bold; text-shadow: 3px 3px 3px orange , 6px 6px 6px blue;"
+    );
+    console.log(
+      `
+      /$$$$$$$$                /$$     /$$                  
+      |__  $$__/               | $$    | $$                 
+        | $$  /$$$$$$        /$$$$$$  | $$$$$$$   /$$$$$$   
+        | $$ /$$__  $$      |_  $$_/  | $$__  $$ /$$__  $$  
+        | $$| $$  \ $$        | $$    | $$  \ $$| $$$$$$$$  
+        | $$| $$  | $$        | $$ /$$| $$  | $$| $$_____/  
+        | $$|  $$$$$$/        |  $$$$/| $$  | $$|  $$$$$$$  
+        |__/ \______/          \___/  |__/  |__/ \_______/  
+                                                                                                                                                                                                
+      `
+    );
+    console.log(
+      `
+        /$$      /$$                                  /$$
+        | $$$    /$$$                                 | $$
+      | $$$$  /$$$$  /$$$$$$   /$$$$$$  /$$$$$$$    | $$
+      | $$ $$/$$ $$ /$$__  $$ /$$__  $$| $$__  $$   | $$
+      | $$  $$$| $$| $$  \ $$| $$  \ $$| $$  \ $$   |__/
+      | $$\  $ | $$| $$  | $$| $$  | $$| $$  | $$       
+      | $$ \/  | $$|  $$$$$$/|  $$$$$$/| $$  | $$    /$$
+      |__/     |__/ \______/  \______/ |__/  |__/   |__/
+      `);
+  }, []);
+
+
   const update_g = (change, what) => {
     // for useContext hook
     switch(what) {
@@ -67,7 +98,6 @@ function App() {
   return (
     <>
       <UserContext.Provider value={{interval_g, update_g, coin_g, resp_g}}>
-        
         <BrowserRouter>
           <NavBarV2 />
           <Routes>
