@@ -1,0 +1,36 @@
+.port-tab-nav-cont {
+  display: flex;
+  /* align-items: center;
+  justify-content: center; */
+  flex-direction: column;
+}
+
+#port-tabs {
+  width: 100%;
+  height: 100%;
+}
+
+.port-stat-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.stat-box-col-1 {
+  width: 50%;
+  padding: 10px;
+  overflow: auto;
+}
+
+.stat-box-col-2 {
+  width: 50%;
+  padding: 10px;
+  overflow: auto;
+}
+
+
+@media (max-width: 800px) { 
+  .port-tab-nav-cont {
+    font-size: 14px;
+  }
+}

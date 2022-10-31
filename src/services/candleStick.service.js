@@ -5,8 +5,6 @@ const candleStickService = () => {
   const _serverUr = process.env.REACT_APP_NODE_ENV === "dev" ? 
     process.env.REACT_APP_DEV_SERVER_URL : process.env.REACT_APP_SERVER_URL;
 
-    // const _serverUr =  process.env.REACT_APP_SERVER_URL;
-
   const _fetchCandleData = async ({coin: coin, start: start, end: end}) => {
     //TODO: check if coin is valid
     try {
