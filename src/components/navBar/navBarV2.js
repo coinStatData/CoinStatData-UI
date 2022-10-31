@@ -110,9 +110,6 @@ const NavBarV2 = () => {
                 ))}
               </Menu>
             </Box>
-            <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
-              <img className="nav-bar-logo-sm" src="../../assets/csdLogo2.png" alt="" />
-            </Box>
             <Typography
               variant="h6"
               noWrap
@@ -132,7 +129,9 @@ const NavBarV2 = () => {
                 letterSpacing: "-1px"
               }}
             >
-              CoinStatData
+              <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 5 }}>
+                <img className="nav-bar-logo-sm" src="../../assets/csdLogo2.png" alt="" />
+              </Box>
             </Typography>
 
             {/* ----------------- mid up ----------------- */}

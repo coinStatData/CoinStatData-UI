@@ -8,6 +8,9 @@ const RestService = (defaultConfig={}) => {
     newConfig.method = method;
     newConfig.headers = {...newConfig.headers, ...config.headers};
     newConfig.headers['API-KEY'] = process.env.REACT_APP_API_KEY;
+    if(config.data) {
+      newConfig.data = config.data;
+    }
     return newConfig;
   };
 

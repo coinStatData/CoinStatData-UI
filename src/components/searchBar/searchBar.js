@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { COIN_LIST } from '../../util/constants/coins';
-import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG } from '../../components/searchBar/constants';
+import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG } from './constants';
 import ErrorModal from '../alertModal/error';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
@@ -13,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import './style.css';
 
 function SearchBar({ fetchCandleData, fetchLineData }) {
@@ -109,6 +110,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
       setDays(100);
     }
   }
+
   const handleVolOrPriceChange = (e) => {
     if(e.target.value === "price") {
       setTempVolprice("price");
@@ -160,21 +162,19 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
           <FormControl sx={{ width: "100%", my:"10px"}} size="small">
             <InputLabel id="coin-select-label">Coin</InputLabel>
             <Select
-              labelId="coin-select-label"
               id="coin-select"
               value={coinName}
               label="Coin"
               onChange={(e) => handleCoinChange(e)}
             >            
               {
-                COIN_LIST.map((record => <MenuItem value={record}>{record}</MenuItem>))
+                COIN_LIST.map((record => <MenuItem key={record} value={record}>{record}</MenuItem>))
               }
             </Select>
           </FormControl>
           <div className="input-or">OR</div>
           <FormControl sx={{ width: "100%", my:"10px"}} size="small">
             <TextField
-              labelId="custom-coin-label"
               onChange={(e) => handleCoinChange(e)} 
               label="Custom coin search" 
               size="small" variant="outlined"
@@ -184,7 +184,6 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
           <FormControl sx={{ width: "100%", my:"15px"}} size="small">
             <TextField
               error={isInteger? false : true}
-              labelId="past-days-label"
               id="past-days-select"
               value={days}
               label="Past # of Days"
@@ -197,7 +196,6 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
           <FormControl sx={{ width: "100%", my:"15px"}} size="small">
             <InputLabel id="interval-label">Interval</InputLabel>
             <Select
-              labelId="interval-label"
               id="interval-select"
               value={tempInterval}
               label="Interval"
@@ -210,7 +208,6 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
           <FormControl sx={{ width: "100%", my:"15px"}} size="small">
             <InputLabel id="volPrice-label">Volume or Price</InputLabel>
             <Select
-              labelId="volPrice-label"
               id="volPrice-select"
               label="Volume or Price"
               onChange={handleVolOrPriceChange}
@@ -221,7 +218,9 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
               <MenuItem value={"volume"}>volume</MenuItem>
             </Select>
           </FormControl>
-        <Button onClick={handleSubmitDays} variant="primary" type="button">Submit</Button>
+          <Button onClick={handleSubmitDays} variant="contained" endIcon={<SmartToyIcon />}>
+            Submit
+          </Button>
         {/* <hr/> */}
         {/* <h4>Search By Date Range </h4>
         <Form.Group className="mb-3" controlId="formBasicEmail">

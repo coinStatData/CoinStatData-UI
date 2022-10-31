@@ -1,6 +1,6 @@
 import React from 'react';
 import Footer from '../../components/footer';
-import './styles.css';
+import './portfolioV1.css';
 
 function PortFolioOpt(props) {
 

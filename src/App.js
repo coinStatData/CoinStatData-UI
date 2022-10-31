@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UserContext from './hooks/userContext';
 import TablePage from './pages/table/tablePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PortFolioOpt from './pages/portfolioOpt';
+import PortFolioOptV2 from './pages/portfolioOpt/portfolioV2';
 import DonatePage from './pages/donation';
 import ChatPage from './pages/chat';
 import HomePage from './pages/home';
@@ -24,33 +24,7 @@ function App() {
   const msg2 = "Oopse, something went wrong. Please try again later!";
 
   React.useEffect(() => {
-    console.log("%c Welcome to CoinStatData!", 
-    "background: #222; color:gold; font-size:40px; font-weight:bold; text-shadow: 3px 3px 3px orange , 6px 6px 6px blue;"
-    );
-    console.log(
-      `
-      /$$$$$$$$                /$$     /$$                  
-      |__  $$__/               | $$    | $$                 
-        | $$  /$$$$$$        /$$$$$$  | $$$$$$$   /$$$$$$   
-        | $$ /$$__  $$      |_  $$_/  | $$__  $$ /$$__  $$  
-        | $$| $$  \ $$        | $$    | $$  \ $$| $$$$$$$$  
-        | $$| $$  | $$        | $$ /$$| $$  | $$| $$_____/  
-        | $$|  $$$$$$/        |  $$$$/| $$  | $$|  $$$$$$$  
-        |__/ \______/          \___/  |__/  |__/ \_______/  
-                                                                                                                                                                                                
-      `
-    );
-    console.log(
-      `
-        /$$      /$$                                  /$$
-        | $$$    /$$$                                 | $$
-      | $$$$  /$$$$  /$$$$$$   /$$$$$$  /$$$$$$$    | $$
-      | $$ $$/$$ $$ /$$__  $$ /$$__  $$| $$__  $$   | $$
-      | $$  $$$| $$| $$  \ $$| $$  \ $$| $$  \ $$   |__/
-      | $$\  $ | $$| $$  | $$| $$  | $$| $$  | $$       
-      | $$ \/  | $$|  $$$$$$/|  $$$$$$/| $$  | $$    /$$
-      |__/     |__/ \______/  \______/ |__/  |__/   |__/
-      `);
+
   }, []);
 
 
@@ -104,7 +78,7 @@ function App() {
             {/* pages with navbar */}
             <Route path="/" element={<HomePage errorResponse={errorResponse} screenWidth={screenWidth} />} />
             <Route path="/stat" element={<TablePage screenWidth={screenWidth}/>} />
-            <Route path="/optimization" element={<PortFolioOpt />} />
+            <Route path="/optimization" element={<PortFolioOptV2 />} />
             <Route path="/donate" element={<DonatePage />} />
             <Route path="/chat" element={<ChatPage />} />
           </Routes>

@@ -13,12 +13,41 @@ import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+  console.log(
+    "%c Welcome to CoinStatData!", 
+    "color:gold; font-size:40px; font-weight:bold; text-shadow: 3px 3px 3px orange , 6px 6px 6px blue;"
+  );
+  console.log(
+    `
+    /$$$$$$$$                /$$     /$$                  
+    |__  $$__/               | $$    | $$                 
+      | $$  /$$$$$$        /$$$$$$  | $$$$$$$   /$$$$$$   
+      | $$ /$$__  $$      |_  $$_/  | $$__  $$ /$$__  $$  
+      | $$| $$  \ $$        | $$    | $$  \ $$| $$$$$$$$  
+      | $$| $$  | $$        | $$ /$$| $$  | $$| $$_____/  
+      | $$|  $$$$$$/        |  $$$$/| $$  | $$|  $$$$$$$  
+      |__/ \______/          \___/  |__/  |__/ \_______/  
+                                                                                                                                                                                              
+    `
+  );
+  console.log(
+    `
+      /$$      /$$                                  /$$
+      | $$$    /$$$                                 | $$
+    | $$$$  /$$$$  /$$$$$$   /$$$$$$  /$$$$$$$    | $$
+    | $$ $$/$$ $$ /$$__  $$ /$$__  $$| $$__  $$   | $$
+    | $$  $$$| $$| $$  \ $$| $$  \ $$| $$  \ $$   |__/
+    | $$\  $ | $$| $$  | $$| $$  | $$| $$  | $$       
+    | $$ \/  | $$|  $$$$$$/|  $$$$$$/| $$  | $$    /$$
+    |__/     |__/ \______/  \______/ |__/  |__/   |__/
+    `
+  );
+
   root.render(
     <Provider store={store}>
       <App></App>
     </Provider>
   );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
