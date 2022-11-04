@@ -4,7 +4,6 @@ import HomeTable from '../../components/homeTable'
 import Trending from '../../components/trending'
 import TopRedditPosts from '../../components/topRedditPosts';
 import Chat from '../../components/chat';
-import Footer from '../../components/footer';
 import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import { connect } from 'react-redux';
@@ -51,10 +50,8 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
             </div>
           </div>
           <TopRedditPosts/>
-
         </div>
       </div>
-      <Footer></Footer>
     </>
 	)
 }

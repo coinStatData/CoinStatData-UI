@@ -8,6 +8,7 @@ import ChatPage from './pages/chat';
 import HomePage from './pages/home';
 import { useFetch } from "react-async"
 import NavBarV2 from './components/navBar/navBarV2'
+import Footer from './components/footer';
 import './App.css';
 
 const APIEndPoint = "https://40rrfmjfvc.execute-api.us-east-1.amazonaws.com/v1/hello"
@@ -70,21 +71,24 @@ function App() {
   }
 
   return (
-    <>
-      <UserContext.Provider value={{interval_g, update_g, coin_g, resp_g}}>
-        <BrowserRouter>
-          <NavBarV2 />
-          <Routes>
-            {/* pages with navbar */}
-            <Route path="/" element={<HomePage errorResponse={errorResponse} screenWidth={screenWidth} />} />
-            <Route path="/stat" element={<TablePage screenWidth={screenWidth}/>} />
-            <Route path="/optimization" element={<PortFolioOptV2 />} />
-            <Route path="/donate" element={<DonatePage />} />
-            <Route path="/chat" element={<ChatPage />} />
-          </Routes>
-        </BrowserRouter>
-      </UserContext.Provider> 
-    </>
+    <UserContext.Provider value={{interval_g, update_g, coin_g, resp_g}}>
+      <BrowserRouter>
+        <div className="coin-body">
+          <div>
+            <NavBarV2 />
+            <Routes>
+              {/* pages with navbar */}
+              <Route path="/" element={<HomePage errorResponse={errorResponse} screenWidth={screenWidth} />} />
+              <Route path="/stat" element={<TablePage screenWidth={screenWidth}/>} />
+              <Route path="/optimization" element={<PortFolioOptV2 />} />
+              <Route path="/donate" element={<DonatePage />} />
+              <Route path="/chat" element={<ChatPage />} />
+            </Routes>
+          </div>
+          <Footer/>
+        </div>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

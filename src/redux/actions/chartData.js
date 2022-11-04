@@ -11,10 +11,10 @@ const _mutateResp = (resp, interval, coin) => {
     let min = Number.MAX_SAFE_INTEGER;
     let hmax = -100;
     let hmin = 100;
-    let chartD = resp.map((item, index) => {
+    const chartD = resp.map((item, index) => {
       if(index < resp.length-2) {
-        let ch = (resp[index+1][1] - item[1])/item[1] * 100;
-        let row = {
+        const ch = (resp[index+1][1] - item[1])/item[1] * 100;
+        const row = {
           name: interval == "hourly"? formatDate(new Date(item[0])).toLocaleString() : new Date(item[0]).toLocaleString(),
           [coin]: item[1],
           hourlyReturn: ch.toFixed(5)

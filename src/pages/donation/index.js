@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Alert from 'react-bootstrap/Alert'
-import Footer from '../../components/footer';
 import './styles.css';
 
 function DonatePage(props) {
@@ -68,7 +67,6 @@ function DonatePage(props) {
 					</div>
 				</div>
 			</div>
-			<Footer></Footer>
 		</>
 	)
 }

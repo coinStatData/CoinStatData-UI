@@ -3,9 +3,9 @@ import ErrorSpinner from '../spinner/error';
 import LoadingSpinner from '../spinner/loading';
 import pythonLambdaService from '../../services/pythonLambda.service';
 import { COIN_LIST } from '../../util/constants/coins';
-import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG, RESP } from './constants';
+import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG, RESP, MenuProps, INIT_COINS, HELPER_TEXTS } from './constants';
 import ErrorModal from '../alertModal/error';
-import TabNav from './tabNav';
+import StatTabNav from './tabNav/statistic';
 const graphImage = require("../../assets/graphs/efficientFrontier.jpg")
 
 //mau stylesheet
@@ -20,29 +20,9 @@ import Button from '@mui/material/Button';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import './portfolio.css';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-function getStyles(name, chosenCoins, theme) {
-  return {
-    fontWeight:
-      chosenCoins.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
 const PortfolioOptimization = (props) => {
   const theme = useTheme();
-  const [chosenCoins, setChosenCoins] = useState(['bitcoin', 'ethereum', 'litecoin', 'dogecoin', 'monero', 'ripple', 'solana']);
+  const [chosenCoins, setChosenCoins] = useState(INIT_COINS);
   const [days, setDays] = useState(300);
   const [isOver100, setIsOver100] = useState(true);
   const [isOver2000, setIsOver2000] = useState(true);
@@ -53,6 +33,15 @@ const PortfolioOptimization = (props) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [imageSrc, setImageSrc] = useState(graphImage);
+
+  const getStyles = (name, chosenCoins, theme) => {
+    return {
+      fontWeight:
+        chosenCoins.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
 
   const errorResponse = (e) => {
     if(e.response) {
@@ -133,7 +122,6 @@ const PortfolioOptimization = (props) => {
           <FormControl sx={{ width: "100%", my:2 }} size="small">
             <InputLabel id="multi-coins-label">Choose Coins</InputLabel>
             <Select
-
               id="multi-coins-select"
               multiple
               value={chosenCoins}
@@ -162,7 +150,7 @@ const PortfolioOptimization = (props) => {
               label="Past # of Days"
               onChange={handleDaysChange}
               size="small" variant="outlined"
-              helperText={isOver100? "" : "Must be greater than 100 and less than 600."}
+              helperText={isOver100? "" : HELPER_TEXTS.daysSelectWarning}
             >
             </TextField>
           </FormControl>
@@ -176,7 +164,7 @@ const PortfolioOptimization = (props) => {
               label="Number of Simulations"
               onChange={handleNumOfSimulationsChange}
               size="small" variant="outlined"
-              helperText={isOver2000? "*Greater number of simulations will take longer to calculate." : "Must be greater than 2000 and less than 10000."}
+              helperText={isOver2000? HELPER_TEXTS.simSelectInfo : HELPER_TEXTS.simSelectWarning}
             >
             </TextField>
           </FormControl>
@@ -194,7 +182,7 @@ const PortfolioOptimization = (props) => {
         :
         <div className="graph-cont">
           <div className="img-cont">
-            <TabNav imageSrc={imageSrc} portResp={portResp}></TabNav>
+            <StatTabNav imageSrc={imageSrc} portResp={portResp}></StatTabNav>
           </div>
         </div>
       }

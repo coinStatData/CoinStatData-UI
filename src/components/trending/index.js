@@ -31,7 +31,7 @@ function Trending({ trendingCoins, fetchTrending }) {
     if(trendingCoins.data.length === 0) {
       fetchTrending();
     }
-  }, [])
+  }, []);
 
   const clickCoin = (coin) => {
     dispatch(update_coin(coin));
