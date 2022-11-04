@@ -7,8 +7,7 @@ import BarChartBoy from '../../components/graph/barChart';
 import CandleStickChart from '../../components/graph/candleStick';
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
-import Footer from '../../components/footer';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as chartActions from '../../redux/actions/chartData';
 import { calculateGraphWidth } from '../../util';
 import LoadingSpinner from '../../components/spinner/loading';
@@ -82,7 +81,6 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </>
   );
 }

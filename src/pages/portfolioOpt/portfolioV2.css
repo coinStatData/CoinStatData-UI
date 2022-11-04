@@ -1,0 +1,11 @@
+.under-construction {
+  padding: 15% 0px 10% 0;
+  text-align: center;
+}
+
+.under-construction span {
+  margin-right: 10px;
+  margin-left: 10px;
+  font-size: 14px;
+  color: #555;
+}

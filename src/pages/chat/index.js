@@ -1,6 +1,5 @@
 import React from 'react';
 import Chat from '../../components/chat';
-import Footer from '../../components/footer';
 import './styles.css';
 
 function ChatPage(props) {
@@ -11,7 +10,6 @@ function ChatPage(props) {
 					<Chat></Chat>
 				</div>
 			</div>
-			<Footer></Footer>
 		</>
 	)
 }

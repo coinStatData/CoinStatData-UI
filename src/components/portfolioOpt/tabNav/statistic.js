@@ -3,7 +3,7 @@ import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import "./tabNav.css"
 
-function TabNav({ imageSrc, portResp }) {
+function StatTabNav({ imageSrc, portResp }) {
 
   return (
     <>
@@ -55,6 +55,5 @@ function TabNav({ imageSrc, portResp }) {
   );
 }
 
-
-export default TabNav;
+export default StatTabNav;
 
