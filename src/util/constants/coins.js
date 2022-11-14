@@ -8,6 +8,6 @@ const CSD_LIST = CSD_STR.split(',');
 
 const STABLE_LIST = ["tether", "usd-coin","binance-usd","dai","frax","true-usd","usdd","gemini-dollar","paxos-standard","compound-usd-coin"];
 
-const CSD_INDEX = [ ...CSD_LIST, ...STABLE_LIST].sort();
+const CSD_INDEX = [ ...CSD_LIST, ...STABLE_LIST];
 
 module.exports = { COIN_LIST, COIN_STR, STABLE_LIST, CSD_INDEX, CSD_LIST, CSD_STR };
