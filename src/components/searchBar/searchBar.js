@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_coin, update_interval } from '../../redux/slices/search';
-import { COIN_LIST } from '../../util/constants/coins';
+import { CSD_INDEX } from '../../util/constants/coins';
 import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG } from './constants';
 import ErrorModal from '../alertModal/error';
 import TextField from '@mui/material/TextField';
@@ -168,7 +168,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
               onChange={(e) => handleCoinChange(e)}
             >            
               {
-                COIN_LIST.map((record => <MenuItem key={record} value={record}>{record}</MenuItem>))
+                CSD_INDEX.map((record => <MenuItem key={record} value={record}>{record}</MenuItem>))
               }
             </Select>
           </FormControl>

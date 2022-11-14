@@ -7,6 +7,7 @@ export const coinIndexSlice = createSlice({
     isError: false,
     isLoading: false,
     data: [],
+    stableData: [],
     error: {},
   },
   reducers: {
@@ -18,18 +19,21 @@ export const coinIndexSlice = createSlice({
       state.isError = false;
       state.error = null;
       state.data = [];
+      state.stableData = [];
     },
     update_success: (state, action) => {
       state.isLoading = false;
       state.isError = false;
       state.error = null;
-      state.data = action.payload;
+      state.data = action.payload.csd50;
+      state.stableData = action.payload.stable10;
     },
     update_fail: (state, action) => {
       state.isLoading = false;
       state.isError = true;
       state.error = action.payload;
       state.data = [];
+      state.stableData = [];
     },
   },
 })

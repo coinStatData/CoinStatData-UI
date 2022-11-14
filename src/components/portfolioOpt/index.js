@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ErrorSpinner from '../spinner/error';
 import LoadingSpinner from '../spinner/loading';
 import pythonLambdaService from '../../services/pythonLambda.service';
-import { COIN_LIST } from '../../util/constants/coins';
+import { CSD_INDEX } from '../../util/constants/coins';
 import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG, RESP, MenuProps, INIT_COINS, HELPER_TEXTS } from './constants';
 import ErrorModal from '../alertModal/error';
 import StatTabNav from './tabNav/statistic';
@@ -129,7 +129,7 @@ const PortfolioOptimization = (props) => {
               input={<OutlinedInput label="Choose Coins" />}
               MenuProps={MenuProps}
             >
-              {COIN_LIST.map((coin) => (
+              {CSD_INDEX.map((coin) => (
                 <MenuItem
                   key={coin}
                   value={coin}
