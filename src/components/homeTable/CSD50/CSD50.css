@@ -1,0 +1,30 @@
+.coin-name {
+  font-weight: 500;
+}
+
+.coin-icon {
+  width:20px;
+  height: 20px;
+  margin: 0 10px 0 0;
+}
+
+@media (max-width: 500px) { 
+  .home-table td {
+    font-size: 12px;
+  }
+  .home-table th {
+    font-size: 12px;
+  }
+  .coin-icon {
+    width: 15px;
+    height: 15px;
+    margin: 0 5px 0 0;
+  }
+}
+
+
+@media (max-width: 650px) { 
+  .home-table td {
+    font-size: 14px;
+  }
+}

@@ -14,10 +14,11 @@ import './styles.css';
 function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     if(coinIndex.data.length === 0) fetchCoinIndex();
     dispatch(update_interval("daily"));
-  }, [])
+  }, []);
 
 	return (
     <>
@@ -25,7 +26,8 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
         <div id="gecko-price-widget">
           <coingecko-coin-price-marquee-widget 
             coin-ids={COIN_IDS}
-            currency="usd" background-color="#ffffff" 
+            currency="usd" 
+            background-color="#ffffff" 
             locale="en"
           />
         </div>
