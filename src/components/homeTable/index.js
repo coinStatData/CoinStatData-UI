@@ -1,9 +1,14 @@
 import React from 'react';
 import CSD50 from './CSD50';
+import GlobalIndex from './globalIndex';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabPanel from './tabPanel';
 import Tabs from '@mui/material/Tabs';
+import Tooltip from '@mui/material/Tooltip';
+import InfoBar from './infoBar';
+import CSDIndexInfo from './infoBar/infoContents/CSDIndex';
+import GlobalIndexInfo from './infoBar/infoContents/globalIndex';
 import './homeTable.css';
 
 function a11yProps(index) {
@@ -27,20 +32,38 @@ function HomeTable(props) {
       <div className="home-table-inner">
         <Box sx={{ width: '100%' }}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <Tabs centered={screenWidth < 1000 ? true:false} value={value} onChange={handleTabChange} aria-label="home index tabs">
-              <Tab className="tab-title" label="CSD50 Index" {...a11yProps(0)} />
-              <Tab className="tab-title" label="CSD10 Stable Index" {...a11yProps(1)} />
-              <Tab className="tab-title" disabled label="Global Index" {...a11yProps(2)} />
+            <Tabs 
+              centered={screenWidth < 1000 ? true : false} 
+              value={value} onChange={handleTabChange} 
+              aria-label="home index tabs"
+            >
+              <Tab 
+                className="tab-title"
+                label="CSD50 Index"
+                {...a11yProps(0)} 
+              />
+              <Tab 
+                className="tab-title"
+                label={screenWidth < 650 ? "CSD10 Index" : "CSD10 Stable Index"}
+                {...a11yProps(1)} 
+              />
+              <Tab 
+                className="tab-title" 
+                label="Global Index" 
+                {...a11yProps(2)} 
+              />
             </Tabs>
           </Box>
           <TabPanel value={value} index={0}>
             <CSD50 screenWidth={screenWidth} index={"data"} coinIndex={coinIndex} />
           </TabPanel>
           <TabPanel value={value} index={1}>
+            <InfoBar content={<CSDIndexInfo/>} title={"About CSD Indexes"} />
             <CSD50 screenWidth={screenWidth} index={"stableData"} coinIndex={coinIndex} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            Item Three
+            <InfoBar content={<GlobalIndexInfo/>} title={"About CSD Global Index"} />
+            <GlobalIndex screenWidth={screenWidth} />
           </TabPanel>
         </Box>
       </div>

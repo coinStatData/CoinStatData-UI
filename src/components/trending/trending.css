@@ -7,6 +7,10 @@
   width: 100%;
 }
 
+.trending-table tr {
+  font-size: 14px;
+}
+
 @media (max-width: 1000px) { 
   .trending-table {
     display: flex;
@@ -22,7 +26,6 @@
   }
 }
 
-
 @media (max-width: 530px) { 
   .trending-table-cont h4 {
     text-align: left;
@@ -30,6 +33,9 @@
   }
   .trending-table tr {
     font-size: 14px;
+  }
+  .trending-table th {
+    font-size: 12px;
   }
 }
 

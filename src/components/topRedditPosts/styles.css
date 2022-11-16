@@ -53,4 +53,14 @@
   .top-posts-cont h4 {
     font-size: 1.2rem;
   }
+  .top-posts-cont .post-content-title {
+    font-size: 14px
+  }
+  .post-col-img img {
+    margin-left: 10px;
+  }
+  .select-sub-dropdown {
+    font-size: 14px !important;
+    padding-top: 0px !important
+  }
 }

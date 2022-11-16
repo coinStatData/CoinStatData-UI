@@ -1,0 +1,13 @@
+.info-bar-content-cont {
+  font-size: 13px;
+}
+
+.info-bar-content-cont strong {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 600px) { 
+  .info-bar-content-cont {
+    font-size: 11px;
+  }
+ }

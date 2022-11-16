@@ -7,6 +7,8 @@ import { update_coin } from '../../../redux/slices/search';
 import * as chartActions from '../../../redux/actions/chartData';
 import ErrorSpinner from '../../spinner/error';
 import LoadingSpinner from '../../spinner/loading';
+import { convertNumberFormat } from '../../../util';
+import Tooltip from '@mui/material/Tooltip';
 import './CSD50.css';
 
 const CSD50 = (props) => {
@@ -14,12 +16,22 @@ const CSD50 = (props) => {
   let navigate = useNavigate();
   const { screenWidth, coinIndex, index } = props;
   const dispatch = useDispatch();
+  const [isFullDigits, setIsFullDigits] = useState(false);
+  const [mcTotal, setMcTotal] = useState(0);
+  const [volTotal, setVolTotal] = useState(0);
 
   const clickCoin = async (coin) => {
     dispatch(update_coin(coin));
     // const respp = props.fetchCandleData(coin, 100);
     navigate("/stat");
   }
+
+  useEffect(() => {
+    const mcSum = coinIndex[index].reduce((prev, curr) => prev + curr[1].usd_market_cap, 0);
+    const volSum = coinIndex[index].reduce((prev, curr) => prev + curr[1].usd_24h_vol, 0);
+    setMcTotal(mcSum);
+    setVolTotal(volSum);
+  }, [coinIndex]);
 
   function TableRow(item, index) {
     return (
@@ -32,9 +44,13 @@ const CSD50 = (props) => {
           {item[0]}
         </td>
         <td>{item[1].usd}</td>
-        <td>{Math.ceil(item[1].usd_market_cap)}</td>
+        <td>
+          {isFullDigits ? Math.ceil(item[1].usd_market_cap) : convertNumberFormat(item[1].usd_market_cap)}
+        </td>
         {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
-          <td>{Math.ceil(item[1].usd_24h_vol)}</td>
+          <td>
+            {isFullDigits ? Math.ceil(item[1].usd_24h_vol): convertNumberFormat(item[1].usd_24h_vol)}
+          </td>
         }
       </tr>
     );
@@ -54,12 +70,14 @@ const CSD50 = (props) => {
       <Table className="home-table" hover responsive>
         <thead>
           <tr>
-            <th>Rank</th>
+            <Tooltip title="Ranked by Market Cap" arrow>
+              <th>Rank</th>
+            </Tooltip>
             <th>Coin</th>
-            <th>Price</th>
-            <th>Market Cap</th>
+            <th>Price($)</th>
+            <th>{screenWidth < 550 ? "MC($)" : "Market Cap($)"}</th>
             {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
-              <th>24h Volume</th>
+              <th>24h Volume($)</th>
             }
           </tr>
         </thead>
@@ -78,11 +96,19 @@ const CSD50 = (props) => {
                   <LoadingSpinner />
                 </td>
               </tr>
-              : 
+              :
               makeTable(coinIndex[index])
           }
         </tbody>
       </Table>
+      <div className="index-summary-cont">
+        <div className="total-sum">
+          <strong>Total Market Cap:</strong> {"$" + Math.floor(mcTotal) + ` (${convertNumberFormat(mcTotal)})`}
+        </div>
+        <div className="total-sum">
+          <strong>Total Volume:</strong> {"$" + Math.floor(volTotal) + ` (${convertNumberFormat(volTotal)})`}
+        </div>
+      </div>
     </div>
   );
 }

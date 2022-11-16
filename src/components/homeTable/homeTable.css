@@ -21,11 +21,6 @@ td:hover {
   padding: 0;
 }
 
-.home-table-title {
-  font-size: 25px;
-  text-align: center;
-}
-
 .table-coinGecko {
   padding-left: 10%;
 }
@@ -44,11 +39,10 @@ td:hover {
  }
 
  @media (max-width: 650px) { 
-  .home-table-title {
-    text-align: center;
-    font-size: 20px;
-  }
   .home-table-inner .tab-title {
-    font-size: 12px !important;
+    font-size: 10px !important;
+  }
+  .home-table-inner button {
+    padding: 6px 8px !important;
   }
 }

@@ -5,7 +5,7 @@ This is the frontend application of CoinStatData. It has a user-friendly interfa
 
 # Indexes
 ## CSD 50 Index
-CoinStatData keeps track of top 50 prominent coins in the crypto market (<b>none-stable coins</b>). It keeps hourly and daily data. Below is the list of the constituents of CSD 50 Index:
+CoinStatData keeps track of top 50 prominent coins in the crypto market (<b>none-stable coins</b>). It keeps track of hourly and daily data. Below is the list of the constituents of CSD 50 Index:
 
 ```javascript
 CSD-50-INDEX
