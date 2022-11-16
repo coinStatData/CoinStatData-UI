@@ -93,10 +93,10 @@ function Table2(props) {
                   {props.screenWidth > 650 &&
                     <th>Coin</th>
                   }
-                  <th>DateTime</th>
-                  <th>Price</th>
+                  <th>DateTime(UTC)</th>
+                  <th>Price($)</th>
                   {props.screenWidth > 450 &&
-                    <th>{isLambda? "Market Cap":"24_HR_Vol"}</th>
+                    <th>{isLambda? "Market Cap($)":"24_HR_Vol($)"}</th>
                   }
                 </tr>
               </thead>

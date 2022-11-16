@@ -15,7 +15,7 @@ const _mutateResp = (resp, interval, coin) => {
       if(index < resp.length-2) {
         const ch = (resp[index+1][1] - item[1])/item[1] * 100;
         const row = {
-          name: interval == "hourly"? formatDate(new Date(item[0])).toLocaleString() : new Date(item[0]).toLocaleString(),
+          name: interval == "hourly" ? formatDate(new Date(item[0])).toLocaleString() : new Date(item[0]).toLocaleString(),
           [coin]: item[1],
           hourlyReturn: ch.toFixed(5)
         }

@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import ErrorSpinner from '../spinner/error';
 import LoadingSpinner from '../spinner/loading';
 import * as trendingActions from '../../redux/actions/trendingCoins';
-import './styles.css';
+import './trending.css';
 
 function Trending({ trendingCoins, fetchTrending }) {
 

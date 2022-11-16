@@ -6,7 +6,10 @@ import tableDataReducer from './slices/tableData';
 import candleDataReducer from './slices/candleData';
 import chatReducer from './slices/chat';
 import trendingCoinsReducer from './slices/trendingCoins';
-import coinIndexReducer from './slices/coinIndex'
+import coinIndexReducer from './slices/coinIndex';
+import CSD60IndexReducer from './slices/CSD60Index';
+import CSDGlobalIndexReducer from './slices/CSDGlobalIndex';
+import CSDCoinsReducer from './slices/CSDCoins';
 
 export default configureStore({
   reducer: {
@@ -16,7 +19,10 @@ export default configureStore({
     candleData: candleDataReducer,
     chat: chatReducer,
     trendingCoins: trendingCoinsReducer,
-    coinIndex: coinIndexReducer
+    coinIndex: coinIndexReducer,
+    CSD_60Index: CSD60IndexReducer,
+    CSD_GlobalIndex: CSDGlobalIndexReducer,
+    CSD_Coins: CSDCoinsReducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'dev' ? 

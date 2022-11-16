@@ -1,0 +1,22 @@
+.global-index-cont .datetime-td {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.global-index-cont th {
+  font-size: 14px;
+}
+
+@media (max-width: 500px) { 
+
+}
+
+
+@media (max-width: 650px) { 
+  .global-index-cont .datetime-td {
+    font-size: 12px;
+  }
+  .global-index-cont th {
+    font-size: 12px;
+  }
+}

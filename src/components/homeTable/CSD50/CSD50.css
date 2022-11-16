@@ -8,9 +8,23 @@
   margin: 0 10px 0 0;
 }
 
+.home-table th {
+  font-size: 14px;
+}
+
+.index-summary-cont .total-sum {
+  font-size: 13px;
+  color: #708090;
+}
+
+.index-summary-cont .total-sum strong {
+  margin-right: 5px;
+}
+
 @media (max-width: 500px) { 
   .home-table td {
-    font-size: 12px;
+    font-size: 12px !important;
+    padding: 8px 4px !important;
   }
   .home-table th {
     font-size: 12px;
@@ -26,5 +40,8 @@
 @media (max-width: 650px) { 
   .home-table td {
     font-size: 14px;
+  }
+  .index-summary-cont .total-sum {
+    font-size: 12px;
   }
 }
