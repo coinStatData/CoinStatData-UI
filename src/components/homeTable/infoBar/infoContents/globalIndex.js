@@ -5,9 +5,7 @@ const GlobalIndexInfo = (props) => {
   return (
     <>
       <div className="info-bar-content-cont">
-        <div>
-          <strong>CSD-60 Global Index</strong>
-        </div>
+        <strong>CSD-60 Global Index</strong>
         <div>
           <p>
             The CSD Global Index consists of CSD-50 Index and CSD-10 Stable Index, accumulated by the total market capitlization and total volume. 

@@ -5,9 +5,7 @@ const CSDIndexInfo = (props) => {
   return (
     <>
       <div className="info-bar-content-cont">
-        <div>
-          <strong>CSD-50 Index</strong>
-        </div>
+        <strong>CSD-50 Index</strong>
         <div>
           <p>
             CoinStatData keeps track of top 50 prominent coins in the crypto market (none-stable coins). It keeps hourly and daily data.
@@ -16,9 +14,7 @@ const CSDIndexInfo = (props) => {
         </div>
       </div>
       <div className="info-bar-content-cont">
-        <div>
-          <strong>CSD-10 Stable Index</strong>
-        </div>
+        <strong>CSD-10 Stable Index</strong>
         <div>
           <p>
             CoinStatData keeps track of top 10 prominent stable coins in the crypto market. It keeps hourly and daily data. 

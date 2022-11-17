@@ -12,10 +12,10 @@ export function formatDate(date) {
   hours = hours ? hours : 12;
   hours = hours < 10 ? '0' + hours : hours;
   minutes = '00';
-  let strTime = formatedDate + ' - ' + hours + ':' + minutes + ' ' + ampm;
+  //let strTime = formatedDate + ' - ' + hours + ':' + minutes + ' ' + ampm;
+  let strTime = formatedDate + ' - ' + hours + ' ' + ampm;
   return strTime;
 }
-
 
 export const calculateGraphWidth = (newWidth) => {
   let newGraphWidth = 0;
