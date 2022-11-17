@@ -20,7 +20,7 @@ const GlobalIndex = (props) => {
       const start = end - 60 * 60 * 25; // last 25 hours
       fetchGlobalIndex({interval: 'hourly', start, end });
     }
-  }, [])
+  }, []);
 
   const TableRow = (item, index) => {
     return (
@@ -67,8 +67,8 @@ const GlobalIndex = (props) => {
       <Table className="home-table" hover responsive>
         <thead>
           <tr>
-            <Tooltip title="In UTC timezone." arrow>
-              <th>DateTime(UTC)</th>
+            <Tooltip title="Your local timezone." arrow>
+              <th>DateTime</th>
             </Tooltip>
             <Tooltip title="Total market cap of CSD-50 Index (none-stable coins)." arrow>
               <th>CSD50 MC($)</th>

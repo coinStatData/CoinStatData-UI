@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 import DownloadIcon from '@mui/icons-material/Download';
 import Box from '@mui/joy/Box';
 import Stack from '@mui/joy/Stack';
-import Divider from '@mui/material/Divider';
 import './style.css';
 
 function Table2(props) {
@@ -19,8 +18,6 @@ function Table2(props) {
   const [tableD, setTableD] = useState();
   const [isLambda, setIsLambda] = useState();
   const dispatch = useDispatch()
-  const sDate = useSelector((state) => state.search.startDate);
-  const eDate = useSelector((state) => state.search.endDate);
   const lineData = useSelector((state) => state.lineData);
   const coin = useSelector((state) => state.search.coin);
   
