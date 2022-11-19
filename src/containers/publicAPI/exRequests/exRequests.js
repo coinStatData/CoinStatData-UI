@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './exRequests.css';
 
-function ExRequests({APIInfo}) {
+function ExRequests({ APIInfo }) {
 	return (
 		<>
       <div>
@@ -95,8 +95,6 @@ function ExRequests({APIInfo}) {
           </code>
         </AccordionDetails>
       </Accordion>
-
-
 		</>
 	)
 }
