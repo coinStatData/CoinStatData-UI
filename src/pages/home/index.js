@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { fetchCoinIndex } from '../../redux/actions/coinIndex';
-import HomeTable from '../../components/homeTable'
+import HomeTable from '../../containers/homeTable'
 import Trending from '../../components/trending'
 import TopRedditPosts from '../../components/topRedditPosts';
-import Chat from '../../components/chat';
+import Chat from '../../containers/chat';
 import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import { connect } from 'react-redux';

@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabPanel from './tabPanel';
 import Tabs from '@mui/material/Tabs';
-import Tooltip from '@mui/material/Tooltip';
 import InfoBar from './infoBar';
 import CSDIndexInfo from './infoBar/infoContents/CSDIndex';
 import GlobalIndexInfo from './infoBar/infoContents/globalIndex';
@@ -58,7 +57,7 @@ function HomeTable(props) {
             <CSD50 screenWidth={screenWidth} index={"data"} coinIndex={coinIndex} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <InfoBar content={<CSDIndexInfo/>} title={"About CSD Indexes"} />
+            <InfoBar content={<CSDIndexInfo/>} title={"About CSD Indices"} />
             <CSD50 screenWidth={screenWidth} index={"stableData"} coinIndex={coinIndex} />
           </TabPanel>
           <TabPanel value={value} index={2}>

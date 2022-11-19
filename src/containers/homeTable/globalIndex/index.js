@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Table from 'react-bootstrap/Table'
 import * as CSDIndexActions from '../../../redux/actions/CSDIndex';
-import ErrorSpinner from '../../spinner/error';
-import LoadingSpinner from '../../spinner/loading';
+import ErrorSpinner from '../../../components/spinner/error';
+import LoadingSpinner from '../../../components/spinner/loading';
 import { convertNumberFormat, formatDate } from '../../../util';
 import Tooltip from '@mui/material/Tooltip';
 import './global.css';
@@ -96,7 +96,7 @@ const GlobalIndex = (props) => {
         <tbody>
           {globalIndex.isError ? 
             <tr>
-              <td colSpan="5">
+              <td colSpan="6">
                 <ErrorSpinner />
                 <br/><br/>
               </td>
@@ -104,7 +104,7 @@ const GlobalIndex = (props) => {
             : 
             globalIndex.isLoading ? 
               <tr>
-                <td colSpan="5">
+                <td colSpan="6">
                   <LoadingSpinner />
                 </td>
               </tr>

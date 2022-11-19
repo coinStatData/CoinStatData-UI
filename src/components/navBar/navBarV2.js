@@ -12,8 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate  } from "react-router-dom";
 import './navBarV2.css';
 
-const PAGES_LG = ['Statistic', 'Portfolio-Opt', 'Store'];
-const PAGES_SM = ['Statistic', 'Portfolio-Opt', 'Chat-Room', 'Store'];
+const PAGES_LG = ['Statistic', 'Portfolio-Opt', 'CRYPTO-API', 'Store'];
+const PAGES_SM = ['Statistic', 'Portfolio-Opt', 'CRYPTO-API', 'Chat-Room', 'Store'];
 
 const NavBarV2 = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,6 +35,9 @@ const NavBarV2 = () => {
       case "Chat-Room":
         navigate('chat');
         break;
+      case "CRYPTO-API":
+        navigate('publicAPI');
+        break;
       case "Store":
         window.open("https://alienvogue.com", '_blank')
         break;
@@ -44,111 +47,111 @@ const NavBarV2 = () => {
   };
 
   return (
-      <AppBar sx={{ backgroundColor:"#212529"}} position="static">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
+    <AppBar sx={{ backgroundColor:"#212529"}} position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
 
-            {/* ----------------- mid up ----------------- */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-              <img className="nav-bar-logo-md" src="../../assets/csdLogo2.png" alt="" />
-            </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="../"
+          {/* ----------------- mid up ----------------- */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+            <img className="nav-bar-logo-md" src="../../assets/csdLogo2.png" alt="" />
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="../"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 600,
+              color: 'inherit',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#bd971b !important'
+              },
+              letterSpacing: "-1px"
+            }}
+          >
+            CoinStatData
+          </Typography>
+
+          {/* ----------------- x small ----------------- */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="menu-dropdown"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
               sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 600,
-                color: 'inherit',
-                textDecoration: 'none',
-                '&:hover': {
-                  color: '#bd971b !important'
-                },
-                letterSpacing: "-1px"
+                display: { xs: 'block', md: 'none' },
               }}
             >
-              CoinStatData
-            </Typography>
-
-            {/* ----------------- x small ----------------- */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <IconButton
-                size="large"
-                aria-label="menu-dropdown"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: 'block', md: 'none' },
-                }}
-              >
-                {PAGES_SM.map((page) => (
-                  <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
-                    <Typography textAlign="center">{page}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="a"
-              href="../"
-              sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 600,
-                color: 'inherit',
-                textDecoration: 'none',
-                '&:hover': {
-                  color: '#bd971b !important'
-                },
-                letterSpacing: "-1px"
-              }}
-            >
-              <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 5 }}>
-                <img className="nav-bar-logo-sm" src="../../assets/csdLogo2.png" alt="" />
-              </Box>
-            </Typography>
-
-            {/* ----------------- mid up ----------------- */}
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              {PAGES_LG.map((page) => (
-                <Button
-                  key={page}
-                  onClick={() => handleCloseNavMenu(page)}
-                  sx={{ my:2, color:'#ced4da', display:'block', '&:hover':{color:'#bd971b !important'}}}
-                >
-                  {page}
-                </Button>
+              {PAGES_SM.map((page) => (
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                  <Typography textAlign="center">{page}</Typography>
+                </MenuItem>
               ))}
+            </Menu>
+          </Box>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="../"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', md: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 600,
+              color: 'inherit',
+              textDecoration: 'none',
+              '&:hover': {
+                color: '#bd971b !important'
+              },
+              letterSpacing: "-1px"
+            }}
+          >
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 5 }}>
+              <img className="nav-bar-logo-sm" src="../../assets/csdLogo2.png" alt="" />
             </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
+          </Typography>
+
+          {/* ----------------- mid up ----------------- */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {PAGES_LG.map((page) => (
+              <Button
+                key={page}
+                onClick={() => handleCloseNavMenu(page)}
+                sx={{ my:2, color:'#ced4da', display:'block', '&:hover':{color:'#bd971b !important'}}}
+              >
+                {page}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 export default NavBarV2;

@@ -27,12 +27,21 @@ const CSD_LIST = [
 const STABLE_LIST = ["tether", "usd-coin","binance-usd","dai","frax","true-usd","usdd","gemini-dollar","paxos-standard","compound-usd-coin"];
 
 const CSD_INDEX = [
-  'bitcoin', 'ethereum', 'dash', 'aptos', 'zcash', 'ripple', 'solana', 'dogecoin', 'theta-token', 'axie-infinity', 'filecoin', 'decentraland',
-  'the-sandbox', 'apecoin', 'kucoin-shares', 'internet-computer', 'maker', 'binancecoin', 'quant-network', 'cardano', 'okb',
-  'polkadot', 'chain-2', 'wrapped-bitcoin', 'tron', 'flow', 'cosmos', 'tezos', 'theta-fuel', 'hedera-hashgraph','avalanche-2', 'near', 'uniswap',
-  'shiba-inu', 'vechain', 'leo-token', 'algorand', 'matic-network', 'stellar', 'bitcoin-cash', 'monero', 'ethereum-classic',
-  'eos', 'klay-token', 'pancakeswap-token', 'neo', 'helium', 'evmos', 'the-graph', 'fantom', 'tether', 'usd-coin', 'binance-usd', 'dai',
-  'frax', 'true-usd', 'usdd', 'gemini-dollar', 'paxos-standard', 'compound-usd-coin'
+  'algorand',       'apecoin',           'aptos',
+  'ethereum',       'ethereum-classic',  'evmos',
+  'fantom',         'filecoin',          'flow',
+  'frax',           'gemini-dollar',     'hedera-hashgraph',
+  'helium',         'internet-computer', 'klay-token',
+  'kucoin-shares',  'leo-token',         'maker',
+  'matic-network',  'monero',            'near',
+  'neo',            'okb',               'pancakeswap-token',
+  'paxos-standard', 'polkadot',          'quant-network',
+  'ripple',         'shiba-inu',         'solana',
+  'stellar',        'tether',            'tezos',
+  'the-graph',      'the-sandbox',       'theta-fuel',
+  'theta-token',    'tron',              'true-usd',
+  'uniswap',        'usd-coin',          'usdd',
+  'vechain',        'wrapped-bitcoin',   'zcash'
 ];
 
 module.exports = { COIN_LIST, COIN_STR, STABLE_LIST, CSD_LIST, CSD_STR, CSD_INDEX };

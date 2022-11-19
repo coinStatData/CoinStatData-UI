@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import ErrorSpinner from '../spinner/error';
-import LoadingSpinner from '../spinner/loading';
+import ErrorSpinner from '../../components/spinner/error';
+import LoadingSpinner from '../../components/spinner/loading';
 import pythonLambdaService from '../../services/pythonLambda.service';
 import { CSD_INDEX } from '../../util/constants/coins';
 import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG, RESP, MenuProps, INIT_COINS, HELPER_TEXTS } from './constants';
-import ErrorModal from '../alertModal/error';
+import ErrorModal from '../../components/alertModal/error';
 import StatTabNav from './tabNav/statistic';
 const graphImage = require("../../assets/graphs/efficientFrontier.jpg")
 
