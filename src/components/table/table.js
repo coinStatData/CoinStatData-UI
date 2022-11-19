@@ -1,5 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
-import UserContext from '../../hooks/userContext';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table'
 import { formatDate } from '../../util'
 import { CSVLink } from "react-csv";
@@ -14,22 +13,12 @@ import Stack from '@mui/joy/Stack';
 import './style.css';
 
 function Table2(props) {
-  const { resp_g, coin_g } = useContext(UserContext);
   const [tableD, setTableD] = useState();
   const [isLambda, setIsLambda] = useState();
   const dispatch = useDispatch()
   const lineData = useSelector((state) => state.lineData);
   const coin = useSelector((state) => state.search.coin);
-  
-  useEffect(() => {
-    //this is for lambda resp
-    setTableD(resp_g)
-    setIsLambda(true);
-    if(Array.isArray(resp_g) && resp_g.length > 0) {
-      dispatch(update_startDate(formatDate(new Date(resp_g[0].datetime * 1000))));
-      dispatch(update_endDate(formatDate(new Date(resp_g[resp_g.length-1].datetime * 1000))));
-    }
-  }, [resp_g]);
+
 
   useEffect(() => {
     //this is coinGecko Resp

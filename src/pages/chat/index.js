@@ -1,5 +1,5 @@
 import React from 'react';
-import Chat from '../../components/chat';
+import Chat from '../../containers/chat';
 import './styles.css';
 
 function ChatPage(props) {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ErrorSpinner from '../spinner/error';
 import LoadingSpinner from '../spinner/loading';
 import { useDispatch } from 'react-redux';
-import  * as ss from 'simple-statistics'
+//import  * as ss from 'simple-statistics'
 import './statBox.css';
 
 const StatBox = ({ lineData, search }) => {
@@ -27,17 +27,17 @@ const StatBox = ({ lineData, search }) => {
 
   return (
     <div className="stat-cont">
-        <h3>Statistics</h3>
-        <div className="stat-box">
-            <div className="stat-box-col">
-              <p>Min Return</p>
-              <p>{min}</p>
-            </div>
-            <div className="stat-box-col">
-              <p>Max Return</p>
-              <p>{max}</p>
-            </div>
-          </div>
+      <h3>Statistics</h3>
+      <div className="stat-box">
+        <div className="stat-box-col">
+          <p>Min Return</p>
+          <p>{min}</p>
+        </div>
+        <div className="stat-box-col">
+          <p>Max Return</p>
+          <p>{max}</p>
+        </div>
+      </div>
     </div>
   );
 }

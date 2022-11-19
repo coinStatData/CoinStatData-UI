@@ -1,0 +1,13 @@
+.endpoint-info-cont .method-title {
+  font-weight: 750;
+}
+
+.endpoint-info-cont .uri-title {
+  font-weight: 750;
+  font-size: 19px;
+}
+
+.endpoint-info-cont .endpoint-about {
+  margin: 5px 0 0 5px;
+  font-size: 14px;
+}

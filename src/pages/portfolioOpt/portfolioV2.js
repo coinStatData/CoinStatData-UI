@@ -1,5 +1,5 @@
 import React from 'react';
-import PortfolioOptimization from '../../components/portfolioOpt';
+import PortfolioOptimization from '../../containers/portfolioOpt';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
