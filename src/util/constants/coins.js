@@ -28,6 +28,11 @@ const STABLE_LIST = ["tether", "usd-coin","binance-usd","dai","frax","true-usd",
 
 const CSD_INDEX = [
   'algorand',       'apecoin',           'aptos',
+  'avalanche-2',    'axie-infinity',     'binance-usd',
+  'binancecoin',    'bitcoin',           'bitcoin-cash',
+  'cardano',        'chain-2',           'compound-usd-coin',
+  'cosmos',         'dai',               'dash',
+  'decentraland',   'dogecoin',          'eos',
   'ethereum',       'ethereum-classic',  'evmos',
   'fantom',         'filecoin',          'flow',
   'frax',           'gemini-dollar',     'hedera-hashgraph',
