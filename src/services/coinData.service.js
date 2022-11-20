@@ -15,6 +15,16 @@ const coinDataService = () => {
     }
   }
 
+  const _fetchMarqueeData = async (coins) => {
+    try {
+      const response = await RestService().get(_serverUr + "/public/api/v1/home/detailed/coins?coins=" + coins);
+      return response;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
   const _fetchTableData = async (coin, days, interval) => {
     try {
       const query = "coin=" + coin + "&days=" + days + "&interval=" + interval;
@@ -28,7 +38,8 @@ const coinDataService = () => {
 
   return {
     fetchHomeData: _fetchHomeData,
-    fetchTableData:_fetchTableData
+    fetchTableData:_fetchTableData,
+    fetchMarqueeData: _fetchMarqueeData
   }
 }
 

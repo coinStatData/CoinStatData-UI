@@ -1,0 +1,48 @@
+.marquee-entry-cont {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  align-items: center;
+  padding: 10px 0 10px 0;
+  border-bottom: whitesmoke solid 2px;
+}
+
+.marquee-entry-cont:hover {
+  background-color: rgb(246, 232, 155);
+  cursor: pointer;
+}
+
+.marquee-entry-cont .marquee-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  margin: 0 5px 0 8px;
+}
+
+.marquee-entry-cont .coin-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.marquee-entry-cont .percent-text {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 5px 0 5px;
+}
+
+.marquee-entry-cont .red-text{
+  color: red;
+}
+
+.marquee-entry-cont .green-text{
+  color: green;
+}
+
+.marquee-entry-cont .rocket-icon {
+  margin: 0 5px 0 5px;
+}
+
+
+@media (max-width: 650px) { 
+
+}

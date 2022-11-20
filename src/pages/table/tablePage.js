@@ -48,13 +48,24 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
                 :
                 <>
                   {(Array.isArray(candleData.resp.data) && candleData.resp.data.length > 2 && !candleData.resp.isError) ? 
-                      <CandleStickChart candleData={candleData} coin={coin} graphWidth={graphWidth} timezone={timezone} />
+                      <CandleStickChart 
+                        candleData={candleData} 
+                        coin={coin} 
+                        graphWidth={graphWidth} 
+                        timezone={timezone} 
+                      />
                     :
                       <>
                         {lineData.resp.isError ? 
                           <ErrorSpinner />
                           :
-                          <LineChartBoy graphWidth={graphWidth} timezone={timezone} lineData={lineData} setIsDaily={changeDailyHourly} isDaily={isDaily} />
+                          <LineChartBoy 
+                            graphWidth={graphWidth} 
+                            timezone={timezone} 
+                            lineData={lineData} 
+                            setIsDaily={changeDailyHourly} 
+                            isDaily={isDaily} 
+                          />
                         }
                       </>
                   }
@@ -96,7 +107,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCandleData: (coin, days) => dispatch(chartActions.fetchCandleStickData(coin, days)),
-    fetchLineData: (coin, days, interval, timezone) => dispatch(chartActions.fetchLineDataAndCalculate_price(coin, days, interval, timezone))
+    fetchLineData: (coin, days, interval, timezone) => 
+      dispatch(chartActions.fetchLineDataAndCalculate_price(coin, days, interval, timezone))
   };
 }
 

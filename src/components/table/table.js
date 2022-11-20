@@ -25,12 +25,12 @@ function Table2(props) {
     //this is linedata
     setTableD(lineData.resp.data);
     setIsLambda(false);
-    if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length>3) {
+    if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length>3) {      
       dispatch(update_startDate(formatDate(
-        lineData.resp.data.prices[0][0]), 
+        lineData.resp.data.prices[0][0], 
         timeFormat, 
         timezone
-      ));
+      )));
       dispatch(update_endDate(formatDate(
         lineData.resp.data.prices[lineData.resp.data.prices.length-1][0],
         timeFormat,

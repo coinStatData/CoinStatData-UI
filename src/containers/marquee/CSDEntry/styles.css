@@ -1,0 +1,11 @@
+.csd-entry-cont {
+  background-color: black;
+  border: solid 2px black;
+  color: white;
+  padding: 10px 5px 10px 5px;
+}
+
+.csd-entry-cont:hover {
+  cursor: not-allowed;
+  background-color: black;
+}

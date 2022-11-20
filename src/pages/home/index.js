@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import { connect } from 'react-redux';
 import CoinGecko from '../../components/coinGecko';
-import { COIN_IDS } from './constants';
+import Marquee from '../../containers/marquee';
 import './styles.css';
 
 function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
@@ -22,22 +22,16 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
 
 	return (
     <>
-      {process.env['REACT_APP_NODE_ENV'] !== 'dev' &&
-        <div id="gecko-price-widget">
-          <coingecko-coin-price-marquee-widget 
-            coin-ids={COIN_IDS}
-            currency="usd" 
-            background-color="#ffffff" 
-            locale="en"
-          />
-        </div>
-      }
+      <Marquee/>
       <div className="flex-cont">
         <div className="homeTable-box">
-          <HomeTable fetchCandleData={fetchCandleData} screenWidth={screenWidth} coinIndex={coinIndex}/>
+          <HomeTable 
+            fetchCandleData={fetchCandleData} 
+            screenWidth={screenWidth} 
+            coinIndex={coinIndex}
+          />
         </div>
         <div className="trending-box">
-
           {/* <div className="flex-item">
             <TreeMapChart></TreeMapChart>
           </div> */}

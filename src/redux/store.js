@@ -11,6 +11,7 @@ import CSD60IndexReducer from './slices/CSD60Index';
 import CSDGlobalIndexReducer from './slices/CSDGlobalIndex';
 import CSDCoinsReducer from './slices/CSDCoins';
 import userSettingReducer from './slices/userSettings';
+import marqueeReducer from './slices/marquee';
 
 export default configureStore({
   reducer: {
@@ -24,7 +25,8 @@ export default configureStore({
     CSD_60Index: CSD60IndexReducer,
     CSD_GlobalIndex: CSDGlobalIndexReducer,
     CSD_Coins: CSDCoinsReducer,
-    userSettings: userSettingReducer
+    userSettings: userSettingReducer,
+    marquee: marqueeReducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'dev' ? 
