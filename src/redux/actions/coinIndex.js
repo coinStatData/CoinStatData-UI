@@ -7,7 +7,6 @@ export const fetchCoinIndex = () => {
     dispatch(coinIndexReducers.begin_fetch());
     try {
       const resp = await coinDataService().fetchHomeData(CSD_INDEX.join());
-      console.log("$$$$$$$$resp", resp)
       let mutatedResp = _mutateResp(resp.data);
       dispatch(coinIndexReducers.update_success(mutatedResp));
       return mutatedResp;

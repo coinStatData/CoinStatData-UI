@@ -7,7 +7,7 @@ export const GLOBAl_API = {
       "end": 1668878861
     }'
   `,
-  url: "'api.coinstatdata/public/api/v1/dynamo/global'",
+  url: "'https://api.coinstatdata/public/api/v1/dynamo/global'",
   host: "api.coinstatdata",
   uri: "/public/api/v1/dynamo/global",
   content: "application/json",
@@ -17,7 +17,7 @@ export const GLOBAl_API = {
   var request = require('request');
   var options = {
     'method': 'POST',
-    'url': 'api.coinstatdata/public/api/v1/dynamo/global',
+    'url': 'https://api.coinstatdata/public/api/v1/dynamo/global',
     'headers': {
       'Content-Type': 'application/json'
     },
@@ -84,7 +84,7 @@ export const CSD_INDEX_API = {
     "end": 1668878861
     }'
   `,
-  url: "'api.coinstatdata/public/api/v1/dynamo/csd-index'",
+  url: "'https://api.coinstatdata/public/api/v1/dynamo/csd-index'",
   host: "api.coinstatdata",
   uri: "/public/api/v1/dynamo/csd-index",
   content: "application/json",

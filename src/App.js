@@ -10,6 +10,7 @@ import { useFetch } from "react-async"
 import NavBarV2 from './components/navBar/navBarV2'
 import Footer from './components/footer';
 import PublicAPIPage from './pages/publicAPI';
+import UserSettings from './containers/settings/userSettings';
 import './App.css';
 
 const APIEndPoint = "https://40rrfmjfvc.execute-api.us-east-1.amazonaws.com/v1/hello"
@@ -44,6 +45,7 @@ function App() {
             </Routes>
           </div>
           <Footer/>
+          <UserSettings/>
         </div>
       </BrowserRouter>
     </UserContext.Provider>

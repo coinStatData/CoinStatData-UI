@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import { formatDate } from '../../util'
 import topTrendingService from '../../services/topTrending.service';
+import { useSelector } from 'react-redux';
 import './styles.css';
 
 function TopRedditPosts() {
 
   const [topPosts, setTopPosts] = useState();
   const [subReddit, setSubReddit] = useState('SatoshiStreetBets');
+  const timezone = useSelector((state) => state.userSettings.timezone);
+  const timeFormat = useSelector((state) => state.userSettings.timeFormat);
 
   useEffect(() => {
     async function fetchData2() {
@@ -57,7 +60,7 @@ function TopRedditPosts() {
             {post.title}
           </div>
           <div className="timestamp">
-            {formatDate(new Date(post.created * 1000))}
+            {formatDate(post.created * 1000, timeFormat, timezone)}
           </div>
         </div>
         <div className="post-col-img">

@@ -5,7 +5,7 @@ import candleStickService from '../../services/candleStick.service';
 import coinDataService from '../../services/coinData.service';
 import { formatDate } from '../../util';
 
-const _mutateResp = (resp, interval, coin) => {
+const _mutateResp = (resp, interval, coin, timezone) => {
   if(Array.isArray(resp) && resp.length>1) {
     let max = 0;
     let min = Number.MAX_SAFE_INTEGER;
@@ -15,7 +15,7 @@ const _mutateResp = (resp, interval, coin) => {
       if(index < resp.length-2) {
         const ch = (resp[index+1][1] - item[1])/item[1] * 100;
         const row = {
-          name: interval == "hourly" ? formatDate(new Date(item[0])).toLocaleString() : new Date(item[0]).toLocaleString(),
+          name: new Date(new Date(item[0]).toLocaleString('en', {timeZone: timezone})), //interval == "hourly" ? formatDate(item[0]) : new Date(item[0]),
           [coin]: item[1],
           hourlyReturn: ch.toFixed(5)
         }
@@ -72,7 +72,7 @@ export const fetchLineData = (coin, days, interval) => {
   }
 }
 
-export const fetchLineDataAndCalculate_price = (coin, days, interval) => {
+export const fetchLineDataAndCalculate_price = (coin, days, interval, timezone) => {
   //mutate line chart data and update stat
   return async dispatch => {
     dispatch(LineReducers.begin_fetch());
@@ -80,10 +80,10 @@ export const fetchLineDataAndCalculate_price = (coin, days, interval) => {
     try {
       const resp = await coinDataService().fetchTableData(coin, days, interval);
       dispatch(LineReducers.update_success(resp.data));
-      const mutatedResp = _mutateResp(resp.data['prices'], interval, coin);
+      const mutatedResp = _mutateResp(resp.data['prices'], interval, coin, timezone);
       dispatch(LineReducers.update_price_minMax(mutatedResp.minMax));
       dispatch(LineReducers.update_price_chart(mutatedResp.chart));
-      const stat = calAvg(mutatedResp.chart, interval);
+      const stat = calAvg(mutatedResp.chart, interval, timezone);
       dispatch(LineReducers.update_price_stat(stat));
       return true;
     } catch(e) {

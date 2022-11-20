@@ -18,15 +18,20 @@ function Table2(props) {
   const dispatch = useDispatch()
   const lineData = useSelector((state) => state.lineData);
   const coin = useSelector((state) => state.search.coin);
-
+  const timezone = useSelector((state) => state.userSettings.timezone);
+  const timeFormat = useSelector((state) => state.userSettings.timeFormat);
 
   useEffect(() => {
     //this is coinGecko Resp
     setTableD(lineData.resp.data);
     setIsLambda(false);
     if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length>5) {
-      dispatch(update_startDate(formatDate(new Date(lineData.resp.data.prices[0][0]))));
-      dispatch(update_endDate(formatDate(new Date(lineData.resp.data.prices[lineData.resp.data.prices.length-1][0]))));
+      dispatch(update_startDate(formatDate(lineData.resp.data.prices[0][0]), timeFormat, timezone));
+      dispatch(update_endDate(formatDate(
+        lineData.resp.data.prices[lineData.resp.data.prices.length-1][0],
+        timeFormat,
+        timezone
+      )));
     }
   }, [lineData.resp.data]);
 
@@ -44,6 +49,40 @@ function Table2(props) {
       return [];
     }
   }
+
+  function TableRow(item) {
+    return (
+      <tr key={item.datetime}>
+        <td>{item.coin}</td>
+        <td>{formatDate(item.datetime * 1000, timeFormat, timezone)}</td>
+        <td>{item.price}</td>
+        <td>{Math.ceil(item.market_cap)}</td>
+      </tr>
+    )
+  }
+  
+  function TableRowGecko(priceItem, volItem, coinname, props) {
+    return (
+      <tr key={priceItem[0]}>
+        {props.screenWidth > 650 &&
+          <td>{coinname}</td>
+        }
+        <td>{formatDate(priceItem[0], timeFormat, timezone)}</td>
+        <td>{priceItem[1]>10? priceItem[1].toFixed(2):priceItem[1].toFixed(7)}</td>
+        {props.screenWidth > 450 &&
+          <td>{Math.ceil(volItem[1])}</td>
+        }
+      </tr>
+    )
+  }
+
+  function makeTableGecko(priceAr, volAr, coinname, props) {
+    let arr = priceAr.map((item, index)=> {
+      return TableRowGecko(priceAr[index], volAr[index], coinname, props);
+    })
+    return arr;
+  }
+  
 
   return (
     <>
@@ -79,7 +118,7 @@ function Table2(props) {
                   {props.screenWidth > 650 &&
                     <th>Coin</th>
                   }
-                  <th>DateTime(UTC)</th>
+                  <th>DateTime({timezone})</th>
                   <th>Price($)</th>
                   {props.screenWidth > 450 &&
                     <th>{isLambda? "Market Cap($)":"24_HR_Vol($)"}</th>
@@ -104,39 +143,6 @@ function Table2(props) {
       }
     </>
   );
-}
-
-function TableRow(item) {
-  return (
-    <tr key={item.datetime}>
-      <td>{item.coin}</td>
-      <td>{formatDate(new Date(item.datetime * 1000))}</td>
-      <td>{item.price}</td>
-      <td>{Math.ceil(item.market_cap)}</td>
-    </tr>
-  )
-}
-
-function TableRowGecko(priceItem, volItem, coinname, props) {
-  return (
-    <tr key={priceItem[0]}>
-      {props.screenWidth > 650 &&
-        <td>{coinname}</td>
-      }
-      <td>{formatDate(new Date(priceItem[0]))}</td>
-      <td>{priceItem[1]>10? priceItem[1].toFixed(2):priceItem[1].toFixed(7)}</td>
-      {props.screenWidth > 450 &&
-        <td>{Math.ceil(volItem[1])}</td>
-      }
-    </tr>
-  )
-}
-
-function makeTableGecko(priceAr, volAr, coinname, props) {
-  let arr = priceAr.map((item, index)=> {
-    return TableRowGecko(priceAr[index], volAr[index], coinname, props);
-  })
-  return arr;
 }
 
 export default Table2;

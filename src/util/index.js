@@ -3,18 +3,26 @@ Number.prototype.padLeft = function (base, chr) {
   return len > 0 ? new Array(len).join(chr || '0') + this : this;
 };
 
-export function formatDate(date) {
-  let formatedDate = [(date.getMonth() + 1).padLeft(), date.getDate().padLeft(), date.getFullYear()].join('/');
-  let hours = date.getHours();
-  let minutes = date.getMinutes();
-  let ampm = hours >= 12 ? 'PM' : 'AM';
-  hours = hours % 12;
-  hours = hours ? hours : 12;
-  hours = hours < 10 ? '0' + hours : hours;
-  minutes = '00';
-  //let strTime = formatedDate + ' - ' + hours + ':' + minutes + ' ' + ampm;
-  let strTime = formatedDate + ' - ' + hours + ' ' + ampm;
-  return strTime;
+export function formatDate(date, format="default", timezone="UTC") {
+  if(format === "default") {
+    let newDate = new Date(new Date(date).toLocaleString('en', {timeZone: timezone}));
+    let formatedDate = [(newDate.getMonth() + 1).padLeft(), newDate.getDate().padLeft(), newDate.getFullYear()].join('/');
+    let hours = newDate.getHours();
+    let minutes = newDate.getMinutes();
+    let ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = '00';
+    //let strTime = formatedDate + ' - ' + hours + ':' + minutes + ' ' + ampm;
+    let strTime = formatedDate + ' - ' + hours + ' ' + ampm;
+    return strTime;
+  } else if(format === "ISO") {
+    let newDate = new Date(date).toLocaleString('en', {timeZone: timezone});
+    return newDate;
+  } else if(format === "Unix") {
+    return date;
+  }
 }
 
 export const calculateGraphWidth = (newWidth) => {

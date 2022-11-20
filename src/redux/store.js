@@ -10,6 +10,7 @@ import coinIndexReducer from './slices/coinIndex';
 import CSD60IndexReducer from './slices/CSD60Index';
 import CSDGlobalIndexReducer from './slices/CSDGlobalIndex';
 import CSDCoinsReducer from './slices/CSDCoins';
+import userSettingReducer from './slices/userSettings';
 
 export default configureStore({
   reducer: {
@@ -22,7 +23,8 @@ export default configureStore({
     coinIndex: coinIndexReducer,
     CSD_60Index: CSD60IndexReducer,
     CSD_GlobalIndex: CSDGlobalIndexReducer,
-    CSD_Coins: CSDCoinsReducer
+    CSD_Coins: CSDCoinsReducer,
+    userSettings: userSettingReducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'dev' ? 

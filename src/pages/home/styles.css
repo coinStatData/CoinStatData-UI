@@ -84,7 +84,7 @@
 
 @media (max-width: 600px) { 
   .flex-cont {
-    padding: 10px;
+    padding: 0 10px;
   }
 }
 

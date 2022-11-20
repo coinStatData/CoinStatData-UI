@@ -48,7 +48,7 @@ function HomeTable(props) {
               />
               <Tab 
                 className="tab-title" 
-                label="Global Index" 
+                label="CSD60 Aggregate" 
                 {...a11yProps(2)} 
               />
             </Tabs>
@@ -61,7 +61,7 @@ function HomeTable(props) {
             <CSD50 screenWidth={screenWidth} index={"stableData"} coinIndex={coinIndex} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <InfoBar content={<GlobalIndexInfo/>} title={"About CSD Global Index"} />
+            <InfoBar content={<GlobalIndexInfo/>} title={"About CSD60 Aggregate"} />
             <GlobalIndex screenWidth={screenWidth} />
           </TabPanel>
         </Box>

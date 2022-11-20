@@ -60,11 +60,11 @@ const prepCandleData = () => {
   }
 
  // data = [{open, high, low, close, volume, period}]
-  const _mutateCandleData = (rawRespData) => {
+  const _mutateCandleData = (rawRespData, timezone) => {
     const data = [];
     rawRespData.forEach((item) => {
-      data.push({
-        x: new Date(item.period),
+      data.push({ 
+        x: new Date(new Date(item.period).toLocaleString('en', {timeZone: timezone})),//new Date(item.period),
         y: [Number(item.open).toFixed(5), Number(item.high).toFixed(5), Number(item.low).toFixed(5), Number(item.close).toFixed(5)]
       });
     });

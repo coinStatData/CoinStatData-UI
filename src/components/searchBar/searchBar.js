@@ -28,6 +28,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   const [errorMessage, setErrorMessage] = useState("");
   const coin = useSelector((state) => state.search.coin);
   const interval = useSelector((state) => state.search.interval);
+  const timezone = useSelector((state) => state.userSettings.timezone);
   const [tempInterval, setTempInterval] = useState(interval);
   const [coinName, setCoinName] = useState(coin);
   const dispatch = useDispatch()
@@ -146,7 +147,7 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
     //days = hourly:<90 / daily:any:
     //market_caps/prices/total_volumes
     try {
-      await fetchLineData(coin1, days1, interval1);
+      await fetchLineData(coin1, days1, interval1, timezone);
     } catch(e) {
       console.log(e.message);
       errorResponse(e);

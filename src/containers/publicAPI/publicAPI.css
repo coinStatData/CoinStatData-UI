@@ -43,9 +43,11 @@
     flex-direction: column;
     width: 80%;
   }
+
   .publicAPI-inner-col-left {
     width: 100%;
     padding-left: 5px;
+    padding-right: 5px;
   }
   
   .publicAPI-inner-col-right {
@@ -57,6 +59,12 @@
   .publicAPI-inner-row {
     flex-direction: column;
     width: 90%;
+  }
+  .publicAPI-inner-col-left {
+    padding: 0 5px 15px 5px;
+  }
+  .publicAPI-inner-col-right {
+    padding: 12px;
   }
  }
 

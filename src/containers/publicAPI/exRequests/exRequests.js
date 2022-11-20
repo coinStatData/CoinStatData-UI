@@ -9,15 +9,17 @@ import './exRequests.css';
 
 function ExRequests({ APIInfo }) {
 	return (
-		<>
+		<div className="example-outer-cont">
       <div>
         <strong className="language-title">cURL</strong>
         <code>
           <span className="white-text">curl --location --request </span>
           <span className="red-text text-margins">{APIInfo.method}</span> 
+          <br/>
           <span className="green-text text-margins">{APIInfo.url}</span>
           <br/>
           <span className="white-text text-margins">--data-raw</span>
+          <br/>
           <span className="green-text">
             {APIInfo.postBody}
           </span>
@@ -95,8 +97,8 @@ function ExRequests({ APIInfo }) {
           </code>
         </AccordionDetails>
       </Accordion>
-		</>
-	)
+		</div>
+	);
 }
 
 export default ExRequests;
