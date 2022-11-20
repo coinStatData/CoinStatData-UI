@@ -9,3 +9,12 @@
   cursor: not-allowed;
   background-color: black;
 }
+
+@media (max-width: 650px) { 
+  .csd-entry-cont {
+    background-color: black;
+    border: solid 2px black;
+    color: white;
+    padding: 5px 5px 5px 5px;
+  }
+}

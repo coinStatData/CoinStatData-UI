@@ -17,29 +17,33 @@ const CoinMarquee = ({ fetchMarquee, marquee, updateCoin }) => {
   }, []);
 
   return (
-    <div className="marquee-cont">
-      <Marquee
-        pauseOnHover={true}
-        gradient={true}
-        gradientColor={[255, 255, 255]}
-        gradientWidth={5}
-      >
-        <CSDEntry/>
-        {(!marquee.isError && !marquee.isLoading) &&
-          marquee.data.map((data) => {
-            return (
-              <Entry 
-                key={data.name}
-                id={data.id} 
-                name={data.name} 
-                change={data.price_change_percentage_24h}
-                updateCoin={updateCoin}
-              />
-            );
-          })
-        }
-      </Marquee>
-    </div>
+    <>
+      {marquee.data.length > 0 && 
+        <div className="marquee-cont">
+          <Marquee
+            pauseOnHover={true}
+            gradient={true}
+            gradientColor={[255, 255, 255]}
+            gradientWidth={5}
+          >
+            {
+              marquee.data.map((data) => {
+                return (
+                  <Entry 
+                    key={data.name}
+                    id={data.id} 
+                    name={data.name} 
+                    change={data.price_change_percentage_24h}
+                    updateCoin={updateCoin}
+                  />
+                );
+              })
+            }
+            <CSDEntry/>
+          </Marquee>
+        </div>
+      }
+    </>
   );
 }
 
