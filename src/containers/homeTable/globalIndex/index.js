@@ -5,6 +5,8 @@ import * as CSDIndexActions from '../../../redux/actions/CSDIndex';
 import ErrorSpinner from '../../../components/spinner/error';
 import LoadingSpinner from '../../../components/spinner/loading';
 import { convertNumberFormat, formatDate } from '../../../util';
+import { useSelector } from 'react-redux';
+
 import Tooltip from '@mui/material/Tooltip';
 import './global.css';
 
@@ -12,7 +14,8 @@ const GlobalIndex = (props) => {
 
   const { screenWidth, fetchGlobalIndex, globalIndex } = props;
   const [isFullDigits, setIsFullDigits] = useState(false);
-  const [isUnix, setIsUnix] = useState(false);
+  const timezone = useSelector((state) => state.userSettings.timezone);
+  const timeFormat = useSelector((state) => state.userSettings.timeFormat);
 
   useEffect(() => {
     if(globalIndex.data.length === 0) {
@@ -26,7 +29,7 @@ const GlobalIndex = (props) => {
     return (
       <tr key={index}>
         <td className="datetime-td">
-          {isUnix ? item.datetime : formatDate(new Date(item.datetime * 1000))}
+          {formatDate(item.datetime * 1000, timeFormat, timezone)}
         </td>
         <td>
           {isFullDigits ? item.none_stable_mc : convertNumberFormat(item.none_stable_mc)}
@@ -67,8 +70,8 @@ const GlobalIndex = (props) => {
       <Table className="home-table" hover responsive>
         <thead>
           <tr>
-            <Tooltip title="Your local timezone." arrow>
-              <th>DateTime</th>
+            <Tooltip title={timeFormat} arrow>
+              <th>DateTime ({timezone})</th>
             </Tooltip>
             <Tooltip title="Total market cap of CSD-50 Index (none-stable coins)." arrow>
               <th>CSD50 MC($)</th>

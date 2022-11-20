@@ -4,13 +4,13 @@ import prepCandleData from './util/prepareCandleData';
 import { checkIfSameArrayCandle } from '../../util';
 import './style.css';
 
-function CandleStickChart({ graphWidth, coin, candleData }) {
+function CandleStickChart({ graphWidth, coin, candleData, timezone }) {
 
   const [candleChartCopy, setCandleChartCopy] = useState([{open: 0, close: 0}]); //copy due to double render
   const [mudatedDataCopy, setMudatedDataCopy] = useState([{x: 0, y: []}]); //copy due to double render
 
   const renderCandleChart = (data) => {
-    let mudatedData = (!checkIfSameArrayCandle(candleData.resp.data, candleChartCopy)) ? prepCandleData().mutateData(data) : mudatedDataCopy; //reduce calls to mutateData
+    let mudatedData = (!checkIfSameArrayCandle(candleData.resp.data, candleChartCopy)) ? prepCandleData().mutateData(data, timezone) : mudatedDataCopy; //reduce calls to mutateData
     setMudatedDataCopy(mudatedData);
     const title = `${coin.toUpperCase()} Chart`;
     const options = prepCandleData().returnData(mudatedData, graphWidth, title);
@@ -24,7 +24,7 @@ function CandleStickChart({ graphWidth, coin, candleData }) {
   }
   
   useEffect(() => {
-    if(!candleData.resp.isLoading && !candleData.resp.isError && Array.isArray(candleData.resp.data) && candleData.resp.data.length > 1) { //!checkIfSameArrayCandle(candleChart, candleChartCopy)
+    if(!candleData.resp.isLoading && !candleData.resp.isError && Array.isArray(candleData.resp.data) && candleData.resp.data.length > 1) {
       setCandleChartCopy(candleData.resp.data);
       renderCandleChart(candleData.resp.data);
     }

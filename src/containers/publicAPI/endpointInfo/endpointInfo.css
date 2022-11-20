@@ -11,3 +11,16 @@
   margin: 5px 0 0 5px;
   font-size: 14px;
 }
+
+
+@media (max-width: 650px) { 
+  .endpoint-info-cont .endpoint-about {
+    font-size: 12px;
+  }
+  .endpoint-info-cont .uri-title {
+    font-size: 15px;
+  }
+  .endpoint-info-cont .method-title {
+    font-size: 15px;
+  }
+}

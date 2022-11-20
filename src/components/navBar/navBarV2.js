@@ -12,8 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate  } from "react-router-dom";
 import './navBarV2.css';
 
-const PAGES_LG = ['Statistic', 'Portfolio-Opt', 'CRYPTO-API', 'Store'];
-const PAGES_SM = ['Statistic', 'Portfolio-Opt', 'CRYPTO-API', 'Chat-Room', 'Store'];
+const PAGES_LG = ['Statistic', 'Portfolio-Opt', 'Crypto-API', 'Store'];
+const PAGES_SM = ['Statistic', 'Portfolio-Opt', 'Crypto-API', 'Chat-Room', 'Store'];
 
 const NavBarV2 = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,7 +35,7 @@ const NavBarV2 = () => {
       case "Chat-Room":
         navigate('chat');
         break;
-      case "CRYPTO-API":
+      case "Crypto-API":
         navigate('publicAPI');
         break;
       case "Store":
