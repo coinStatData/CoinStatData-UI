@@ -4,7 +4,7 @@ export const searchSlice = createSlice({
   name: 'search',
   initialState: {
     endDate: "07/07/2027 07:00 PM",
-    startDate: "07/07/2000 07:00 PM",
+    startDate: "07/07/2007 07:00 PM",
     coin: "bitcoin",
     interval: "daily",
     volumeOrPrice: "prices",
@@ -37,7 +37,7 @@ export const searchSlice = createSlice({
       state.timezone = action.payload.timezone || 'UTC';
     },
   },
-})
+});
 
 export const { 
   update_endDate, 

@@ -71,6 +71,22 @@ export const fetchLineData = (coin, days, interval) => {
   }
 }
 
+export const fetchMarqueeData = (coins) => {
+  //just updates line chart data - no stat calculation
+  return async dispatch => {
+    dispatch(LineReducers.begin_fetch());
+    try {
+      const resp = await coinDataService().fetchTableData(coin, days, interval);
+      dispatch(LineReducers.update_success(resp.data));
+      return resp.data;
+    } catch(e) {
+      console.log(e.message);
+      dispatch(LineReducers.update_fail(e.messagee));
+      throw e;
+    }
+  }
+}
+
 export const fetchLineDataAndCalculate_price = (coin, days, interval, timezone) => {
   //mutate line chart data and update stat
   return async dispatch => {
