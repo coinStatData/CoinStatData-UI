@@ -22,11 +22,15 @@ function Table2(props) {
   const timeFormat = useSelector((state) => state.userSettings.timeFormat);
 
   useEffect(() => {
-    //this is coinGecko Resp
+    //this is linedata
     setTableD(lineData.resp.data);
     setIsLambda(false);
-    if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length>5) {
-      dispatch(update_startDate(formatDate(lineData.resp.data.prices[0][0]), timeFormat, timezone));
+    if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length>3) {
+      dispatch(update_startDate(formatDate(
+        lineData.resp.data.prices[0][0]), 
+        timeFormat, 
+        timezone
+      ));
       dispatch(update_endDate(formatDate(
         lineData.resp.data.prices[lineData.resp.data.prices.length-1][0],
         timeFormat,
@@ -54,7 +58,7 @@ function Table2(props) {
     return (
       <tr key={item.datetime}>
         <td>{item.coin}</td>
-        <td>{formatDate(item.datetime * 1000, timeFormat, timezone)}</td>
+        <td>{formatDate(item.datetime, timeFormat, timezone)}</td>
         <td>{item.price}</td>
         <td>{Math.ceil(item.market_cap)}</td>
       </tr>
@@ -83,7 +87,6 @@ function Table2(props) {
     return arr;
   }
   
-
   return (
     <>
       {(lineData.resp.isLoading || lineData.resp.isError) ? (

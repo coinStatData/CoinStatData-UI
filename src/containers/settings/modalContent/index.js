@@ -12,7 +12,7 @@ const determineExDate = (timeFormat) => {
     case 'default':
       return '07/07/2022 - 07 AM'
     case 'ISO':
-      return '7/7/2022, 7:00:00 AM';
+      return '2022-11-21T00:47:18';
     case 'Unix':
       return '177700000000'
   }
@@ -51,7 +51,7 @@ export default function ModalContent(props) {
   return (
     <div>
       <div>
-        <FormControl sx={{ mt: 3, minWidth: 250 }} size="small">
+        <FormControl sx={{ mt: 3, minWidth: 220 }} size="small">
           <InputLabel id="timezone-select">Timezone</InputLabel>
           <Select
             labelId="timezone-select"
@@ -62,14 +62,11 @@ export default function ModalContent(props) {
           >
             <MenuItem value={"UTC"}>UTC</MenuItem>
             <MenuItem value={"EST"}>EST</MenuItem>
-            <MenuItem value={"PST"}>PST</MenuItem>
-            <MenuItem value={"AST"}>AST</MenuItem>
-            <MenuItem value={"CST"}>CST</MenuItem>
             <MenuItem value={"HST"}>HST</MenuItem>
           </Select>
         </FormControl>
 
-        <FormControl sx={{ mt: 3, minWidth: 250 }} size="small">
+        <FormControl sx={{ mt: 3, minWidth: 220 }} size="small">
           <InputLabel id="timeFormat-select">Time Format</InputLabel>
           <Select
             labelId="timeFormat-select"
@@ -79,7 +76,7 @@ export default function ModalContent(props) {
             onChange={handleTimeFormatChange}
           >
             <MenuItem value={"default"}>MM/DD/YYYY - hh</MenuItem>       
-            <MenuItem value={"ISO"}>MM/DD/YYYY, hh:mm:ss</MenuItem>
+            <MenuItem value={"ISO"}>YYYY-MM-DD T HH:mm</MenuItem>
             <MenuItem value={"Unix"}>Unix Timestamp</MenuItem>
           </Select>
           <FormHelperText>i.e. {exDate}</FormHelperText>

@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Divider from '@mui/material/Divider';
 
-export default function BasicModal({title, Content, handleClose, isOpen, width=350 }) {
+export default function BasicModal({title, Content, handleClose, isOpen, width=290 }) {
 
   const style = {
     position: 'absolute',
@@ -28,7 +28,12 @@ export default function BasicModal({title, Content, handleClose, isOpen, width=3
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography 
+            id="modal-modal-title" 
+            variant="h6" 
+            component="h2"
+            align="center"
+          >
             {title}
           </Typography>
           <Divider sx={{mt: "5px"}}></Divider>

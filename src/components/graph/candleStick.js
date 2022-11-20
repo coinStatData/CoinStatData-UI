@@ -10,9 +10,10 @@ function CandleStickChart({ graphWidth, coin, candleData, timezone }) {
   const [mudatedDataCopy, setMudatedDataCopy] = useState([{x: 0, y: []}]); //copy due to double render
 
   const renderCandleChart = (data) => {
-    let mudatedData = (!checkIfSameArrayCandle(candleData.resp.data, candleChartCopy)) ? prepCandleData().mutateData(data, timezone) : mudatedDataCopy; //reduce calls to mutateData
+    let mudatedData = (!checkIfSameArrayCandle(candleData.resp.data, candleChartCopy)) ? 
+      prepCandleData().mutateData(data, timezone) : mudatedDataCopy; //reduce calls to mutateData
     setMudatedDataCopy(mudatedData);
-    const title = `${coin.toUpperCase()} Chart`;
+    const title = `${coin.toUpperCase()} Chart (${timezone})`;
     const options = prepCandleData().returnData(mudatedData, graphWidth, title);
     const chartNode = document.querySelector("#candle-chart-cont");
     chartNode.innerHTML = "";
@@ -24,11 +25,15 @@ function CandleStickChart({ graphWidth, coin, candleData, timezone }) {
   }
   
   useEffect(() => {
-    if(!candleData.resp.isLoading && !candleData.resp.isError && Array.isArray(candleData.resp.data) && candleData.resp.data.length > 1) {
+    if(!candleData.resp.isLoading 
+        && !candleData.resp.isError 
+        && Array.isArray(candleData.resp.data) 
+        && candleData.resp.data.length > 1
+      ) {
       setCandleChartCopy(candleData.resp.data);
       renderCandleChart(candleData.resp.data);
     }
-  }, [candleData, graphWidth]);
+  }, [candleData, graphWidth, timezone]);
 
   return (
     <div className="chart-cont">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -23,9 +23,7 @@ const InfoBar = (props) => {
           <InfoIcon sx={{ fontSize:"15px", ml:"5px", mt: "2px" }} /> 
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
             { content }
-          </Typography>
         </AccordionDetails>
       </Accordion>
     </div>

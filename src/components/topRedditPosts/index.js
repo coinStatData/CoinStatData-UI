@@ -60,7 +60,7 @@ function TopRedditPosts() {
             {post.title}
           </div>
           <div className="timestamp">
-            {formatDate(post.created * 1000, timeFormat, timezone)}
+            {formatDate(post.created, timeFormat, timezone)}
           </div>
         </div>
         <div className="post-col-img">

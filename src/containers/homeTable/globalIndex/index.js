@@ -29,7 +29,7 @@ const GlobalIndex = (props) => {
     return (
       <tr key={index}>
         <td className="datetime-td">
-          {formatDate(item.datetime * 1000, timeFormat, timezone)}
+          {formatDate(item.datetime, timeFormat, timezone)}
         </td>
         <td>
           {isFullDigits ? item.none_stable_mc : convertNumberFormat(item.none_stable_mc)}

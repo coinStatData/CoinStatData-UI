@@ -25,16 +25,27 @@ export const searchSlice = createSlice({
     update_volPrice: (state, action) => {
       state.volumeOrPrice = action.payload;
     },
+    update_timezone: (state, action) => {
+      state.timezone = action.payload;
+    },
     update_all: (state, action) => {
       state.volumeOrPrice = action.payload.volumeOrPrice || 'prices';
       state.coin = action.payload.coin || 'bitcoin';
       state.interval = action.payload.interval || 'daily';
       state.startDate = action.payload.startDate;
       state.endDate = action.payload.endDate;
+      state.timezone = action.payload.timezone || 'UTC';
     },
   },
 })
 
-export const { update_endDate, update_startDate, update_interval, update_coin, update_volPrice, update_all } = searchSlice.actions
+export const { 
+  update_endDate, 
+  update_startDate, 
+  update_interval, 
+  update_coin, 
+  update_volPrice, 
+  update_all 
+} = searchSlice.actions
 
 export default searchSlice.reducer

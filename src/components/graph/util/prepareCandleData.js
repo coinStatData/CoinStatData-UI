@@ -1,4 +1,3 @@
-
 const prepCandleData = () => {
 
   const _returnCandleData = (data, width, title) => {
@@ -20,13 +19,7 @@ const prepCandleData = () => {
         align: 'left'
       },
       xaxis: {
-        // type: 'datetime',
         type: 'datetime',
-        // labels: {
-        //   formatter: function(val) {
-        //     return dayjs(val).format('MMM DD HH:mm')
-        //   }
-        // }
       },
       yaxis: {
         tooltip: {
@@ -64,8 +57,13 @@ const prepCandleData = () => {
     const data = [];
     rawRespData.forEach((item) => {
       data.push({ 
-        x: new Date(new Date(item.period).toLocaleString('en', {timeZone: timezone})),//new Date(item.period),
-        y: [Number(item.open).toFixed(5), Number(item.high).toFixed(5), Number(item.low).toFixed(5), Number(item.close).toFixed(5)]
+        x: new Date(new Date(item.period).toLocaleString('en', {timeZone: timezone})),
+        y: [
+          Number(item.open).toFixed(5), 
+          Number(item.high).toFixed(5), 
+          Number(item.low).toFixed(5), 
+          Number(item.close).toFixed(5)
+        ]
       });
     });
     return data;

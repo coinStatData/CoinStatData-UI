@@ -5,14 +5,23 @@ const defaultStat = {
   avgSumData: [],
   avgSumMData: [],
   avgMReturn: {},
-}
+};
 
 const defaultMinMax = {
   min: 0,
   max: 0,
   hMinReturn: 0,
   hMaxReturn: 0,
-}
+};
+
+const defaultSearch = {
+  endDate: "07/07/2027 07:00 PM",
+  startDate: "07/07/2000 07:00 PM",
+  coin: "bitcoin",
+  interval: "daily",
+  volumeOrPrice: "prices", //or total_volumes
+  timezone: "UTC"
+};
 
 export const lineDataSlice = createSlice({
   
@@ -24,13 +33,7 @@ export const lineDataSlice = createSlice({
       isError: false,
       error: {},
     },
-    search: {
-      endDate: "07/07/2027 07:00 PM",
-      startDate: "07/07/2000 07:00 PM",
-      coin: "bitcoin",
-      interval: "daily",
-      volumeOrPrice: "prices", //or total_volumes
-    },
+    search: defaultSearch,
     price: {
       chart: {
         data: [],
@@ -120,13 +123,31 @@ export const lineDataSlice = createSlice({
       state.price.isError = false;
     },
 
+    //---------------- search -----------------//
+    update_search: (state, action) => {
+      state.search.timezone = action.payload.timezone;
+      state.search.startDate = action.payload.startDate;
+      state.search.endDate = action.payload.endDate;
+      state.search.coin = action.payload.coin;
+      state.search.interval = action.payload.interval;
+      state.search.volumeOrPrice = action.payload.volumeOrPrice;
+    },
   },
-})
+});
 
-export const { begin_volume_calculation, begin_price_calculation, 
-  update_volume_stat, update_volume_minMax, update_volume_chart, 
-  update_price_chart, begin_fetch, update_success, update_fail, 
-  update_price_stat, update_price_minMax 
+export const { 
+  begin_volume_calculation, 
+  begin_price_calculation, 
+  update_volume_stat, 
+  update_volume_minMax, 
+  update_volume_chart, 
+  update_price_chart, 
+  begin_fetch, 
+  update_success, 
+  update_fail, 
+  update_price_stat, 
+  update_price_minMax,
+  update_search
 } = lineDataSlice.actions;
 
 export default lineDataSlice.reducer
