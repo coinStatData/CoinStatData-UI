@@ -28,6 +28,7 @@
   font-size: 14px;
   font-weight: 600;
   margin: 0 5px 0 5px;
+  padding-top: 2px;
 }
 
 .marquee-entry-cont .red-text{
@@ -44,5 +45,18 @@
 
 
 @media (max-width: 650px) { 
-
+  .marquee-entry-cont {
+    padding: 5px 0 5px 0;
+  }
+  .marquee-entry-cont .coin-text {
+    font-size: 13px;
+  }
+  .marquee-entry-cont .percent-text {
+    font-size: 13px;
+    padding-top: 2px;
+  }
+  .marquee-entry-cont .marquee-icon {
+    width: 15px;
+    height: 15px;
+  }
 }
