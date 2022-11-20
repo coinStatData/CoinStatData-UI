@@ -20,7 +20,6 @@ const CoinMarquee = ({ fetchMarquee, marquee, updateCoin }) => {
     <div className="marquee-cont">
       <Marquee
         pauseOnHover={true}
-        speed={75}
         gradient={true}
         gradientColor={[255, 255, 255]}
         gradientWidth={5}
