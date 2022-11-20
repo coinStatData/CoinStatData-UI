@@ -1,3 +1,5 @@
+const moment = require("moment-timezone");
+
 export const calAvg = (chartD, interval, timezone="UTC") => {
   let avgReturn = 0;
   let avgMReturn = 0;
@@ -21,18 +23,21 @@ export const calAvg = (chartD, interval, timezone="UTC") => {
     for(let i=0; i<chartD.length-2; i++) {
       let time = "";
       let mday = "";
+      const newDate = moment.unix(chartD[i]["name"]).tz(timezone);
       if(interval === "daily") {
-        let newDate = new Date(new Date(chartD[i]["name"]).toLocaleString('en', {timeZone: timezone}));
-        time = weekDic[newDate.getDay()];
-        mday = newDate.getDate();
+        //new Date(new Date(chartD[i]["name"]).toLocaleString('en', {timeZone: timezone}));
+        time = weekDic[newDate.day()];
+        mday = newDate.date();
         //month dates
         mObj[mday] = 0;
         mObj[mday+"_count"] = 0;
         mObj[mday+"_avg"] = 0;
         mdic[mday] = mday;
+      } else if(interval === "hourly") {
+        //hourly
+        time = newDate.hour();
       } else {
-        let newDate = new Date(new Date(chartD[i]["name"]).toLocaleString('en', {timeZone: timezone}));
-        time = chartD[i]["name"].slice(-8);
+        throw new Error("Invalid Interval");
       }
       //hourly and weekdays
       dObj[time] = 0;
@@ -43,16 +48,17 @@ export const calAvg = (chartD, interval, timezone="UTC") => {
     for(let i=0; i<chartD.length-2; i++) {
       let time = "";
       let mday = "";
+      const newDate = moment.unix(chartD[i]["name"]).tz(timezone);
       if(interval === "daily") {
-        let newDate = new Date(new Date(chartD[i]["name"]).toLocaleString('en', {timeZone: timezone}));
-        time = weekDic[newDate.getDay()];
-        mday = newDate.getDate();
+        time = weekDic[newDate.day()];
+        mday = newDate.date();
         //month dates
         mObj[mday] += parseFloat(chartD[i].hourlyReturn);
         mObj[mday+"_count"] += 1;
         mObj[mday+"_avg"] = mObj[mday] / mObj[mday+"_count"];
       } else {
-        time = chartD[i]["name"].slice(-8); //FIXME:
+        //hourly
+        time = newDate.hour();
       }
       dObj[time] += parseFloat(chartD[i].hourlyReturn);
       dObj[time+"_count"] += 1;
@@ -75,7 +81,7 @@ export const calAvg = (chartD, interval, timezone="UTC") => {
 
     if(interval === "daily") {
       //month days
-      let marr = [];
+      const marr = [];
       for(const d in mdic) {
         const temp = {
           name: mdic[d],

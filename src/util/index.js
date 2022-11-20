@@ -1,27 +1,43 @@
+const moment = require("moment-timezone");
+
 Number.prototype.padLeft = function (base, chr) {
-  var len = String(base || 10).length - String(this).length + 1;
+  let len = String(base || 10).length - String(this).length + 1;
   return len > 0 ? new Array(len).join(chr || '0') + this : this;
 };
 
-export function formatDate(date, format="default", timezone="UTC") {
+//date<int>: unix timestamp
+export function formatDate(date, format="default", timezone="UTC", pattern="") {
+  const strDate = String(date);
+  const unixStamp = strDate.length > 10 ? Number(strDate.slice(0, 10)) : date;
   if(format === "default") {
-    let newDate = new Date(new Date(date).toLocaleString('en', {timeZone: timezone}));
-    let formatedDate = [(newDate.getMonth() + 1).padLeft(), newDate.getDate().padLeft(), newDate.getFullYear()].join('/');
-    let hours = newDate.getHours();
-    let minutes = newDate.getMinutes();
-    let ampm = hours >= 12 ? 'PM' : 'AM';
+    //let newDate = new Date(new Date(date).toLocaleString('en', {timeZone: timezone}));
+    const newDate = moment.unix(unixStamp).tz(timezone);
+    const formatedDate = [
+      (newDate.month() + 1).padLeft(), 
+      newDate.date().padLeft(), 
+      newDate.year()
+    ].join('/');
+    let hours = newDate.hour();
+    let minutes = newDate.minute();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
     hours = hours ? hours : 12;
     hours = hours < 10 ? '0' + hours : hours;
     minutes = '00';
     //let strTime = formatedDate + ' - ' + hours + ':' + minutes + ' ' + ampm;
-    let strTime = formatedDate + ' - ' + hours + ' ' + ampm;
+    const strTime = formatedDate + ' - ' + hours + ' ' + ampm;
     return strTime;
   } else if(format === "ISO") {
-    let newDate = new Date(date).toLocaleString('en', {timeZone: timezone});
+    //new Date(date).toLocaleString('en', {timeZone: timezone});
+    const newDate = moment.unix(unixStamp).tz(timezone).format("YYYY-MM-DDTHH:mm");
     return newDate;
   } else if(format === "Unix") {
     return date;
+  } else if(format === "custom") {
+    const newDate = moment.unix(unixStamp).tz(timezone).format(pattern);
+    return newDate;
+  } else {
+    throw new Error("Invalid Date format: " + format);
   }
 }
 
