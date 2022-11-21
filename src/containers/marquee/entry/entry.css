@@ -39,11 +39,6 @@
   color: green;
 }
 
-.marquee-entry-cont .rocket-icon {
-  margin: 0 5px 0 5px;
-}
-
-
 @media (max-width: 650px) { 
   .marquee-entry-cont {
     padding: 5px 0 5px 0;
