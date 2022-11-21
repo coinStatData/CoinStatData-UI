@@ -6,6 +6,10 @@
   cursor: url('./assets/yellowRocket.svg'), auto !important;	
 }
 
+.coin-body:active {
+  cursor: url('./assets/explosion.svg'), auto !important;	
+}
+
 tr th {
   border-bottom: solid black 2px !important;
 }
