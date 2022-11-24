@@ -12,6 +12,10 @@
   font-size: 14px;
 }
 
+.home-table td {
+  font-size: 14px !important;
+}
+
 .index-summary-cont .total-sum {
   font-size: 13px;
   color: #708090;
@@ -21,7 +25,7 @@
   margin-right: 5px;
 }
 
-@media (max-width: 500px) { 
+@media (max-width: 550px) { 
   .home-table td {
     font-size: 12px !important;
     padding: 8px 4px !important;

@@ -2,7 +2,7 @@
   background-color: black;
   border: solid 2px black;
   color: white;
-  padding: 10px 5px 10px 5px;
+  padding: 10px 5px 11px 5px;
 }
 
 .csd-entry-cont:hover {
@@ -12,9 +12,6 @@
 
 @media (max-width: 650px) { 
   .csd-entry-cont {
-    background-color: black;
-    border: solid 2px black;
-    color: white;
-    padding: 5px 5px 5px 5px;
+    padding: 9px 7px 9px 7px;
   }
 }

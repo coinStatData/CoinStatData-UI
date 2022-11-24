@@ -7,10 +7,16 @@
   font-size: 14px;
 }
 
+@media (max-width: 800px) { 
+  .global-index-cont td {
+    font-size: 12px !important;
+  }
+}
+
+
 @media (max-width: 500px) { 
 
 }
-
 
 @media (max-width: 650px) { 
   .global-index-cont .datetime-td {

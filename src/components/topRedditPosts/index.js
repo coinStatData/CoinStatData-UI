@@ -54,7 +54,7 @@ function TopRedditPosts() {
 
   const insertRow = (post) => {
     return (
-      <div onClick={() => openSub(post.url)} key={post.title} className="post-row-cont">
+      <div onClick={() => openSub(post.url)} key={post.url} className="post-row-cont">
         <div className="post-col-content">
           <div className="post-content-title">
             {post.title}

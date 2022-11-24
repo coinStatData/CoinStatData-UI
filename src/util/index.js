@@ -5,6 +5,37 @@ Number.prototype.padLeft = function (base, chr) {
   return len > 0 ? new Array(len).join(chr || '0') + this : this;
 };
 
+export const dragElement = (elmnt, id) => {
+  const _elementDrag = (e) => {
+    e = e || window.event;
+    e.preventDefault();
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+  const _closeDragElement = () => {
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+  const _dragMouseDown = (e) => {
+    e = e || window.event;
+    e.preventDefault();
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = _closeDragElement;
+    document.onmousemove = _elementDrag;
+  }
+  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(id)) {
+    document.getElementById(id).onmousedown = _dragMouseDown;
+  } else {
+    elmnt.onmousedown = _dragMouseDown;
+  }
+}
+
 //date<int>: unix timestamp
 export function formatDate(date, format="default", timezone="UTC", pattern="") {
   const strDate = String(date);

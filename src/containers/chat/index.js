@@ -49,10 +49,13 @@ const Chat = (props) => {
   return (
     <div className="chat-outer-cont">
       <div className="chat-inner-cont">
-        <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
-        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+        <div id="chat-popup-header1">
+          <InfoBar room={room} />
+          <Messages messages={messages} name={name} />
+        </div>
+        
       </div>
+      <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       {/* <TextContainer users={users}/> */}
     </div>
   );

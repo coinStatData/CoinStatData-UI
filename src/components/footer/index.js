@@ -29,7 +29,7 @@ function Footer() {
           <p>
             {INFO_TEXT}
           </p>
-          <p className="name-sig">{COMPANY_RIGHTS}</p>
+          <p id="name-sig">{COMPANY_RIGHTS}</p>
           <CoinGecko></CoinGecko>
         </div>
         <div className="aux-links-cont">

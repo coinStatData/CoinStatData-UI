@@ -13,7 +13,7 @@ import { useNavigate  } from "react-router-dom";
 import './navBarV2.css';
 
 const PAGES_LG = ['Statistic', 'Portfolio-Opt', 'Crypto-API', 'Store'];
-const PAGES_SM = ['Statistic', 'Portfolio-Opt', 'Crypto-API', 'Chat-Room', 'Store'];
+const PAGES_SM = ['Statistic', 'Portfolio-Opt', 'Crypto-API', 'Store'];
 
 const NavBarV2 = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

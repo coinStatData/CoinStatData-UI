@@ -9,7 +9,7 @@ import { update_interval } from '../../redux/slices/search';
 import { connect } from 'react-redux';
 import CoinGecko from '../../components/coinGecko';
 import Marquee from '../../containers/marquee';
-import './styles.css';
+import './home.css';
 
 function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
 
@@ -40,16 +40,18 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
               <Trending/>
               <CoinGecko/>
             </div>
-            <div className="chat-inner">
-              <br></br>
-              <Chat className="coin-chat" />
-            </div>
+            {screenWidth > 1000 && 
+              <div className="chat-inner">
+                <br></br>
+                <Chat className="coin-chat" />
+              </div>
+            }
           </div>
           <TopRedditPosts/>
         </div>
       </div>
     </>
-	)
+	);
 }
 
 function mapStateToProps(state) {

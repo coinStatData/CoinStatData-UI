@@ -20,12 +20,12 @@ const Entry = ({ id, change, name, updateCoin }) => {
       {change > 0 ? (
         <div className="percent-text green-text">
           {change.toFixed(2) + "%"}
-          <ArrowDropUpIcon />
+          <ArrowDropUpIcon sx={{mb: "2px"}} />
         </div>
         ) : (
           <div className="percent-text red-text">
             {change.toFixed(2) + "%"}
-            <ArrowDropDownIcon />
+            <ArrowDropDownIcon sx={{mb: "2px"}} />
           </div>
         )
       }
