@@ -3,32 +3,32 @@
   flex-direction: row;
   background-color: #ffffff;
   align-items: center;
-  padding: 10px 0 10px 0;
+  padding: 6px 0 6px 0;
   border-bottom: whitesmoke solid 2px;
 }
 
 .marquee-entry-cont:hover {
-  background-color: rgb(246, 232, 155);
+  background-color: var(--light-orange);
   cursor: pointer;
 }
 
 .marquee-entry-cont .marquee-icon {
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   display: block;
   margin: 0 5px 0 8px;
 }
 
 .marquee-entry-cont .coin-text {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
 }
 
 .marquee-entry-cont .percent-text {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   margin: 0 5px 0 5px;
-  padding-top: 2px;
+  padding-top: 5px;
 }
 
 .marquee-entry-cont .red-text{
@@ -44,10 +44,10 @@
     padding: 5px 0 5px 0;
   }
   .marquee-entry-cont .coin-text {
-    font-size: 13px;
+    font-size: 11px;
   }
   .marquee-entry-cont .percent-text {
-    font-size: 13px;
+    font-size: 11px;
     padding-top: 2px;
   }
   .marquee-entry-cont .marquee-icon {

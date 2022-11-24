@@ -1,6 +1,11 @@
 .top-posts-cont {
   margin-top: 40px;
 }
+
+.top-posts-cont .post-content-title {
+  font-size: 14px
+}
+
 .post-row-cont {
   display: flex;
   flex-direction: row;
@@ -21,7 +26,6 @@
 
 .post-content-title {
   font-weight: bold;
-
 }
 
 .post-col-content {
@@ -54,7 +58,7 @@
     font-size: 1.2rem;
   }
   .top-posts-cont .post-content-title {
-    font-size: 14px
+    font-size: 13px
   }
   .post-col-img img {
     margin-left: 10px;

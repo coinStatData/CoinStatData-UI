@@ -14,6 +14,11 @@
   align-items: center;
   margin-left: 5%;
   color: white;
+  margin-top: 10px;
+}
+
+.left-inner-cont h3 {
+  font-size: 20px;
 }
 
 .right-inner-cont {
@@ -32,15 +37,14 @@
   background: none;
   border: none;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
   cursor: pointer;
 }
 
 .right-inner-cont button:hover {
-  color: #008B8B;
+  color: orange;
 }
-
 
 .csd-icon {
   width: 30px;
