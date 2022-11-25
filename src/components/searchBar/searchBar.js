@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_coin, update_interval } from '../../redux/slices/search';
 import { CSD_INDEX } from '../../util/constants/coins';
-import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG } from './constants';
 import ErrorModal from '../alertModal/error';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
@@ -14,6 +13,7 @@ import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
+import useErrorHandle from '../../hooks/useErrorHandle';
 import './style.css';
 
 function SearchBar({ fetchCandleData, fetchLineData }) {
@@ -24,32 +24,15 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   const [days, setDays] = useState(100);
   const [tempVolprice, setTempVolprice] = useState("price");
   const [volprice, setVolprice] = useState("prices");
-  const [showAlert, setShowAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
   const coin = useSelector((state) => state.search.coin);
   const interval = useSelector((state) => state.search.interval);
   const timezone = useSelector((state) => state.userSettings.timezone);
   const [tempInterval, setTempInterval] = useState(interval);
   const [coinName, setCoinName] = useState(coin);
-  const dispatch = useDispatch()
-
-  const errorResponse = (e) => {
-    if(e.response) {
-      if(e.response.status == 404) {
-        setErrorMessage(INPUT_ERROR_MSG);
-        setShowAlert(true);
-      } else {
-        setErrorMessage(NETWORK_ERROR_MSG);
-        setShowAlert(true);
-      }
-    } else {
-      setErrorMessage(NETWORK_ERROR_MSG);
-      setShowAlert(true);
-    }
-  }
+  const dispatch = useDispatch();
+  const { errorResponse, errorMessage, showAlert, setErrorMessage, setShowAlert } = useErrorHandle();
 
   useEffect(() => {
-    // console.log("SEARCHBAR useEffect call candledata , ", candleData);
     fetchDataGecko(coin, days, tempInterval);
     fetchCandleData(coin, days);
   }, []);

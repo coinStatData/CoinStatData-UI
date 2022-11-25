@@ -26,15 +26,15 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
     setIsDaily(!isDaily);
   }
 
-  const calculateSize = () => {
-    const newWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+  const calculateSize = (screenWidth) => {
+    const newWidth = screenWidth;
     const [newGraphWidth, newGraphWidthBar] = calculateGraphWidth(newWidth);
     if(graphWidth !== newGraphWidth) setGraphWidth(newGraphWidth);
     if(graphWidthBar !== newGraphWidthBar) setGraphWidthBar(newGraphWidthBar);
   }
 
   useEffect(() => {
-    calculateSize();
+    calculateSize(screenWidth);
   }, [screenWidth]);
 
   return (
@@ -47,7 +47,10 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
                 <LoadingSpinner />
                 :
                 <>
-                  {(Array.isArray(candleData.resp.data) && candleData.resp.data.length > 2 && !candleData.resp.isError) ? 
+                  {(Array.isArray(candleData.resp.data) 
+                    && candleData.resp.data.length > 2 
+                    && !candleData.resp.isError) 
+                    ? 
                       <CandleStickChart 
                         candleData={candleData} 
                         coin={coin} 

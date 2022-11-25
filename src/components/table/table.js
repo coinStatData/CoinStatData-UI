@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Table from 'react-bootstrap/Table'
 import { formatDate } from '../../util'
 import { CSVLink } from "react-csv";
@@ -54,6 +54,8 @@ function Table2(props) {
     }
   }
 
+  const csvMemoizedData = useMemo(() => csvData(), [props.lineData.price.chart.data]);
+
   function TableRow(item) {
     return (
       <tr key={item.datetime}>
@@ -77,7 +79,7 @@ function Table2(props) {
           <td>{Math.ceil(volItem[1])}</td>
         }
       </tr>
-    )
+    );
   }
 
   function makeTableGecko(priceAr, volAr, coinname, props) {
@@ -108,7 +110,7 @@ function Table2(props) {
               </Typography>
             </Box>
             <Box sx={{ width:"50%", textAlign:"right", pt:"20px"}}>
-              <CSVLink data={csvData()}>
+              <CSVLink data={csvMemoizedData}>
                 {"CSV"}
                 <DownloadIcon fontSize="small"/>
               </CSVLink>

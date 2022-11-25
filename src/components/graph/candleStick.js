@@ -1,4 +1,4 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect, useMemo }  from 'react';
 import ApexCharts from 'apexcharts'
 import prepCandleData from './util/prepareCandleData';
 import { checkIfSameArrayCandle } from '../../util';
@@ -10,8 +10,9 @@ function CandleStickChart({ graphWidth, coin, candleData, timezone }) {
   const [mudatedDataCopy, setMudatedDataCopy] = useState([{x: 0, y: []}]); //copy due to double render
 
   const renderCandleChart = (data) => {
-    let mudatedData = (!checkIfSameArrayCandle(candleData.resp.data, candleChartCopy)) ? 
-      prepCandleData().mutateData(data, timezone) : mudatedDataCopy; //reduce calls to mutateData
+    let mudatedData = !checkIfSameArrayCandle(candleData.resp.data, candleChartCopy)
+      ? prepCandleData().mutateData(data, timezone) 
+      : mudatedDataCopy; //reduce calls to mutateData
     setMudatedDataCopy(mudatedData);
     const title = `${coin.toUpperCase()} Chart (${timezone})`;
     const options = prepCandleData().returnData(mudatedData, graphWidth, title);
