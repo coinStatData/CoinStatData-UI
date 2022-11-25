@@ -9,42 +9,15 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import { useNavigate  } from "react-router-dom";
+import useNavMenu from '../../hooks/useNavMenu';
 import './navBarV2.css';
 
 const PAGES_LG = ['Statistic', 'Portfolio-Opt', 'Crypto-API', 'Store'];
 const PAGES_SM = ['Statistic', 'Portfolio-Opt', 'Crypto-API', 'Store'];
 
 const NavBarV2 = () => {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const navigate = useNavigate();
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = (page) => {
-    setAnchorElNav(null);
-    switch(page) {
-      case "Statistic":
-        navigate('stat');
-        break;
-      case "Portfolio-Opt":
-        navigate('optimization');
-        break;
-      case "Chat-Room":
-        navigate('chat');
-        break;
-      case "Crypto-API":
-        navigate('publicAPI');
-        break;
-      case "Store":
-        window.open("https://alienvogue.com", '_blank')
-        break;
-      default:
-        // code block
-    }
-  };
+  const { anchorElNav, handleOpenNavMenu, handleCloseNavMenu } = useNavMenu();
 
   return (
     <AppBar sx={{ backgroundColor:"#212529"}} position="static">

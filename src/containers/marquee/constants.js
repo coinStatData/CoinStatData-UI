@@ -1,1 +1,1 @@
-export const MARQUEE_COINS = "bitcoin,ethereum,bitcoin-cash,ripple,dash,eos,cardano,solana,dogecoin,polkadot,tron,zcash";
+export const MARQUEE_COINS = "bitcoin,ethereum,ripple,dogecoin,cardano,bitcoin-cash,shiba-inu,dash,monero,eos,solana,polkadot,tron,zcash";

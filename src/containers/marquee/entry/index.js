@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { useNavigate  } from "react-router-dom";
@@ -6,7 +6,7 @@ import './entry.css';
 
 const Entry = ({ id, change, name, updateCoin }) => {
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const clickCoin = (coin) => {
     updateCoin(coin);
@@ -48,4 +48,7 @@ const ICON_PATHS = {
   'zcash': require('../../../assets/zcash.webp'),
   'bitcoin-cash': require('../../../assets/bitcoin-cash.webp'),
   'polkadot': require('../../../assets/polkadot.webp'),
+  'shiba-inu': require('../../../assets/shiba-inu.webp'),
+  'bitcoin-cash': require('../../../assets/bitcoin-cash.webp'),
+  'monero': require('../../../assets/monero.webp'),
 }

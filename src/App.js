@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import UserContext from './hooks/userContext';
 import TablePage from './pages/table/tablePage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -12,22 +12,14 @@ import Footer from './components/footer';
 import PublicAPIPage from './pages/publicAPI';
 import UserSettings from './containers/settings/userSettings';
 import ChatModal from './containers/chatModal';
+import useScreenSize from './hooks/useScreenSize';
 import './App.css';
 
 const APIEndPoint = "https://40rrfmjfvc.execute-api.us-east-1.amazonaws.com/v1/hello"
 
 function App() {
 
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth);
-
-  const calculateSize = () => {
-    let width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    setScreenWidth(width);
-  }
-
-  window.addEventListener("resize", ()=> {
-    calculateSize();
-  });
+  const { screenWidth } = useScreenSize();
 
   return (
     <UserContext.Provider value={{}}>
