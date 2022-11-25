@@ -26,7 +26,7 @@ function PortFolioOpt(props) {
 				{...other}
 			>
 				{value === index && (
-					<Box sx={{ p: 3 }}>
+					<Box sx={{ p: 1.5 }}>
 						<Typography component="span">{children}</Typography>
 					</Box>
 				)}
@@ -44,38 +44,34 @@ function PortFolioOpt(props) {
 	return (
 		<>
 			<div>
-				<div className="">
-					<Box sx={{ width: '100%' }}>
-						<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-							<Tabs value={value} onChange={handleChange} aria-label="portfolio-tabs" centered>
-								<Tab label="Efficient Frontier" {...a11yProps(0)} />
-								<Tab label="CAPM" {...a11yProps(1)} />
-								<Tab label="Info" {...a11yProps(2)} />
-							</Tabs>
-						</Box>
-						<TabPanel value={value} index={0}>
-							<PortfolioOptimization/>
-						</TabPanel>
-						<TabPanel value={value} index={1}>
-							<div className="under-construction">
-								<ConstructionIcon />
-								<span>
-									Under construction. Coming Soon...
-								</span>
-								<ConstructionIcon />
-							</div>
-						</TabPanel>
-						<TabPanel value={value} index={2}>
-							<div className="under-construction">
-								<ConstructionIcon />
-								<span>
-									Under construction. Coming Soon...
-								</span>
-								<ConstructionIcon />
-							</div>
-						</TabPanel>
-					</Box>
-				</div>
+					<div className="portfolio-page-tabs-cont">
+						<Tabs value={value} onChange={handleChange} aria-label="portfolio-tabs" centered>
+							<Tab label="Efficient Frontier" {...a11yProps(0)} />
+							<Tab label="CAPM" {...a11yProps(1)} />
+							<Tab label="Info" {...a11yProps(2)} />
+						</Tabs>
+					</div>
+				<TabPanel value={value} index={0}>
+					<PortfolioOptimization/>
+				</TabPanel>
+				<TabPanel value={value} index={1}>
+					<div className="under-construction">
+						<ConstructionIcon />
+						<span>
+							Under construction. Coming Soon...
+						</span>
+						<ConstructionIcon />
+					</div>
+				</TabPanel>
+				<TabPanel value={value} index={2}>
+					<div className="under-construction">
+						<ConstructionIcon />
+						<span>
+							Under construction. Coming Soon...
+						</span>
+						<ConstructionIcon />
+					</div>
+				</TabPanel>
 			</div>
 		</>
 	);

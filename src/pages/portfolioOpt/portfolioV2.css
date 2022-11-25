@@ -9,3 +9,10 @@
   font-size: 14px;
   color: #555;
 }
+
+
+@media (max-width: 600px) {
+  .portfolio-page-tabs-cont button {
+    font-size: 12px !important;
+  }
+}

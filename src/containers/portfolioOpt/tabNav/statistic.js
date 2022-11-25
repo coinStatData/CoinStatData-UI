@@ -32,21 +32,21 @@ function StatTabNav({ imageSrc, portResp }) {
                 </ul>
               </div>
               <div className="stat-box-col-2">
-                <strong>Maximum Performance</strong>
-                <br />
-                <ul>
-                  {portResp['maximum-perf'] && 
-                    Object.keys(portResp['maximum-perf']).map((key) => {
-                      return (
-                        <li key={key}>
-                          {key}: {portResp['maximum-perf'][key]}
-                        </li>
-                      )
-                    })
-                  }
-                </ul>
+                {portResp['maximum-perf'] && 
+                  Object.keys(portResp['maximum-perf']).map((key) => {
+                    return (
+                      <div key={key} className="max-perf-box">
+                        <strong>{key.replaceAll('_', ' ')}</strong>
+                        <ul>
+                          <li>
+                            {portResp['maximum-perf'][key]}
+                          </li>
+                        </ul>
+                      </div>
+                    )
+                  })
+                }
               </div>
-
             </div>
           </Tab>
         </Tabs>

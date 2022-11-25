@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ErrorSpinner from '../../components/spinner/error';
 import LoadingSpinner from '../../components/spinner/loading';
 import pythonLambdaService from '../../services/pythonLambda.service';
@@ -20,6 +20,15 @@ import Button from '@mui/material/Button';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import './portfolio.css';
 
+const getStyles = (name, chosenCoins, theme) => {
+  return {
+    fontWeight:
+      chosenCoins.indexOf(name) === -1
+        ? theme.typography.fontWeightRegular
+        : theme.typography.fontWeightMedium,
+  };
+}
+
 const PortfolioOptimization = (props) => {
   const theme = useTheme();
   const [chosenCoins, setChosenCoins] = useState(INIT_COINS);
@@ -33,15 +42,6 @@ const PortfolioOptimization = (props) => {
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [imageSrc, setImageSrc] = useState(graphImage);
-
-  const getStyles = (name, chosenCoins, theme) => {
-    return {
-      fontWeight:
-        chosenCoins.indexOf(name) === -1
-          ? theme.typography.fontWeightRegular
-          : theme.typography.fontWeightMedium,
-    };
-  }
 
   const errorResponse = (e) => {
     if(e.response) {
@@ -181,9 +181,7 @@ const PortfolioOptimization = (props) => {
         </div>
         :
         <div className="graph-cont">
-          <div className="img-cont">
-            <StatTabNav imageSrc={imageSrc} portResp={portResp}></StatTabNav>
-          </div>
+          <StatTabNav imageSrc={imageSrc} portResp={portResp}></StatTabNav>
         </div>
       }
     </div>
