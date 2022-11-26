@@ -49,11 +49,4 @@ const CSD_INDEX = [
   'vechain',        'wrapped-bitcoin',   'zcash'
 ];
 
-const ob = {}
-
-for(let coin of STABLE_LIST) {
-  ob[coin] =  'path*' + coin + '.svg'
-}
-console.log(ob)
-
 module.exports = { COIN_LIST, COIN_STR, STABLE_LIST, CSD_LIST, CSD_STR, CSD_INDEX };
