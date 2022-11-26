@@ -10,11 +10,6 @@ import './home.css';
 
 function HomePage({ screenWidth }) {
 
-  console.log(
-    "%c Philippians 4:13", 
-    "font-weight:bold;"
-  );
-
 	return (
     <>
       <Marquee/>

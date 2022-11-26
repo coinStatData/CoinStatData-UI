@@ -37,11 +37,6 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
     calculateSize(screenWidth);
   }, [screenWidth]);
 
-  console.log(
-    "%c Luke 1:37", 
-    "font-weight:bold;"
-  );
-
   return (
     <>
       <div>
