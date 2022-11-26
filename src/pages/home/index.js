@@ -1,24 +1,14 @@
-import React, { useEffect } from 'react';
-import { fetchCoinIndex } from '../../redux/actions/coinIndex';
+import React from 'react';
 import HomeTable from '../../containers/homeTable'
 import Trending from '../../components/trending'
 import TopRedditPosts from '../../components/topRedditPosts';
 import Chat from '../../containers/chat';
-import { useDispatch } from 'react-redux';
-import { update_interval } from '../../redux/slices/search';
-import { connect } from 'react-redux';
 import CoinGecko from '../../components/coinGecko';
 import Marquee from '../../containers/marquee';
+
 import './home.css';
 
-function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if(coinIndex.data.length === 0) fetchCoinIndex();
-    dispatch(update_interval("daily"));
-  }, []);
+function HomePage({ screenWidth }) {
 
 	return (
     <>
@@ -26,9 +16,7 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
       <div className="flex-cont">
         <div className="homeTable-box">
           <HomeTable 
-            fetchCandleData={fetchCandleData} 
             screenWidth={screenWidth} 
-            coinIndex={coinIndex}
           />
         </div>
         <div className="trending-box">
@@ -54,16 +42,4 @@ function HomePage({screenWidth, fetchCandleData, fetchCoinIndex, coinIndex}) {
 	);
 }
 
-function mapStateToProps(state) {
-  return {
-    coinIndex: state.coinIndex,
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchCoinIndex: () => dispatch(fetchCoinIndex()),
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

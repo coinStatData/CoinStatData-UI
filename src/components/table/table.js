@@ -39,10 +39,10 @@ function Table2(props) {
     }
   }, [lineData.resp.data]);
 
-  const csvData = () => {
+  const csvData = (lineData) => {
     const data = [];
-    const cdata = props.lineData.price.chart.data;
-    if(Array.isArray(cdata)){
+    const cdata = lineData; //props.lineData.price.chart.data;
+    if(Array.isArray(cdata)) {
       for(let i=0; i<cdata.length-2; i++)
         data.push({
           dateTime: cdata[i].name,
@@ -54,7 +54,9 @@ function Table2(props) {
     }
   }
 
-  const csvMemoizedData = useMemo(() => csvData(), [props.lineData.price.chart.data]);
+  const csvMemoizedData = useMemo(() => csvData(props.lineData.price.chart.data), 
+    [props.lineData.price.chart.data]
+  );
 
   function TableRow(item) {
     return (
@@ -64,7 +66,7 @@ function Table2(props) {
         <td>{item.price}</td>
         <td>{Math.ceil(item.market_cap)}</td>
       </tr>
-    )
+    );
   }
   
   function TableRowGecko(priceItem, volItem, coinname, props) {
@@ -83,9 +85,9 @@ function Table2(props) {
   }
 
   function makeTableGecko(priceAr, volAr, coinname, props) {
-    let arr = priceAr.map((item, index)=> {
+    const arr = priceAr.map((item, index)=> {
       return TableRowGecko(priceAr[index], volAr[index], coinname, props);
-    })
+    });
     return arr;
   }
   

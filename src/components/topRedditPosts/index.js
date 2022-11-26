@@ -75,7 +75,11 @@ function TopRedditPosts() {
       <h4>Top Reddit Posts</h4>
       <div className="sub-select-cont">
         <div>
-          <Form.Select className="select-sub-dropdown" value={subReddit} onChange={(e)=>handleSubChange(e)}>
+          <Form.Select 
+            className="select-sub-dropdown" 
+            value={subReddit} 
+            onChange={(e)=>handleSubChange(e)}
+          >
             <option>r/{subReddit}</option>
             <option>r/bitcoin</option>
             <option>r/buttcoin</option>

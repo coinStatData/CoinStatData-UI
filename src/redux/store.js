@@ -12,6 +12,7 @@ import CSDGlobalIndexReducer from './slices/CSDGlobalIndex';
 import CSDCoinsReducer from './slices/CSDCoins';
 import userSettingReducer from './slices/userSettings';
 import marqueeReducer from './slices/marquee';
+import miniChartReducer from './slices/miniCharts';
 
 export default configureStore({
   reducer: {
@@ -26,11 +27,12 @@ export default configureStore({
     CSD_GlobalIndex: CSDGlobalIndexReducer,
     CSD_Coins: CSDCoinsReducer,
     userSettings: userSettingReducer,
-    marquee: marqueeReducer
+    marquee: marqueeReducer,
+    miniChart: miniChartReducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'dev' ? 
       getDefaultMiddleware({serializableCheck: false,}).concat(logger) : getDefaultMiddleware({serializableCheck: false})
   },
   devTools: process.env?.REACT_APP_NODE_ENV === 'dev',
-})
+});
