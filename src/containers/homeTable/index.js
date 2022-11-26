@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { fetchCoinIndex } from '../../redux/actions/coinIndex';
 import CSD50 from './CSD50';
 import GlobalIndex from './globalIndex';
 import Box from '@mui/material/Box';
@@ -8,6 +9,9 @@ import Tabs from '@mui/material/Tabs';
 import InfoBar from './infoBar';
 import CSDIndexInfo from './infoBar/infoContents/CSDIndex';
 import GlobalIndexInfo from './infoBar/infoContents/globalIndex';
+import { useDispatch } from 'react-redux';
+import { update_interval } from '../../redux/slices/search';
+import { connect } from 'react-redux';
 import './homeTable.css';
 
 function a11yProps(index) {
@@ -19,12 +23,18 @@ function a11yProps(index) {
 
 function HomeTable(props) {
 
-  const { screenWidth, coinIndex } = props;
+  const { screenWidth, coinIndex, fetchCoinIndex } = props;
   const [value, setValue] = React.useState(0);
+  const dispatch = useDispatch();
 
   const handleTabChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  useEffect(() => {
+    if(coinIndex.data.length === 0) fetchCoinIndex();
+    dispatch(update_interval("daily"));
+  }, []);
 
   return (
     <div className="home-table-cont">
@@ -70,4 +80,17 @@ function HomeTable(props) {
   );
 }
 
-export default HomeTable;
+
+function mapStateToProps(state) {
+  return {
+    coinIndex: state.coinIndex,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchCoinIndex: () => dispatch(fetchCoinIndex()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeTable);

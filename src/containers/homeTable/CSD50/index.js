@@ -9,6 +9,7 @@ import ErrorSpinner from '../../../components/spinner/error';
 import LoadingSpinner from '../../../components/spinner/loading';
 import { convertNumberFormat } from '../../../util';
 import Tooltip from '@mui/material/Tooltip';
+import { MINI_CHARTS } from '../../../util/constants/miniCharts';
 import './CSD50.css';
 
 const CSD50 = (props) => {
@@ -35,23 +36,36 @@ const CSD50 = (props) => {
 
   function TableRow(item, index) {
     return (
-      <tr onClick={()=>clickCoin(item[0])} key={item[0]}>
-        <td>
+      <tr onClick={() => clickCoin(item[0])} key={item[0]}>
+        <td className="home-chart-td">
           {index+1}
         </td>
-        <td className="coin-name">
+        <td className="coin-name home-chart-td">
           <img className="coin-icon" src={ICON_PATHS[item[0]]} alt="coin-icon"></img>
           {item[0]}
         </td>
-        <td>{item[1].usd}</td>
-        <td>
-          {isFullDigits ? Math.ceil(item[1].usd_market_cap) : convertNumberFormat(item[1].usd_market_cap)}
+        <td className="home-chart-td">
+          {item[1].usd}
         </td>
+        {(screenWidth > 500) &&
+          <td className="home-chart-td">
+            {isFullDigits ? Math.ceil(item[1].usd_market_cap) : convertNumberFormat(item[1].usd_market_cap)}
+          </td>
+        }
         {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
-          <td>
+          <td className="home-chart-td">
             {isFullDigits ? Math.ceil(item[1].usd_24h_vol): convertNumberFormat(item[1].usd_24h_vol)}
           </td>
         }
+          <td className="mini-chart-td">
+            <img 
+              src={MINI_CHARTS[item[0]]} 
+              width="100px" 
+              height="28px"
+              alt="5-day-chart"
+            >
+            </img>
+          </td>
       </tr>
     );
   }
@@ -75,10 +89,15 @@ const CSD50 = (props) => {
             </Tooltip>
             <th>Coin</th>
             <th>Price($)</th>
-            <th>{screenWidth < 550 ? "MC($)" : "Market Cap($)"}</th>
-            {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
-              <th>24h Volume($)</th>
+            {(screenWidth > 500) &&
+              <th>{screenWidth < 550 ? "MC($)" : "Mkt Cap($)"}</th>
             }
+            {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
+              <th>24h Vol($)</th>
+            }
+            <Tooltip title="Market Cap Chart of past 5 days" arrow>
+              <th>5 Days(MC)</th>
+            </Tooltip>
           </tr>
         </thead>
         <tbody>
@@ -92,7 +111,7 @@ const CSD50 = (props) => {
             : 
             coinIndex.isLoading ? 
               <tr>
-                <td colSpan="5">
+                <td colSpan="6">
                   <LoadingSpinner />
                 </td>
               </tr>

@@ -86,7 +86,7 @@
  @media (max-width: 1000px) { 
   .flex-cont {
     flex-direction: column;
-    padding: 10px 7%;
+    padding: 10px 6%;
   }
   .trending-box {
     width:100%;

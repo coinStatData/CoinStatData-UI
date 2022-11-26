@@ -12,8 +12,12 @@
   font-size: 14px;
 }
 
-.home-table td {
-  font-size: 14px !important;
+.mini-chart-td {
+  padding: 5px !important;
+}
+
+.home-table .home-chart-td {
+  font-size: 13px !important;
 }
 
 .index-summary-cont .total-sum {
@@ -26,9 +30,12 @@
 }
 
 @media (max-width: 550px) { 
-  .home-table td {
+  .home-table .home-chart-td {
     font-size: 12px !important;
-    padding: 8px 4px !important;
+    padding: 7px 4px !important;
+  }
+  .home-table .mini-chart-td {
+    padding: 3px !important;
   }
   .home-table th {
     font-size: 12px;
@@ -46,5 +53,22 @@
   }
   .index-summary-cont .total-sum {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 400px) { 
+  .home-table .home-chart-td {
+    font-size: 11px !important;
+    padding: 8px 4px !important;
+  }
+  .home-table .mini-chart-td {
+    padding: 3px !important;
+  }
+  .home-table th {
+    font-size: 12px;
+  }
+  .coin-icon {
+    width: 12px;
+    height: 12px;
   }
 }
