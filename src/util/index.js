@@ -76,8 +76,8 @@ export function formatDate(date, format="default", timezone="UTC", pattern="") {
 export const calculateGraphWidth = (newWidth) => {
   let newGraphWidth = 0;
   let newGraphWidthBar = 0;
-  let histogramWidth = 0;
-  let histogramHeight = 0
+  let histogramWidth = 500;
+  let histogramHeight = 300
   if(newWidth < 650) {
     newGraphWidth = newWidth * .90;
     newGraphWidthBar = newWidth * .90;
