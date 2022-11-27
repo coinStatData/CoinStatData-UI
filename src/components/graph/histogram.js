@@ -12,16 +12,18 @@ function HistogramD3({
 }) {
   
   useEffect (() => {
-    const chart = Histogram(data, {
-      value: d => d?.return,
-      label: label,
-      width: width,
-      height: height,
-      color: color
-    });
-    const element = document.getElementById("histogram-chart-cont");
-    element.innerHTML = "";
-    element.appendChild(chart);
+    if(data.length > 0) {
+      const chart = Histogram(data, {
+        value: d => d?.return,
+        label: label,
+        width: width,
+        height: height,
+        color: color
+      });
+      const element = document.getElementById("histogram-chart-cont");
+      element.innerHTML = "";
+      element.appendChild(chart);
+    }
   }, [data]);
 
   return (
