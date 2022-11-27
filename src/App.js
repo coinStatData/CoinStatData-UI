@@ -1,6 +1,6 @@
 import React from "react";
 import UserContext from './hooks/userContext';
-import TablePage from './pages/table/tablePage';
+import StatPage from './pages/table/statPage';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PortFolioOptV2 from './pages/portfolioOpt/portfolioV2';
 import DonatePage from './pages/donation';
@@ -30,7 +30,7 @@ function App() {
             <Routes>
               {/* pages with navbar */}
               <Route path="/" element={<HomePage screenWidth={screenWidth} />} />
-              <Route path="/stat" element={<TablePage screenWidth={screenWidth}/>} />
+              <Route path="/stat" element={<StatPage screenWidth={screenWidth}/>} />
               <Route path="/optimization" element={<PortFolioOptV2 />} />
               <Route path="/donate" element={<DonatePage />} />
               <Route path="/chat" element={<ChatPage />} />

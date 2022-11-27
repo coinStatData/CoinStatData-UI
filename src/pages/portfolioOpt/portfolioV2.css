@@ -10,9 +10,12 @@
   color: #555;
 }
 
+.nav-tab-btn {
+  font-size: 14px !important;
+}
 
 @media (max-width: 600px) {
-  .portfolio-page-tabs-cont button {
+  .nav-tab-btn {
     font-size: 12px !important;
-  }
+  }  
 }

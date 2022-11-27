@@ -2,6 +2,7 @@ import React from 'react';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import { useNavigate  } from "react-router-dom";
+import { ICON_PATHS } from '../../../util/constants/iconPaths';
 import './entry.css';
 
 const Entry = ({ id, change, name, updateCoin }) => {
@@ -34,21 +35,3 @@ const Entry = ({ id, change, name, updateCoin }) => {
 }
 
 export default Entry;
-
-const ICON_PATHS = {
-  'bitcoin': require('../../../assets/bitcoin.webp'),
-  'ethereum': require('../../../assets/ethereum.webp'),
-  'ripple': require('../../../assets/ripple.webp'),
-  'solana': require('../../../assets/solana.webp'),
-  'cardano': require('../../../assets/cardano.webp'),
-  'dogecoin': require('../../../assets/dogecoin.webp'),
-  'tron': require('../../../assets/tron.webp'),
-  'eos': require('../../../assets/eos.webp'),
-  'dash': require('../../../assets/dash.webp'),
-  'zcash': require('../../../assets/zcash.webp'),
-  'bitcoin-cash': require('../../../assets/bitcoin-cash.webp'),
-  'polkadot': require('../../../assets/polkadot.webp'),
-  'shiba-inu': require('../../../assets/shiba-inu.webp'),
-  'bitcoin-cash': require('../../../assets/bitcoin-cash.webp'),
-  'monero': require('../../../assets/monero.webp'),
-}

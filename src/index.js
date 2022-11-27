@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
   console.log(
     "%c Welcome to CoinStatData!", 
-    "color:gold; font-size:40px; font-weight:bold; text-shadow: 3px 3px 3px orange , 6px 6px 6px blue;"
+    "color:gold; font-size:30px; font-weight:bold; text-shadow: 3px 3px 3px orange , 6px 6px 6px blue;"
   );
   console.log(
     `
@@ -44,11 +44,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
   );
   console.log(
     "%c Luke 1:37", 
-    "font-weight:bold;"
+    "color:gold; font-weight:bold;"
   );
   console.log(
     "%c Philippians 4:13", 
-    "font-weight:bold;"
+    "color:gold; font-weight:bold;"
   );
 
   root.render(

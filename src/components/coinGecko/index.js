@@ -5,7 +5,8 @@ function CoinGecko() {
 
   return (
     <div className="coinGecko-cont">
-      Data provided By <a href="https://www.coingecko.com/">CoinGecko API</a> <img src={require('../../assets/coinGecko.png')}></img>
+      Data provided By <a href="https://www.coingecko.com/">CoinGecko API</a> 
+      <img src={require('../../assets/coinGecko.png')}></img>
     </div>
   );
 }

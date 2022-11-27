@@ -72,15 +72,22 @@ export function formatDate(date, format="default", timezone="UTC", pattern="") {
   }
 }
 
+
 export const calculateGraphWidth = (newWidth) => {
   let newGraphWidth = 0;
   let newGraphWidthBar = 0;
+  let histogramWidth = 0;
+  let histogramHeight = 0
   if(newWidth < 650) {
     newGraphWidth = newWidth * .90;
     newGraphWidthBar = newWidth * .90;
+    histogramWidth = 350;
+    histogramHeight = 160;
   } else if(1000 >= newWidth && newWidth >= 650) {
     newGraphWidth = newWidth * .85;
     newGraphWidthBar = newWidth * .80;
+    histogramWidth = 500;
+    histogramHeight = 300;
   } else if (1000 < newWidth && newWidth < 1200){
     newGraphWidth = 800;
     newGraphWidthBar = 800;
@@ -88,7 +95,7 @@ export const calculateGraphWidth = (newWidth) => {
     newGraphWidth = 1000;
     newGraphWidthBar = 800;
   }
-  return [newGraphWidth, newGraphWidthBar];
+  return [newGraphWidth, newGraphWidthBar, histogramWidth, histogramHeight];
 }
 
 export const checkIfSameArray = (a, b) => {
