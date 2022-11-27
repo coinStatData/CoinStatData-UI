@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import ApexCharts from 'apexcharts'
 import prepCandleData from './util/prepareCandleData';
 import { checkIfSameArrayCandle } from '../../util';

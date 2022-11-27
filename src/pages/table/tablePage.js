@@ -4,6 +4,7 @@ import Table2 from '../../components/table/table';
 import SearchBar from '../../components/searchBar/searchBar';
 import LineChartBoy from '../../components/graph/lineChart';
 import BarChartBoy from '../../components/graph/barChart';
+import Histogram from '../../components/graph/histogram';
 import CandleStickChart from '../../components/graph/candleStick';
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
@@ -19,6 +20,8 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
   const [isDaily, setIsDaily] = useState(true);
   const [graphWidth, setGraphWidth] = useState(calculateGraphWidth(screenWidth)[0]);
   const [graphWidthBar, setGraphWidthBar] = useState(calculateGraphWidth(screenWidth)[1]);
+  const [histoWidth, setHistoWidth] = useState(calculateGraphWidth(screenWidth)[2]);
+  const [histoHeight, setHistoHeight] = useState(calculateGraphWidth(screenWidth)[3]);
   const coin = useSelector((state) => state.search.coin);
   const timezone = useSelector((state) => state.userSettings.timezone);
 
@@ -28,9 +31,11 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
 
   const calculateSize = (screenWidth) => {
     const newWidth = screenWidth;
-    const [newGraphWidth, newGraphWidthBar] = calculateGraphWidth(newWidth);
+    const [newGraphWidth, newGraphWidthBar, nHistoWidth, nHistoHeight] = calculateGraphWidth(newWidth);
     if(graphWidth !== newGraphWidth) setGraphWidth(newGraphWidth);
     if(graphWidthBar !== newGraphWidthBar) setGraphWidthBar(newGraphWidthBar);
+    if(histoWidth !== nHistoWidth) setHistoWidth(nHistoWidth);
+    if(histoHeight !== nHistoHeight) setHistoHeight(nHistoHeight);
   }
 
   useEffect(() => {
@@ -80,6 +85,18 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
                 <ErrorSpinner />
                 :
                 <BarChartBoy graphWidth={graphWidthBar} lineData={lineData} isDaily={isDaily} />
+              }
+            </Tab>
+            <Tab eventKey="Histogram" title="Histogram">
+              {lineData.resp.isError ? 
+                <ErrorSpinner />
+                :
+                <Histogram 
+                  data={lineData.price.chart.data}
+                  width={histoWidth}
+                  height={histoHeight}
+                >
+                </Histogram>
               }
             </Tab>
           </Tabs>

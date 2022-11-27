@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import DownloadIcon from '@mui/icons-material/Download';
 import Box from '@mui/joy/Box';
 import Stack from '@mui/joy/Stack';
+import Histogram from '../graph/histogram';
 import './style.css';
 
 function Table2(props) {
@@ -25,7 +26,7 @@ function Table2(props) {
     //this is linedata
     setTableD(lineData.resp.data);
     setIsLambda(false);
-    if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length>3) {      
+    if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length > 3) {      
       dispatch(update_startDate(formatDate(
         lineData.resp.data.prices[0][0], 
         timeFormat, 

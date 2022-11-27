@@ -1,27 +1,27 @@
 import * as CandleReducers from '../slices/candleData';
 import * as LineReducers from '../slices/lineData';
-import { calAvg } from '../../stat-scripts/calcAverage';
+import { calAvg } from '../../stat-scripts/average/calcAverage';
 import candleStickService from '../../services/candleStick.service';
 import coinDataService from '../../services/coinData.service';
 
 const _mutateResp = (resp, coin) => {
-  if(Array.isArray(resp) && resp.length>1) {
+  if(Array.isArray(resp) && resp.length > 1) {
     let max = 0;
     let min = Number.MAX_SAFE_INTEGER;
     let hmax = -100;
     let hmin = 100;
     const chartD = resp.map((item, index) => {
-      if(index < resp.length-2) {
+      if(index < resp.length-1) {
         const ch = (resp[index+1][1] - item[1])/item[1] * 100;
         const row = {
           name: item[0],
           [coin]: item[1],
-          hourlyReturn: ch.toFixed(5)
+          return: Number(ch.toFixed(5))
         }
         max = max < item[1] ? item[1] : max;
         min = min > item[1] ? item[1] : min;
-        hmax = hmax < row.hourlyReturn ? row.hourlyReturn : hmax;
-        hmin = hmin > row.hourlyReturn ? row.hourlyReturn : hmin;
+        hmax = hmax < row.return ? row.return : hmax;
+        hmin = hmin > row.return ? row.return : hmin;
         return row;
       }
     });

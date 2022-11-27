@@ -13,7 +13,7 @@
 .chart-cont {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 5px;
   justify-content: center;
 }
 

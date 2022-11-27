@@ -4,7 +4,6 @@ import CSD50 from './CSD50';
 import GlobalIndex from './globalIndex';
 import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
-import TabPanel from './tabPanel';
 import Tabs from '@mui/material/Tabs';
 import InfoBar from './infoBar';
 import CSDIndexInfo from './infoBar/infoContents/CSDIndex';
@@ -12,24 +11,14 @@ import GlobalIndexInfo from './infoBar/infoContents/globalIndex';
 import { useDispatch } from 'react-redux';
 import { update_interval } from '../../redux/slices/search';
 import { connect } from 'react-redux';
+import useTabNav from '../../hooks/useTabNav';
 import './homeTable.css';
-
-function a11yProps(index) {
-  return {
-    id: `home-tab-${index}`,
-    'aria-controls': `homeTable-tabpanel-${index}`,
-  };
-}
 
 function HomeTable(props) {
 
   const { screenWidth, coinIndex, fetchCoinIndex } = props;
-  const [value, setValue] = React.useState(0);
   const dispatch = useDispatch();
-
-  const handleTabChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const { a11yProps, TabPanel, handleTabChange, tabValue } = useTabNav();
 
   useEffect(() => {
     if(coinIndex.data.length === 0) fetchCoinIndex();
@@ -43,7 +32,7 @@ function HomeTable(props) {
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs 
               centered={screenWidth < 1000 ? true : false} 
-              value={value} onChange={handleTabChange} 
+              value={tabValue} onChange={handleTabChange} 
               aria-label="home index tabs"
             >
               <Tab 
@@ -63,14 +52,14 @@ function HomeTable(props) {
               />
             </Tabs>
           </Box>
-          <TabPanel value={value} index={0}>
+          <TabPanel value={tabValue} index={0}>
             <CSD50 screenWidth={screenWidth} index={"data"} coinIndex={coinIndex} />
           </TabPanel>
-          <TabPanel value={value} index={1}>
+          <TabPanel value={tabValue} index={1}>
             <InfoBar content={<CSDIndexInfo/>} title={"About CSD Indices"} />
             <CSD50 screenWidth={screenWidth} index={"stableData"} coinIndex={coinIndex} />
           </TabPanel>
-          <TabPanel value={value} index={2}>
+          <TabPanel value={tabValue} index={2}>
             <InfoBar content={<GlobalIndexInfo/>} title={"About CSD60 Aggregate"} />
             <GlobalIndex screenWidth={screenWidth} />
           </TabPanel>
