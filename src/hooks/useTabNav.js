@@ -20,7 +20,7 @@ const useTabNav = () => {
 				{...other}
 			>
 				{tabValue === index && (
-					<Box sx={{ p: 1, pt: 2 }}>
+					<Box sx={{ p: 0, pt: 2 }}>
 						{children}
 					</Box>
 				)}
