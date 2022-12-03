@@ -1,6 +1,10 @@
 const path = process.env['REACT_APP_S3_BUCKET_MINI_CHARTS'];
 
 const MINI_CHARTS = {
+  'CSD50': path + '/CSD50.svg',
+  'CSD10': path + '/CSD10.svg',
+
+  // ---------------- none-stables ----------------
   'bitcoin': path + '/bitcoin.svg',
   'ethereum': path + '/ethereum.svg',
   'dash': path + '/dash.svg',

@@ -6,7 +6,7 @@ import ErrorSpinner from '../../../components/spinner/error';
 import LoadingSpinner from '../../../components/spinner/loading';
 import { convertNumberFormat, formatDate } from '../../../util';
 import { useSelector } from 'react-redux';
-
+import SearchBar from './searchBar/searchBar';
 import Tooltip from '@mui/material/Tooltip';
 import './global.css';
 
@@ -67,6 +67,7 @@ const GlobalIndex = (props) => {
 
   return (
     <div className="global-index-cont">
+      <SearchBar fetchGlobalIndex={fetchGlobalIndex} />
       <Table className="home-table" hover responsive>
         <thead>
           <tr>

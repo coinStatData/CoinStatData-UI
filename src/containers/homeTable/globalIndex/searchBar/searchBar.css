@@ -1,0 +1,22 @@
+.global-search-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+
+.days-submit-btn {
+  width: auto;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.days-input-bar {
+  width: auto;
+}
+
+.days-input-bar p {
+  position: absolute;
+  top: 37px;
+}

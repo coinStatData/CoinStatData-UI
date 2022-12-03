@@ -1,3 +1,7 @@
+.global-index-cont {
+  overflow-y: auto;
+  max-height: 1300px;
+}
 .global-index-cont .datetime-td {
   font-weight: 500;
 }

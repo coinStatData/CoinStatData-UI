@@ -21,8 +21,10 @@ const CSD50 = (props) => {
   const [isFullDigits, setIsFullDigits] = useState(false);
   const [mcTotal, setMcTotal] = useState(0);
   const [volTotal, setVolTotal] = useState(0);
+  const [csdIndex, setCsdIndex] = useState(["", {usd: "---", usd_market_cap: 0, usd_24h_vol: 0}]);
 
   const clickCoin = async (coin) => {
+    if(coin === "CSD50" || coin === "CSD10") return;
     dispatch(update_coin(coin));
     // const respp = props.fetchCandleData(coin, 100);
     navigate("/stat");
@@ -33,6 +35,13 @@ const CSD50 = (props) => {
     const volSum = coinIndex[index].reduce((prev, curr) => prev + curr[1].usd_24h_vol, 0);
     setMcTotal(mcSum);
     setVolTotal(volSum);
+    const indexName = index === "data" ? "CSD50" : "CSD10";
+    const csdObj = {
+      usd_market_cap: mcSum,
+      usd_24h_vol: volSum,
+      usd: "------"
+    };
+    setCsdIndex([indexName, csdObj]);
   }, [coinIndex]);
 
   function TableRow(item, index) {
@@ -76,6 +85,8 @@ const CSD50 = (props) => {
       const arr = coinData.map((item, index)=> {
         return TableRow(item, index);
       });
+      const indexRow = TableRow(csdIndex, -1);
+      arr.unshift(indexRow);
       return arr;
     }
   }
