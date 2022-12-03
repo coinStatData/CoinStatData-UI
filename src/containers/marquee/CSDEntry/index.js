@@ -5,9 +5,9 @@ const CSDEntry = ({ }) => {
 
   return (
     <div className="marquee-entry-cont csd-entry-cont">
-      <img className="marquee-icon" src={require('../../../assets/csdLogo2.png')} alt="CSD Logo"></img>
+      <img className="marquee-icon" src={require('../../../assets/CSDLogo33.png')} alt="CSD Logo"></img>
       <div className="coin-text">Welcome to CoinStatData!</div>
-      <img className="marquee-icon" src={require('../../../assets/csdLogo2.png')} alt="CSD Logo"></img>
+      <img className="marquee-icon" src={require('../../../assets/CSDLogo33.png')} alt="CSD Logo"></img>
     </div>
   );
 }

@@ -24,7 +24,7 @@ function Footer() {
         <div className="trade-mark-cont">
           <div className="title-logo">
             <h2>CoinStatData</h2>
-            <img src={require('../../assets/csdLogo2.png')}></img>
+            <img src={require('../../assets/CSDLogo33.png')}></img>
           </div>
           <p>
             {INFO_TEXT}

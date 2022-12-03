@@ -1,4 +1,7 @@
 export const ICON_PATHS = {
+  'CSD50': require('../../assets/CSDLogo33.png'),
+  'CSD10': require('../../assets/CSDLogo33.png'),
+  'matic-network': require('../../assets/matic-network.webp'),
   'matic-network': require('../../assets/matic-network.webp'),
   'stellar': require('../../assets/stellar.webp'),
   'bitcoin-cash': require('../../assets/bitcoin-cash.webp'),
