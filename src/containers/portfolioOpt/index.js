@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import ErrorSpinner from '../../components/spinner/error';
-import LoadingSpinner from '../../components/spinner/loading';
 import pythonLambdaService from '../../services/pythonLambda.service';
 import { CSD_INDEX } from '../../util/constants/coins';
-import { INPUT_ERROR_MSG, NETWORK_ERROR_MSG, RESP, MenuProps, INIT_COINS, HELPER_TEXTS } from './constants';
+import { RESP, MenuProps, INIT_COINS, HELPER_TEXTS } from './constants';
 import ErrorModal from '../../components/alertModal/error';
 import StatTabNav from './tabNav/statistic';
-const graphImage = require("../../assets/graphs/efficientFrontier.jpg")
+const graphImage = require('../../assets/graphs/efficientFrontier.jpg');
+import useErrorHandle from '../../hooks/useErrorHandle';
+import useSpinners from '../../hooks/useSpinners';
 
 //mau stylesheet
 import { useTheme } from '@mui/material/styles';
@@ -34,29 +34,12 @@ const PortfolioOptimization = (props) => {
   const [chosenCoins, setChosenCoins] = useState(INIT_COINS);
   const [days, setDays] = useState(300);
   const [isOver100, setIsOver100] = useState(true);
-  const [isOver2000, setIsOver2000] = useState(true);
-  const [numOfPorts, setNumOfPorts] = useState(10000);
-  const [showAlert, setShowAlert] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [isOver1000, setIsOver1000] = useState(true);
+  const [numOfPorts, setNumOfPorts] = useState(5000);
   const [portResp, setPortResp] = useState(RESP);
-  const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [imageSrc, setImageSrc] = useState(graphImage);
-
-  const errorResponse = (e) => {
-    if(e.response) {
-      if(e.response.status == 404) {
-        setErrorMessage(INPUT_ERROR_MSG);
-        setShowAlert(true);
-      } else {
-        setErrorMessage(NETWORK_ERROR_MSG);
-        setShowAlert(true);
-      }
-    } else {
-      setErrorMessage(NETWORK_ERROR_MSG);
-      setShowAlert(true);
-    }
-  }
+  const { errorResponse, errorMessage, showAlert, setShowAlert } = useErrorHandle();
+  const { isLoading, isError, setIsError, setIsLoading, Spinners } = useSpinners();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,11 +86,11 @@ const PortfolioOptimization = (props) => {
 
   const handleNumOfSimulationsChange = (e) => {
     let tempNum = Number(e.target.value);
-    if(tempNum >= 2000 && tempNum <= 10000) {
-      setIsOver2000(true)
+    if(tempNum >= 1000 && tempNum <= 7000) {
+      setIsOver1000(true)
       setNumOfPorts(tempNum);
     } else {
-      setIsOver2000(false);
+      setIsOver1000(false);
       setNumOfPorts(tempNum);
     }
   }
@@ -157,14 +140,14 @@ const PortfolioOptimization = (props) => {
 
           <FormControl sx={{ width: "100%", my:2 }} size="small">
             <TextField
-              error={isOver2000? false : true}
+              error={isOver1000? false : true}
               type="number"
               id="port-count-select"
               value={numOfPorts}
               label="Number of Simulations"
               onChange={handleNumOfSimulationsChange}
               size="small" variant="outlined"
-              helperText={isOver2000? HELPER_TEXTS.simSelectInfo : HELPER_TEXTS.simSelectWarning}
+              helperText={isOver1000? HELPER_TEXTS.simSelectInfo : HELPER_TEXTS.simSelectWarning}
             >
             </TextField>
           </FormControl>
@@ -174,11 +157,7 @@ const PortfolioOptimization = (props) => {
         </form>
       </div>
       {isError || isLoading ? 
-        <div className="loading-cont">
-          {isLoading ? 
-            <LoadingSpinner/> : <ErrorSpinner /> 
-          }
-        </div>
+        <Spinners />
         :
         <div className="graph-cont">
           <StatTabNav imageSrc={imageSrc} portResp={portResp}></StatTabNav>
