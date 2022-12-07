@@ -43,6 +43,7 @@ const Chat = (props) => {
     event.preventDefault();
     if(message) {
       socket.emit('sendMessage', message, () => setMessage(''));
+      setMessage('')
     }
   }
 

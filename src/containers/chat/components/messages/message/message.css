@@ -36,6 +36,16 @@
   font-size: 13px;
 }
 
+.sentTextAI {
+  display: flex;
+  align-items: center;
+  font-family: monospace;
+  color: rgb(61, 61, 208) !important;
+  letter-spacing: 0.3px;
+  font-size: 13px;
+  font-weight: 1000;
+}
+
 .pl-10 {
   padding-left: 10px;
 }
@@ -67,4 +77,8 @@
 
 .backgroundLight {
   background: #F3F3F3;
+}
+
+.backgroundBlue {
+  background: #d2ebff;
 }

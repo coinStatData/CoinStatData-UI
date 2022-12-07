@@ -24,10 +24,23 @@ const Message = ({ message: { text, user }, name }) => {
         )
         : (
           <div className="messageContainer justifyStart">
-            <div className="messageBox backgroundLight">
-              <div className="messageText colorDark">{ReactEmoji.emojify(text)}</div>
-            </div>
-            <div className="sentText pl-10 ">{user}</div>
+
+            {user === "AI_BOT" ? (
+              <>
+                <div className="messageBox backgroundBlue">
+                  <div className="messageText colorDark">{ReactEmoji.emojify(text)}</div>
+                </div>
+                <div className="sentTextAI pl-10">{user}</div>
+              </>
+              ) : (
+                <>
+                  <div className="messageBox backgroundLight">
+                    <div className="messageText colorDark">{ReactEmoji.emojify(text)}</div>
+                  </div>
+                  <div className="sentText pl-10 ">{user}</div>
+                </>
+              )
+            }
           </div>
         )
   );
