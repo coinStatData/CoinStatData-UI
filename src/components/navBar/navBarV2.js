@@ -32,7 +32,7 @@ const NavBarV2 = () => {
             variant="h6"
             noWrap
             component="a"
-            href="../"
+            href="https://coinstatdata.com"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -90,7 +90,7 @@ const NavBarV2 = () => {
             variant="h6"
             noWrap
             component="a"
-            href="../"
+            href="https://coinstatdata.com"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },

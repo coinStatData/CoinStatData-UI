@@ -29,7 +29,7 @@ function App() {
             <NavBarV2 />
             <Routes>
               {/* pages with navbar */}
-              <Route path="/" element={<HomePage screenWidth={screenWidth} />} />
+              <Route path="/"  element={<ChatPage />} />
               <Route path="/stat" element={<StatPage screenWidth={screenWidth}/>} />
               <Route path="/optimization" element={<PortFolioOptV2 />} />
               <Route path="/donate" element={<DonatePage />} />
