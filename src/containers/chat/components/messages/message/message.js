@@ -25,7 +25,7 @@ const Message = ({ message: { text, user }, name }) => {
         : (
           <div className="messageContainer justifyStart">
 
-            {user === "AI_BOT" ? (
+            {user === "Jarvis" ? (
               <>
                 <div className="messageBox backgroundBlue">
                   <div className="messageText colorDark">{ReactEmoji.emojify(text)}</div>
