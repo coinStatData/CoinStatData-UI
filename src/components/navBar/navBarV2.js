@@ -26,7 +26,7 @@ const NavBarV2 = () => {
 
           {/* ----------------- mid up ----------------- */}
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-            <img className="nav-bar-logo-md" src="../../assets/CSDLogo33.png" alt="" />
+            <img className="nav-bar-logo-md" src="../../assets/CSDLogo3.svg" alt="" />
           </Box>
           <Typography
             variant="h6"
@@ -106,7 +106,7 @@ const NavBarV2 = () => {
             }}
           >
             <Box sx={{ display: { xs: 'flex', md: 'none' }, mr: 5 }}>
-              <img className="nav-bar-logo-sm" src="../../assets/CSDLogo33.png" alt="" />
+              <img className="nav-bar-logo-sm" src="../../assets/CSDLogo3.svg" alt="" />
             </Box>
           </Typography>
 
