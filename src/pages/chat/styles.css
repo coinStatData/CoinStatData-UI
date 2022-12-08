@@ -37,7 +37,12 @@
 
 @media (max-width: 550px) { 
   .chat-page-outer-cont {
-    padding: 20px 2% 5px 2%;
+    padding: 30px 2% 5px 2%;
+  }
+  .chat-page-inner-cont .messages-cont {
+    height: 55vh;
+    overflow: auto;
+    flex: auto;
   }
   
 }
