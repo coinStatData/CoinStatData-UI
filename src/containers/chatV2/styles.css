@@ -1,0 +1,28 @@
+.chatv2-outer-cont {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px 15%;
+}
+
+.chat-inner-cont-main {
+  background-color: white;
+  border-radius: 9px;
+  border: solid #fcba03;
+  width: 70%;
+}
+
+.chat-inner-cont-users {
+  background-color: white;
+  border-radius: 9px;
+  border: solid black;
+  width: 30%;
+}
+
+@media (min-width: 320px) and (max-width: 1200px) {
+  .textContainer {
+    display: none;
+  }
+}
+

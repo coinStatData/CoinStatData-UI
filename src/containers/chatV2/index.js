@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Messages from './components/messages/messages';
-import InfoBar from './components/infoBar/infoBar';
+import TextContainer from './components/textCont/textContainer';
 import Input from './components/input/input';
 import io from "socket.io-client";
 import { useSelector } from 'react-redux';
@@ -47,15 +47,17 @@ const Chat = (props) => {
   }
 
   return (
-    <div className="chat-outer-cont">
-      <div className="chat-inner-cont">
+    <div className="chatv2-outer-cont">
+      <div className="chat-inner-cont-main">
         <div id="chat-popup-header1">
-          <InfoBar room={room} />
+          {/* <InfoBar room={room} /> */}
           <Messages messages={messages} name={name} />
         </div>
+        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
-      <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
-      {/* <TextContainer users={users}/> */}
+      <div className="chat-inner-cont-users">
+        <TextContainer users={users}/>
+      </div>
     </div>
   );
 }

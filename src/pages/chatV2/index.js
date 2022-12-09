@@ -1,5 +1,5 @@
 import React from 'react';
-import ChatV2 from '../../containers/chatV2';
+import Chat from '../../containers/chat';
 import './styles.css';
 
 function ChatPage(props) {
@@ -7,7 +7,7 @@ function ChatPage(props) {
 		<>
 			<div className="">
 				<div className="">
-					<ChatV2></ChatV2>
+					<Chat></Chat>
 				</div>
 			</div>
 		</>

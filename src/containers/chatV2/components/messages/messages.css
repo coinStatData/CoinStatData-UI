@@ -1,0 +1,9 @@
+.messages-cont {
+  padding: 5% 0;
+  overflow: auto;
+  flex: auto;
+  height: 280px;
+  margin: 0;
+  word-break: break-word;
+  background-color: antiquewhite;
+}
