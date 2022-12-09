@@ -23,7 +23,7 @@
 .messageContainer {
   display: flex;
   justify-content: flex-end;
-  padding: 0 5%;
+  padding: 1px 3%;
   margin-top: 3px;
 }
 
@@ -33,7 +33,7 @@
   font-family: Helvetica;
   color: #828282;
   letter-spacing: 0.1px;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .sentTextAI {
@@ -41,16 +41,16 @@
   align-items: center;
   color: rgb(61, 61, 208) !important;
   letter-spacing: 0.1px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 900;
 }
 
 .pl-10 {
-  padding-left: 7px;
+  padding-left: 5px;
 }
 
 .pr-10 {
-  padding-right: 7px;
+  padding-right: 5px;
 }
 
 .justifyStart {
@@ -79,5 +79,5 @@
 }
 
 .backgroundBlue {
-  background: #ddeeff;
+  background: #e5f2ff;
 }
