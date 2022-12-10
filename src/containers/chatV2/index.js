@@ -47,16 +47,24 @@ const Chat = (props) => {
   }
 
   return (
-    <div className="chatv2-outer-cont">
-      <div className="chat-inner-cont-main">
-        <div id="chat-popup-header1">
-          {/* <InfoBar room={room} /> */}
-          <Messages messages={messages} name={name} />
-        </div>
-        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+    <div className="chatv2-super-outer">
+      <div className="chat-type-title">
+        <span>Jarvis</span>
+          <img src={require('../../assets/bot.png')}></img>
       </div>
-      <div className="chat-inner-cont-users">
-        <TextContainer users={users}/>
+      <div className="chatv2-outer-cont">
+        <div className="chat-inner-cont-main">
+          <div id="chat-popup-header1">
+            {/* <InfoBar room={room} /> */}
+            <Messages messages={messages} name={name} />
+          </div>
+        </div>
+        <div className="chat-inner-cont-users">
+          <TextContainer users={users}/>
+        </div>
+      </div>
+      <div className="chatv2-input-cont">
+        <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
       </div>
     </div>
   );

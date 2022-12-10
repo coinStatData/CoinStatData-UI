@@ -1,11 +1,12 @@
-.form {
+.chat-input-form {
   display: flex;
-  border-top: 2px solid #DCDCDC;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  border-radius: 5px;
 }
 
 .input {
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 10px;
   width: 80%;
   font-size: 14px;
@@ -16,16 +17,17 @@ input:focus, textarea:focus, select:focus{
 }
 
 .sendButton {
-  color: #fff !important;
+  color: rgb(255, 255, 255) !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: rgb(255, 124, 63);
+  background: rgb(117, 158, 255);
   display: inline-block;
   border: none;
   width: 20%;
-  border-bottom-right-radius: 6px;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .sendButton:hover {
-  background: #FF6347;
+  background: rgb(95, 142, 251);
 }

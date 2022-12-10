@@ -22,8 +22,8 @@ function App() {
             <Route path="/donate" element={<DonatePage />} />
           </Routes>
         </div>
-        <Footer/>
       </div>
+      <Footer/>
     </BrowserRouter>
   );
 }

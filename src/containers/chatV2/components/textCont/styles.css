@@ -1,4 +1,8 @@
 
-.text-container h6 {
+.text-container {
   text-align: center;
+}
+
+.activeItem {
+  font-size: 12px;
 }

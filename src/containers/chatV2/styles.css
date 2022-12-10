@@ -1,28 +1,93 @@
+.chatv2-super-outer {
+  padding: 60px 10%;
+}
+
 .chatv2-outer-cont {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 20px 15%;
+  padding: 10px 5% 20px 5%;
+}
+
+.chat-type-title {
+  padding: 0 5%;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.chat-type-title img {
+  width: 25px;
+  height: 20px;
+  margin-left: 5px;
 }
 
 .chat-inner-cont-main {
   background-color: white;
   border-radius: 9px;
-  border: solid #fcba03;
-  width: 70%;
+  width: 80%;
 }
 
 .chat-inner-cont-users {
-  background-color: white;
-  border-radius: 9px;
-  border: solid black;
-  width: 30%;
+  background-color: whitesmoke;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 20px;
+  width: 20%;
+  overflow-y: auto;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
-@media (min-width: 320px) and (max-width: 1200px) {
-  .textContainer {
-    display: none;
+.chatv2-input-cont {
+  width: 100%;
+  padding: 0 0;
+}
+
+@media (max-width: 1200px) {
+  .chatv2-super-outer {
+    padding: 60px 5%;
   }
 }
+
+@media (max-width: 1000px) {
+  .chatv2-super-outer {
+    padding: 40px 2%;
+  }
+}
+
+@media (max-width: 800px) {
+  .chatv2-super-outer {
+    padding: 40px 0;
+  }
+  .chatv2-outer-cont {
+    padding: 10px 2% 20px 2%;
+  }
+  .chat-type-title {
+    padding: 0 2%;
+  }
+  .chatv2-input-cont {
+    width: 100%;
+    padding: 0 2%;
+  }
+}
+
+@media (max-width: 600px) {
+  .chat-inner-cont-users {
+    display: none;
+  }
+  .chat-inner-cont-main {
+    width: 100%;
+  }
+  .chatv2-super-outer {
+    padding: 40px 5%;
+  }
+}
+
+@media (max-width: 450px) {
+  .chatv2-super-outer {
+    padding: 40px 3%;
+  }
+}
+
 
