@@ -42,7 +42,7 @@ function Footer() {
             <h5>Developer</h5>
             <a target="_blank" href="https://github.com/coinStatData">GitHub</a>
             <Link to="/publicAPI">Crypto API</Link>
-            <Link to="/chat">Chat-Bot</Link>
+            <a target="_blank" href="https://chat.coinstatdata.com">AI-Bot</a>
           </div>
           {/* <div className="link-cont">
             <h5>API's</h5>

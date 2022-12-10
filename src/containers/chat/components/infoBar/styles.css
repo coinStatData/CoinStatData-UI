@@ -17,8 +17,15 @@
   margin-top: 10px;
 }
 
-.left-inner-cont h3 {
+.left-inner-cont h3 a {
   font-size: 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.left-inner-cont h3 a:hover {
+  color: orange;
 }
 
 .right-inner-cont {

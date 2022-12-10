@@ -16,7 +16,9 @@ const InfoBar = ({ room }) => {
     <>
       <div className="info-bar">
         <div className="left-inner-cont">
-          <h3>Coin Chat!</h3>
+          <h3>
+            <a target="_blank" href="https://chat.coinstatdata.com">Coin Chat!</a>
+          </h3>
           {/* <img className="csd-icon" src={csdIcon} alt="CSD Logo" /> */}
         </div>
         <div className="right-inner-cont">
