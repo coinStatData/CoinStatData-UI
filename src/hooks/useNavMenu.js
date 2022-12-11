@@ -9,7 +9,7 @@ const useNavMenu = () => {
   const handleCloseNavMenu = (page) => {
     setAnchorElNav(null);
     switch(page) {
-      case "Statistic":
+      case "Statistics":
         navigate('stat');
         break;
       case "Portfolio-Opt":
