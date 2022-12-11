@@ -41,10 +41,22 @@ const CSDIndexService = () => {
     }
   }
 
+  const _getBatchCoins = async () => {
+    try {
+      const endpoint = _serverUr + "/public/api/v1/dynamo/batch/coins";
+      const response = await RestService().get(endpoint);
+      return response.data.body[0].data; // it happens..
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  }
+
   return {
     fetchGlobal: _fetchGlobal,
     fetchCoin: _fetchcoin,
-    fetchCSDIndex: _fetchCSDIndex
+    fetchCSDIndex: _fetchCSDIndex,
+    getBatchCoins: _getBatchCoins
   }
 }
 

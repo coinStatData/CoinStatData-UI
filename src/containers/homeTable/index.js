@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { fetchCoinIndex } from '../../redux/actions/coinIndex';
+import { fetchCoinIndex, fetchBatchCoins } from '../../redux/actions/coinIndex';
 import CSD50 from './CSD50';
 import GlobalIndex from './globalIndex';
 import Box from '@mui/material/Box';
@@ -16,12 +16,12 @@ import './homeTable.css';
 
 function HomeTable(props) {
 
-  const { screenWidth, coinIndex, fetchCoinIndex } = props;
+  const { screenWidth, coinIndex, fetchBatchCoins } = props;
   const dispatch = useDispatch();
   const { a11yProps, TabPanel, handleTabChange, tabValue } = useTabNav();
 
   useEffect(() => {
-    if(coinIndex.data.length === 0) fetchCoinIndex();
+    if(coinIndex.data.length === 0) fetchBatchCoins();
     dispatch(update_interval("daily"));
   }, []);
 
@@ -79,6 +79,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     fetchCoinIndex: () => dispatch(fetchCoinIndex()),
+    fetchBatchCoins: () => dispatch(fetchBatchCoins()),
   };
 }
 

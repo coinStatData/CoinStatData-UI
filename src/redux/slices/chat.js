@@ -14,7 +14,7 @@ export const chatSlice = createSlice({
       localStorage.setItem("chatUsername", state.username);
     },
   },
-})
+});
 
 export const { update_chat } = chatSlice.actions;
 

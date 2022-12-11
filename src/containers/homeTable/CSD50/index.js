@@ -21,7 +21,7 @@ const CSD50 = (props) => {
   const [isFullDigits, setIsFullDigits] = useState(false);
   const [mcTotal, setMcTotal] = useState(0);
   const [volTotal, setVolTotal] = useState(0);
-  const [csdIndex, setCsdIndex] = useState(["", {usd: "---", usd_market_cap: 0, usd_24h_vol: 0}]);
+  const [csdIndex, setCsdIndex] = useState(["", {price: "---", market_cap: 0, volume: 0}]);
 
   const clickCoin = async (coin) => {
     if(coin === "CSD50" || coin === "CSD10") return;
@@ -31,15 +31,15 @@ const CSD50 = (props) => {
   }
 
   useEffect(() => {
-    const mcSum = coinIndex[index].reduce((prev, curr) => prev + curr[1].usd_market_cap, 0);
-    const volSum = coinIndex[index].reduce((prev, curr) => prev + curr[1].usd_24h_vol, 0);
+    const mcSum = coinIndex[index].reduce((prev, curr) => prev + curr[1].market_cap, 0);
+    const volSum = coinIndex[index].reduce((prev, curr) => prev + curr[1].volume, 0);
     setMcTotal(mcSum);
     setVolTotal(volSum);
     const indexName = index === "data" ? "CSD50" : "CSD10";
     const csdObj = {
-      usd_market_cap: mcSum,
-      usd_24h_vol: volSum,
-      usd: "------"
+      market_cap: mcSum,
+      volume: volSum,
+      price: "------"
     };
     setCsdIndex([indexName, csdObj]);
   }, [coinIndex]);
@@ -55,16 +55,16 @@ const CSD50 = (props) => {
           {item[0]}
         </td>
         <td className="home-chart-td">
-          {item[1].usd}
+          {item[1].price}
         </td>
         {(screenWidth > 500) &&
           <td className="home-chart-td">
-            {isFullDigits ? Math.ceil(item[1].usd_market_cap) : convertNumberFormat(item[1].usd_market_cap)}
+            {isFullDigits ? Math.ceil(item[1].market_cap) : convertNumberFormat(item[1].market_cap)}
           </td>
         }
         {((screenWidth > 700 && screenWidth < 1000) || (screenWidth > 1250)) &&
           <td className="home-chart-td">
-            {isFullDigits ? Math.ceil(item[1].usd_24h_vol): convertNumberFormat(item[1].usd_24h_vol)}
+            {isFullDigits ? Math.ceil(item[1].volume): convertNumberFormat(item[1].volume)}
           </td>
         }
           <td className="mini-chart-td">

@@ -1,5 +1,6 @@
 import * as coinIndexReducers from '../slices/coinIndex';
 import coinDataService from '../../services/coinData.service';
+import CSDIndexService from '../../services/CSDIndex.service';
 import { CSD_INDEX, CSD_LIST, STABLE_LIST } from '../../util/constants/coins';
 
 export const fetchCoinIndex = () => {
@@ -8,6 +9,22 @@ export const fetchCoinIndex = () => {
     try {
       const resp = await coinDataService().fetchHomeData(CSD_INDEX.join());
       let mutatedResp = _mutateResp(resp.data);
+      dispatch(coinIndexReducers.update_success(mutatedResp));
+      return mutatedResp;
+    } catch(e) {
+      console.error(e.message);
+      dispatch(coinIndexReducers.update_fail(e.message));
+      return false;
+    }
+  }
+}
+
+export const fetchBatchCoins = () => {
+  return async dispatch => {
+    dispatch(coinIndexReducers.begin_fetch());
+    try {
+      const resp = await CSDIndexService().getBatchCoins();
+      let mutatedResp = _mutateRespBatch(resp);
       dispatch(coinIndexReducers.update_success(mutatedResp));
       return mutatedResp;
     } catch(e) {
@@ -27,6 +44,19 @@ const _mutateResp = (resp) => {
   });
   stable10.sort((a,b) => {
     return b[1].usd_market_cap - a[1].usd_market_cap;
+  });
+  return { csd50, stable10 };
+}
+
+const _mutateRespBatch = (resp) => {
+  let data = resp;
+  const csd50 = CSD_LIST.map((key) => [key, data[key]]);
+  const stable10 = STABLE_LIST.map((key) => [key, data[key]]);
+  csd50.sort((a,b) => {
+    return b[1].market_cap - a[1].market_cap;
+  });
+  stable10.sort((a,b) => {
+    return b[1].market_cap - a[1].market_cap;
   });
   return { csd50, stable10 };
 }
