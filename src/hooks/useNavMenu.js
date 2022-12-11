@@ -24,6 +24,9 @@ const useNavMenu = () => {
       case "Store":
         window.open("https://alienvogue.com", '_blank')
         break;
+      case "AI":
+        window.open("https://ai.coinstatdata.com", '_blank')
+        break;
       default:
         // code block
     }
