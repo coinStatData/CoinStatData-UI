@@ -1,24 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMarquee } from '../../redux/actions/marquee';
 import Entry from './entry';
 import CSDEntry from './CSDEntry';
-import { MARQUEE_COINS } from './constants';
 import { update_coin } from '../../redux/slices/search';
 import Marquee from "react-fast-marquee";
 import './marquee.css';
 
-const CoinMarquee = ({ fetchMarquee, marquee, updateCoin }) => {
-
-  useEffect(() => {
-    if(marquee.data.length === 0) {
-      fetchMarquee(MARQUEE_COINS);
-    }
-  }, []);
+const CoinMarquee = ({ updateCoin, coinIndex }) => {
 
   return (
     <>
-      {marquee.data.length > 0 && 
+      {coinIndex.data.length > 15 && 
         <div className="marquee-cont">
           <Marquee
             pauseOnHover={true}
@@ -27,13 +19,13 @@ const CoinMarquee = ({ fetchMarquee, marquee, updateCoin }) => {
             gradientWidth={5}
           >
             {
-              marquee.data.map((data) => {
+              coinIndex.data.slice(0, 13).map((data) => {
                 return (
                   <Entry 
-                    key={data.name}
-                    id={data.id} 
-                    name={data.name} 
-                    change={data.price_change_percentage_24h}
+                    key={data[1].id}
+                    id={data[1].id} 
+                    name={data[1].id} 
+                    change={data[1].price_24hr_change}
                     updateCoin={updateCoin}
                   />
                 );
@@ -49,13 +41,12 @@ const CoinMarquee = ({ fetchMarquee, marquee, updateCoin }) => {
 
 function mapStateToProps(state) {
   return {
-    marquee: state.marquee
+    coinIndex: state.coinIndex
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchMarquee: (coins) => dispatch(fetchMarquee(coins)),
     updateCoin: (coin) => dispatch(update_coin(coin)),
   };
 }
