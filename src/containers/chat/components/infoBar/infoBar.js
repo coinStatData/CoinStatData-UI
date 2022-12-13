@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import csdIcon from './icon/csdLogo2.png';
 import Join from '../join/join';
-// import closeIcon from '../../icons/closeIcon.png';
-
 import './styles.css';
 
 const InfoBar = ({ room }) => {
@@ -19,7 +16,6 @@ const InfoBar = ({ room }) => {
           <h3>
             <a target="_blank" href="https://chat.coinstatdata.com">Coin Chat!</a>
           </h3>
-          {/* <img className="csd-icon" src={csdIcon} alt="CSD Logo" /> */}
         </div>
         <div className="right-inner-cont">
           <button onClick={toggleJoin}>Sign-In</button>

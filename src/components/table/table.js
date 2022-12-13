@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import DownloadIcon from '@mui/icons-material/Download';
 import Box from '@mui/joy/Box';
 import Stack from '@mui/joy/Stack';
-import Histogram from '../graph/histogram';
 import './style.css';
 
 function Table2(props) {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Alert from 'react-bootstrap/Alert'
-import CoinGecko from '../coinGecko';
 import { INFO_TEXT, COMPANY_RIGHTS, DISCLAIMER } from './constants';
 import './footer.css';
 
@@ -30,7 +29,6 @@ function Footer() {
             {INFO_TEXT}
           </p>
           <p id="name-sig">{COMPANY_RIGHTS}</p>
-          <CoinGecko></CoinGecko>
         </div>
         <div className="aux-links-cont">
           <div className="link-cont">
