@@ -14,7 +14,7 @@ const InfoBar = ({ room }) => {
       <div className="info-bar">
         <div className="left-inner-cont">
           <h3>
-            <a target="_blank" href="https://chat.coinstatdata.com">Coin Chat!</a>
+            <a target="_blank" href="https://ai.coinstatdata.com">Coin Chat!</a>
           </h3>
         </div>
         <div className="right-inner-cont">
