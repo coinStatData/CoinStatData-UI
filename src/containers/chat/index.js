@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import TextContainer from './components/textCont/textContainer';
 import Messages from './components/messages/messages';
 import InfoBar from './components/infoBar/infoBar';
 import Input from './components/input/input';

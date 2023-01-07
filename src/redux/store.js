@@ -4,6 +4,7 @@ import searchReducer from './slices/search';
 import lineDataReducer from './slices/lineData';
 import tableDataReducer from './slices/tableData';
 import candleDataReducer from './slices/candleData';
+import candleDataV2Reducer from './slices/candleDataV2';
 import chatReducer from './slices/chat';
 import trendingCoinsReducer from './slices/trendingCoins';
 import coinIndexReducer from './slices/coinIndex';
@@ -28,7 +29,8 @@ export default configureStore({
     CSD_Coins: CSDCoinsReducer,
     userSettings: userSettingReducer,
     marquee: marqueeReducer,
-    miniChart: miniChartReducer
+    miniChart: miniChartReducer,
+    candleDataV2: candleDataV2Reducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'dev' ? 

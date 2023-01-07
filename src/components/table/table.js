@@ -23,6 +23,7 @@ function Table2(props) {
 
   useEffect(() => {
     //this is linedata
+    //FIXME: unnecessary rendering after screen resize
     setTableD(lineData.resp.data);
     setIsLambda(false);
     if(Array.isArray(lineData.resp.data.prices) && lineData.resp.data.prices.length > 3) {      

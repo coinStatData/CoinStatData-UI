@@ -106,7 +106,7 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
         </div>
         <div className="table-page">
           <div className="half-page-cont">
-            <SearchBar fetchCandleData={fetchCandleData} fetchLineData={fetchLineData} />
+            <SearchBar fetchCandleData={fetchCandleData} fetchLineData={fetchLineData} lineData={lineData} />
           </div>
           <div className="half-page-cont">
             <Table2 screenWidth={screenWidth} lineData={lineData}/>

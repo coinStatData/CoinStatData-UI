@@ -12,8 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import useNavMenu from '../../hooks/useNavMenu';
 import './navBarV2.css';
 
-const PAGES_LG = ['Statistics', 'Portfolio-Opt', 'Crypto-API', 'AI'];
-const PAGES_SM = ['Statistics', 'Portfolio-Opt', 'Crypto-API', 'AI'];
+const PAGES_LG = ['Statistics', 'Portfolio-Opt', 'Crypto-API', 'A.I.'];
+const PAGES_SM = ['Statistics', 'Portfolio-Opt', 'Crypto-API', 'A.I.'];
 
 const NavBarV2 = () => {
 
