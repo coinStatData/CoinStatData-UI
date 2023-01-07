@@ -69,9 +69,26 @@ const prepCandleData = () => {
     return data;
   }
 
+  const _mutateCandleDataV2 = (rawRespData, timezone) => {
+    const data = [];
+    rawRespData.forEach((item) => {
+      data.push({ 
+        x: new Date(new Date(item[0]).toLocaleString('en', {timeZone: timezone})),
+        y: [
+          Number(item[1]).toFixed(5), 
+          Number(item[2]).toFixed(5), 
+          Number(item[3]).toFixed(5), 
+          Number(item[4]).toFixed(5)
+        ]
+      });
+    });
+    return data;
+  }
+
   return {
     mutateData: _mutateCandleData,
-    returnData: _returnCandleData
+    returnData: _returnCandleData,
+    mutateDataV2: _mutateCandleDataV2
   }
 }
 

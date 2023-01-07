@@ -1,4 +1,5 @@
 import * as CandleReducers from '../slices/candleData';
+import * as CandleV2Reducers from '../slices/candleDataV2';
 import * as LineReducers from '../slices/lineData';
 import { calAvg } from '../../stat-scripts/average/calcAverage';
 import candleStickService from '../../services/candleStick.service';
@@ -50,6 +51,21 @@ export const fetchCandleStickData = (coin, days) => {
     } catch(e) {
       console.log(e.message);
       dispatch(CandleReducers.update_fail(e.message));
+      return false
+    }
+  }
+}
+
+export const fetchCandleDataV2 = (coin, days) => {
+  return async dispatch => {
+    dispatch(CandleV2Reducers.begin_fetch());
+    try {
+      const resp = await candleStickService().fetchCandleDataV2({coin, days});
+      dispatch(CandleV2Reducers.update_success(resp.data));
+      return resp.data;
+    } catch(e) {
+      console.log(e.message);
+      dispatch(CandleV2Reducers.update_fail(e.message));
       return false
     }
   }

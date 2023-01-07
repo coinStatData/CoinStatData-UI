@@ -134,6 +134,24 @@ export const checkIfSameArrayCandle = (a, b) => {
   return true;
 }
 
+export const checkIfSameArrayCandleV2 = (a, b) => {
+  //this is to prevent double render/calculation
+  //a = original array, b = new array
+  try {
+    const aLen = a.length - 1;
+    const bLen = b.length - 1;
+    if (aLen !== bLen) return false;
+    if(a[0] !== b[0] || a[0] !== b[0]) return false;
+    if(a[aLen] !== b[bLen] || a[aLen] !== b[bLen]) return false;
+    const bhalf = Math.floor(bLen/2);
+    const ahalf = Math.floor(aLen/2);
+    if(a[ahalf] !== b[bhalf] || a[ahalf] !== b[bhalf]) return false;
+  } catch(e) {
+    return false;
+  }
+  return true;
+}
+
 export const convertNumberFormat = (labelValue) => {
   // Nine Zeroes for Billions
   return Math.abs(Number(labelValue)) >= 1.0e+9

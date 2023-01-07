@@ -16,12 +16,12 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import useErrorHandle from '../../hooks/useErrorHandle';
 import './style.css';
 
-function SearchBar({ fetchCandleData, fetchLineData }) {
+function SearchBar({ fetchCandleData, fetchLineData, lineData }) {
 
   const [start, setStart] = useState('2022.04.30');
   const [isInteger, setIsInteger] = useState(true);
   const [end, setEnd] = useState("2022.09.07" );
-  const [days, setDays] = useState(100);
+  const [days, setDays] = useState(90);
   const [tempVolprice, setTempVolprice] = useState("price");
   const [volprice, setVolprice] = useState("prices");
   const coin = useSelector((state) => state.search.coin);
@@ -33,8 +33,10 @@ function SearchBar({ fetchCandleData, fetchLineData }) {
   const { errorResponse, errorMessage, showAlert, setErrorMessage, setShowAlert } = useErrorHandle();
 
   useEffect(() => {
-    fetchDataGecko(coin, days, tempInterval);
-    fetchCandleData(coin, days);
+    if(lineData.price.chart.data.length <= 2) {
+      fetchDataGecko(coin, days, tempInterval);
+      fetchCandleData(coin, days);
+    }
   }, []);
 
   const handleSubmitDates = async (e) => {
