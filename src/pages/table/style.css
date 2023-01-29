@@ -22,6 +22,10 @@
   margin: 50px 150px 50px 150px;
 }
 
+.chart-cont button {
+  font-size: 14px !important;
+}
+
 @media (max-width: 1000px) { 
   .table-page {
     flex-direction: column;
@@ -38,18 +42,15 @@
 
 @media (max-width: 600px) { 
   .chart-cont button {
-    font-size: 14px !important;
-  }
-}
-
-@media (max-width: 500px) { 
-  .chart-cont button {
     font-size: 12px !important;
+    padding: 8px !important;
   }
 }
 
-@media (max-width: 330px) { 
+
+@media (max-width: 380px) { 
   .chart-cont button {
     padding: 6px !important;
+    font-size: 11px !important;
   }
 }

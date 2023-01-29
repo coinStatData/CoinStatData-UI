@@ -21,7 +21,7 @@ function SearchBar({ fetchCandleData, fetchLineData, lineData }) {
   const [start, setStart] = useState('2022.04.30');
   const [isInteger, setIsInteger] = useState(true);
   const [end, setEnd] = useState("2022.09.07" );
-  const [days, setDays] = useState(90);
+  const [days, setDays] = useState(150);
   const [tempVolprice, setTempVolprice] = useState("price");
   const [volprice, setVolprice] = useState("prices");
   const coin = useSelector((state) => state.search.coin);
