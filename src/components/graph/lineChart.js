@@ -33,9 +33,10 @@ function LineChartBoy(props) {
       <h3 className="coinHeader">
         {coin.toUpperCase()} {props.isDaily? "Pice" : "Hourly Return"} Chart
       </h3>
-      <h6 className="dateHeader">
-        {search.timezone}: {startDate}~{endDate}
-      </h6>
+      <div className="dateHeader">
+        <strong>({search.timezone}) </strong> 
+        {startDate} ~ {endDate}
+      </div>
       <div className="chart-cont-inner">
         <ResponsiveContainer width={props.graphWidth} height={"100%"}>
           <LineChart 

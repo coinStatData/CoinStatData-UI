@@ -30,15 +30,71 @@
   margin: 0 auto;
 }
 
-
 .btn-cont {
   display: flex;
   flex-direction: row;
 }
 
+.dot-chart-outer-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.dot-chart-cont {
+  margin-top: 20px;
+  width: 700px;
+  resize: both;
+  overflow: auto;
+  border: 2px solid rgb(230, 230, 230);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 3px;
+}
+
+.red-dot {
+  background-color: red;
+}
+
+.green-dot {
+  background-color: green;
+}
+
+.legend-cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.legend-inner {
+  margin: 10px 10px;
+  font-size: small;
+}
+
+#histogram-chart-cont {
+  margin-top: 20px;
+}
+
+.coinHeader {
+  font-size: 19px;
+}
+
+.dateHeader {
+  font-size: 13px;
+}
+
 @media (max-width: 650px) { 
-  .dateHeader{
-    font-size:13px;
+  .dateHeader {
+    font-size: 11px;
   }
   .chart-cont-inner {
     height: 20vh;
@@ -50,15 +106,35 @@
     padding:3px !important;
   }
   .coinHeader {
-    font-size: 19px;
+    font-size: 16px;
   }
 
   .chart-cont h4 {
     font-size: 16px;
   }
-  
+  .dot-chart-cont {
+    width: 80%
+  }
  }
 
- @media (max-width: 400px) { 
+ @media (max-width: 900px) { 
+  .dot-chart-cont {
+    width: 70%
+  }
+ }
 
+ @media (max-width: 450px) { 
+  .dot-chart-cont {
+    width: 90%
+  }
+  .legend-inner {
+    font-size: 11px;
+  }
+  .dot {
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    margin: 3px;
+  }
+  
  }

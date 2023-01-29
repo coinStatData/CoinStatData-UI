@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Table2 from '../../components/table/table';
 import SearchBar from '../../components/searchBar/searchBar';
 import LineChartBoy from '../../components/graph/lineChart';
+import DotChart from '../../components/graph/dotChart';
 import BarChartBoy from '../../components/graph/barChart';
 import Histogram from '../../components/graph/histogram';
 import CandleStickChart from '../../components/graph/candleStick';
@@ -97,6 +98,19 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
                   height={histoHeight}
                 >
                 </Histogram>
+              }
+            </Tab>
+            <Tab eventKey="DotChart" title="Dot Chart">
+              {lineData.resp.isError ? 
+                <ErrorSpinner />
+                :
+                <>
+                  <DotChart 
+                    lineData={lineData}
+                    timezone={timezone}
+                    isDaily={isDaily}
+                  />
+                </>
               }
             </Tab>
           </Tabs>

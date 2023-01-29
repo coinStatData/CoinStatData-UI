@@ -19,9 +19,9 @@ function BarChartBoy(props) {
   const renderGraph = () => {
     return (
       <div className="chart-cont">
-        <h4>
+        <h3 className="coinHeader">
           Average Return by {interval == "hourly"? "Hours" : isMDay? "Days of Month" : "Week Days"}
-        </h4>
+        </h3>
         <div className="dateHeader">
           <strong>({search.timezone}) </strong> 
           {startDate} ~ {endDate}
