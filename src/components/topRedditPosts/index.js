@@ -8,7 +8,7 @@ import './styles.css';
 function TopRedditPosts() {
 
   const [topPosts, setTopPosts] = useState();
-  const [subReddit, setSubReddit] = useState('SatoshiStreetBets');
+  const [subReddit, setSubReddit] = useState('cryptocurrencies');
   const timezone = useSelector((state) => state.userSettings.timezone);
   const timeFormat = useSelector((state) => state.userSettings.timeFormat);
 
