@@ -92,6 +92,10 @@
   font-size: 13px;
 }
 
+.dot-chart-exp {
+  font-size: 12px;
+}
+
 @media (max-width: 650px) { 
   .dateHeader {
     font-size: 11px;
