@@ -1,14 +1,18 @@
 import React  from 'react';
+import Tooltip from '@mui/material/Tooltip';
+import { formatDate } from '../../util'
 import './style.css';
 
-function DotChart({ lineData }) {
+function DotChart({ lineData, timezone }) {
   
   const dot = (data, index) => {
     if(data === null || data === undefined) return;
     const dotColor = +data?.return < 0 ? 'red-dot' : 'green-dot';
     return (
-      <span key={data?.return} className={"dot " + dotColor}>
-      </span>
+      <Tooltip key={index} title={formatDate(data?.name, 'default', timezone)} arrow>
+        <span className={"dot " + dotColor}>
+        </span>
+      </Tooltip>
     )
   }
 
@@ -28,6 +32,9 @@ function DotChart({ lineData }) {
           <strong>Positive Return: </strong>
           <span className="dot green-dot"></span>
         </div>
+      </div>
+      <div className="dot-chart-exp">
+        <i>**Each Dot represents day/hour</i>
       </div>
     </div>
   );

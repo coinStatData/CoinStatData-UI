@@ -25,19 +25,21 @@ export const CSD_GlobalIndexSlice = createSlice({
     isError: false,
     isLoading: false,
     data: [],
+    
     search: defaultSearch,
     metaData: defaultMetaData,
     error: {},
   },
   reducers: {
 
-// ---------------- CSD global index data ----------------
+  // ---------------- CSD global index data ----------------
 
     begin_fetch: (state, action) => {
       state.isLoading = true;
       state.isError = false;
       state.error = null;
       state.data = [];
+      state.returnData = [];
       state.metaData = defaultMetaData;
       state.search = action.payload;
     },
@@ -46,6 +48,7 @@ export const CSD_GlobalIndexSlice = createSlice({
       state.isError = false;
       state.error = null;
       state.data = action.payload.data;
+      state.returnData = action.payload.returnData;
       state.metaData = action.payload.metaData;
     },
     update_fail: (state, action) => {
@@ -53,6 +56,7 @@ export const CSD_GlobalIndexSlice = createSlice({
       state.isError = true;
       state.error = action.payload;
       state.data = [];
+      state.returnData = [];
       state.search = defaultSearch;
       state.metaData = defaultMetaData;
     },
