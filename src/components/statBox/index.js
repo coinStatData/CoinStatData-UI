@@ -6,6 +6,7 @@ const StatBox = ({ lineData, search }) => {
 
   const [min, setMin] = useState(Number(lineData.price.minMax.hMinReturn));
   const [max, setMax] = useState(Number(lineData.price.minMax.hMaxReturn));
+  
   useEffect(() => {
     setMin(Number(lineData.price.minMax.hMinReturn));
     setMax(Number(lineData.price.minMax.hMaxReturn));

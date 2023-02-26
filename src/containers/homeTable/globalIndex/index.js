@@ -98,22 +98,24 @@ const GlobalIndex = (props) => {
           </tr>
         </thead>
         <tbody>
-          {globalIndex.isError ? 
-            <tr>
-              <td colSpan="6">
-                <ErrorSpinner />
-                <br/><br/>
-              </td>
-            </tr>
-            : 
-            globalIndex.isLoading ? 
+          {globalIndex.isError ? (
               <tr>
                 <td colSpan="6">
-                  <LoadingSpinner />
+                  <ErrorSpinner />
+                  <br/><br/>
                 </td>
               </tr>
-              : 
-              makeTable(globalIndex.data)
+            ) : (
+              globalIndex.isLoading ? (
+                <tr>
+                  <td colSpan="6">
+                    <LoadingSpinner />
+                  </td>
+                </tr>
+              ) : (
+                makeTable(globalIndex.data)
+              )
+            )
           }
         </tbody>
       </Table>

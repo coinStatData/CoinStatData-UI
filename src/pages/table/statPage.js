@@ -4,7 +4,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import useTabNav from '../../hooks/useTabNav';
-import TablePage from './tablePage';
+import TablePage from './descriptive/descriptive';
+import Inferential from './inferential/inferential';
 import './style.css';
 
 function StatPage({ screenWidth }) {
@@ -18,7 +19,7 @@ function StatPage({ screenWidth }) {
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
             <Tabs value={tabValue} onChange={handleTabChange} aria-label="stat-tabs" centered>
               <Tab className="nav-tab-btn" label="Descriptive" {...a11yProps(0)} />
-              <Tab className="nav-tab-btn" disabled label="Inferential" {...a11yProps(1)} />
+              <Tab className="nav-tab-btn" label="Inferential" {...a11yProps(1)} />
               <Tab className="nav-tab-btn" disabled label="Advanced" {...a11yProps(2)} />
             </Tabs>
           </Box>
@@ -27,7 +28,7 @@ function StatPage({ screenWidth }) {
           <TablePage screenWidth={screenWidth} />
 				</TabPanel>
 				<TabPanel value={tabValue} index={1}>
-          <div>hi</div>
+          <Inferential screenWidth={screenWidth} />
 				</TabPanel>
 				<TabPanel value={tabValue} index={2}>
           <div>hi</div>

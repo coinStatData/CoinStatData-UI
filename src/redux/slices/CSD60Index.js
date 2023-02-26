@@ -27,6 +27,7 @@ export const CSD_60IndexSlice = createSlice({
     isError: false,
     isLoading: false,
     data: [],
+    returnData: [],
     search: defaultSearch,
     metaData: defaultMetaData,
     error: {},
@@ -40,6 +41,7 @@ export const CSD_60IndexSlice = createSlice({
       state.isError = false;
       state.error = null;
       state.data = [];
+      state.returnData = [];
       state.metaData = defaultMetaData;
       state.search = action.payload;
     },
@@ -48,6 +50,7 @@ export const CSD_60IndexSlice = createSlice({
       state.isError = false;
       state.error = null;
       state.data = action.payload.data;
+      state.returnData = action.payload.returnData;
       state.metaData = action.payload.metaData;
     },
     update_fail: (state, action) => {
@@ -55,6 +58,7 @@ export const CSD_60IndexSlice = createSlice({
       state.isError = true;
       state.error = action.payload;
       state.data = [];
+      state.returnData = [];
       state.search = defaultSearch;
       state.metaData = defaultMetaData;
     },
