@@ -49,14 +49,42 @@ function Inferential(props) {
               {(CSD_GlobalIndex?.isLoading || CSD_60Index?.isLoading) ? (
                   <LoadingSpinner />
                 ) : (
-                  <div>
-                    <div>
-                      <strong>alpha:</strong> {regressionResult.alpha}
+                  <>
+                    <div className="CAPM-outer-cont">
+                      <div className="CAPM-inner-cont">
+                        <div>
+                          <strong>beta:</strong> {regressionResult.beta}
+                        </div>
+                        <p>
+                          Beta is a way of measuring an coin's volatility compared with the overall index's (CSD-50 Index) volatility.
+                        </p>
+                      </div>
+                      <div className="CAPM-inner-cont">
+                        <div>
+                          <strong>alpha:</strong> {regressionResult.alpha}
+                        </div>
+                        <p>
+                          Alpha measures the amount that a coin has returned in comparison to the market index (CSD-50 index) that it is compared against.
+                        </p>
+                      </div> 
                     </div>
-                    <div>
-                      <strong>beta:</strong> {regressionResult.beta}
+                    <div className="CAPM-info-cont">
+                      <div className="CAPM-info-beta">
+                        <strong>CAPM Equation</strong><br/>
+                        r = Rf + beta (Rm – Rf) + Alpha
+                        <li>r = return</li>
+                        <li>Rf = risk-free rate of return</li>
+                        <li>beta = systematic risk</li>
+                        <li>Rm = market/index return, per a benchmark</li>
+                      </div>
+                      <div className="CAPM-info-beta">
+                        <strong>Beta Rule of Thumb</strong>
+                        <li>{"If the Beta of an individual stock is around 1.0, this means its price is perfectly correlated with the market."}</li>
+                        <li>{"If Beta is greater than 1.0, which is referred to as 'defensive', this indicates the security is theoretically less volatile than the market."}</li>
+                        <li>{"If Beta is less than 1.0, or 'aggressive', this indicates the assets price is more volatile than the market."}</li>
+                      </div>
                     </div>
-                  </div>
+                  </>
                 )
               }
             </Tab>
@@ -65,9 +93,6 @@ function Inferential(props) {
             <Tab disabled eventKey="SVM" title="SVM">
             </Tab>
           </Tabs>
-        </div>
-        <div className="hr-cont">
-          <hr></hr>
         </div>
       </div>
     </>
