@@ -53,7 +53,7 @@ function Inferential(props) {
                     <div className="CAPM-outer-cont">
                       <div className="CAPM-inner-cont">
                         <div>
-                          <strong>beta:</strong> {regressionResult.beta}
+                          <strong>{coin}'s beta:</strong> {regressionResult.beta}
                         </div>
                         <p>
                           Beta is a way of measuring an coin's volatility compared with the overall index's (CSD-50 Index) volatility.
@@ -61,7 +61,7 @@ function Inferential(props) {
                       </div>
                       <div className="CAPM-inner-cont">
                         <div>
-                          <strong>alpha:</strong> {regressionResult.alpha}
+                          <strong>{coin}'s alpha:</strong> {regressionResult.alpha}
                         </div>
                         <p>
                           Alpha measures the amount that a coin has returned in comparison to the market index (CSD-50 index) that it is compared against.
