@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
 import { useSelector } from 'react-redux';
-import { calculateGraphWidth } from '../../../util';
+import { formatDate } from '../../../util';
 import LoadingSpinner from '../../../components/spinner/loading';
 import ErrorSpinner from '../../../components/spinner/error';
 import * as CSDIndexActions from '../../../redux/actions/CSDIndex';
@@ -13,7 +13,7 @@ import './inferential.css';
 function Inferential(props) {
 
   const {
-    CSD_GlobalIndex, CSD_60Index, screenWidth, fetchCSD60Index, fetchGlobalIndex
+    CSD_GlobalIndex, CSD_60Index, fetchCSD60Index, fetchGlobalIndex
   } = props;
 
   const [regressionResult, setRegressionResult] = useState({});
@@ -67,6 +67,15 @@ function Inferential(props) {
                           Alpha measures the amount that a coin has returned in comparison to the market index (CSD-50 index) that it is compared against.
                         </p>
                       </div> 
+                    </div>
+                    <div className="CAPM-date">
+                      <li>
+                        <i>
+                          <b>Date Range:</b> 
+                          {"  " + formatDate(CSD_60Index.metaData?.start, 'default', timezone) + "  ~  "} 
+                          {formatDate(CSD_60Index.metaData?.end, 'default', timezone)}
+                        </i>
+                      </li>
                     </div>
                     <div className="CAPM-info-cont">
                       <div className="CAPM-info-beta">
