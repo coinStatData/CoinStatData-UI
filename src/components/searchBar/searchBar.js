@@ -33,11 +33,9 @@ function SearchBar({ fetchCandleData, fetchLineData, lineData }) {
   const { errorResponse, errorMessage, showAlert, setErrorMessage, setShowAlert } = useErrorHandle();
 
   useEffect(() => {
-    if(lineData.price?.chart?.data?.length <= 2) {
-      fetchDataGecko(coin, days, tempInterval);
-      fetchCandleData(coin, days);
-    }
-  }, []);
+    fetchDataGecko(coin, days, tempInterval);
+    fetchCandleData(coin, days);
+  }, [coin]);
 
   const handleSubmitDates = async (e) => {
     //for lambda

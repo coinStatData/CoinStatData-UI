@@ -7,7 +7,8 @@ import { formatDate } from '../../../util';
 import LoadingSpinner from '../../../components/spinner/loading';
 import ErrorSpinner from '../../../components/spinner/error';
 import * as CSDIndexActions from '../../../redux/actions/CSDIndex';
-import { linearRegression } from 'simple-statistics';
+import { linearRegression, mean } from 'simple-statistics';
+import * as vega from "vega";
 import './inferential.css';
 
 function Inferential(props) {
@@ -17,6 +18,9 @@ function Inferential(props) {
   } = props;
 
   const [regressionResult, setRegressionResult] = useState({});
+  const [indexMean, setIndexMean] = useState(0);
+  const [coinMean, setCoinMean] = useState(0);
+  const [expectedR, setExpectedR] = useState(0);
   const coin = useSelector((state) => state.search.coin);
   const timezone = useSelector((state) => state.userSettings.timezone);
 
@@ -35,8 +39,15 @@ function Inferential(props) {
     if(CSD_60Index.returnData.length > 0 && CSD_GlobalIndex.returnData.length > 0) {
       const returnCoin = CSD_60Index.returnData.map(item => Number(item.change));
       const returndGlobal = CSD_GlobalIndex.returnData.map(item => Number(item.change));
-      const result = linearRegression([returnCoin, returndGlobal]);
+      const result = linearRegression([returndGlobal, returnCoin]);
       setRegressionResult({ beta: result.m.toFixed(5), alpha: result.b.toFixed(5) });
+      const globalMean = mean(returndGlobal) * 365;
+      const singleMean = mean(returnCoin) * 365;
+      setIndexMean(globalMean.toFixed(2));
+      setCoinMean(singleMean.toFixed(2));
+      const ER = Number(result.m.toFixed(5) * globalMean+ + result.b.toFixed(5));
+      setExpectedR(ER.toFixed(2));
+
     }
   }, [CSD_60Index, CSD_GlobalIndex]);
 
@@ -49,7 +60,7 @@ function Inferential(props) {
               {(CSD_GlobalIndex?.isLoading || CSD_60Index?.isLoading) ? (
                   <LoadingSpinner />
                 ) : (
-                  <>
+                  <div className="CAPM">
                     <div className="CAPM-outer-cont">
                       <div className="CAPM-inner-cont">
                         <div>
@@ -68,6 +79,24 @@ function Inferential(props) {
                         </p>
                       </div> 
                     </div>
+                    <div className="CAPM-outer-cont">
+                      <div className="CAPM-inner-cont">
+                        <div>
+                          <strong>{coin}'s annualized return:</strong> {coinMean}
+                        </div>
+                        <p>
+                          annualized return = Mean return * 365
+                        </p>
+                      </div>
+                      <div className="CAPM-inner-cont">
+                        <div>
+                          <strong>CSD-60's's  annualized return:</strong> {indexMean}
+                        </div>
+                        <p>
+                          annualized return (Rm) = Mean return * 365
+                        </p>
+                      </div> 
+                    </div>
                     <div className="CAPM-date">
                       <li>
                         <i>
@@ -81,10 +110,12 @@ function Inferential(props) {
                       <div className="CAPM-info-beta">
                         <strong>CAPM Equation</strong><br/>
                         r = Rf + beta (Rm – Rf) + Alpha
-                        <li>r = return</li>
+                        <li>r = expected return</li>
                         <li>Rf = risk-free rate of return</li>
                         <li>beta = systematic risk</li>
                         <li>Rm = market/index return, per a benchmark</li>
+                        <li>when Rf equals 0 {"  =>  "}</li>
+                        <li className="CAPM-nested-li">r = {regressionResult.beta} * {indexMean} + {regressionResult.alpha} = {expectedR}</li>
                       </div>
                       <div className="CAPM-info-beta">
                         <strong>Beta Rule of Thumb</strong>
@@ -93,7 +124,7 @@ function Inferential(props) {
                         <li>{"If Beta is less than 1.0, or 'aggressive', this indicates the assets price is more volatile than the market."}</li>
                       </div>
                     </div>
-                  </>
+                  </div>
                 )
               }
             </Tab>

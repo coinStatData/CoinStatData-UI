@@ -56,19 +56,19 @@ export const fetchCSDCoins = ({ coin, interval, start, end }) => {
 
 const _mutateResp = (resp) => {
   let data = resp.data;
-  data.sort((a,b) => b.datetime - a.datetime);
+  data.sort((a,b) => a.datetime - b.datetime);
   const returnData = data[0]?.coin ? _calculateReturnCoin(data) : _calculateReturnGlobal(data);
-  const actualEnd = data[0].datetime;
-  const actualStart = data[data.length - 2].datetime;
+  const actualEnd = data[data.length - 1].datetime;
+  const actualStart = data[1].datetime; 
   return { data, returnData, actualStart, actualEnd };
 }
 
 const _calculateReturnGlobal = (data) => {
   const returnData = [];
-  for (let i = 0; i < data.length-1; i++) {
+  for (let i = 1; i < data.length; i++) {
     const entry = {
       datetime: data[i].datetime,
-      change: Number((data[i].none_stable_mc - data[i+1].none_stable_mc) / data[i+1].none_stable_mc * 100).toFixed(4)
+      change: Number((data[i].none_stable_mc - data[i-1].none_stable_mc) / data[i-1].none_stable_mc * 100).toFixed(4)
     }
     returnData.push(entry);
   }
@@ -77,10 +77,10 @@ const _calculateReturnGlobal = (data) => {
 
 const _calculateReturnCoin = (data) => {
   const returnData = [];
-  for (let i = 0; i < data.length-1; i++) {
+  for (let i = 1; i < data.length; i++) {
     const entry = {
       datetime: data[i].datetime,
-      change: Number((data[i].price - data[i+1].price) / data[i+1].price * 100).toFixed(4)
+      change: Number((data[i].price - data[i-1].price) / data[i-1].price * 100).toFixed(4)
     }
     returnData.push(entry);
   }
