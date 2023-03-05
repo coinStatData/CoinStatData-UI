@@ -101,8 +101,8 @@ function Inferential(props) {
                       <li>
                         <i>
                           <b>Date Range:</b> 
-                          {"  " + formatDate(CSD_60Index.metaData?.start, 'default', timezone) + "  ~  "} 
-                          {formatDate(CSD_60Index.metaData?.end, 'default', timezone)}
+                          {"  " + formatDate(CSD_60Index.metaData?.start, 'default', timezone).substring(0,11) + "  ~  "} 
+                          {formatDate(CSD_60Index.metaData?.end, 'default', timezone).substring(0,11)}
                         </i>
                       </li>
                     </div>
