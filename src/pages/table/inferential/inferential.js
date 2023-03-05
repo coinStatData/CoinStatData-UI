@@ -8,6 +8,7 @@ import LoadingSpinner from '../../../components/spinner/loading';
 import ErrorSpinner from '../../../components/spinner/error';
 import * as CSDIndexActions from '../../../redux/actions/CSDIndex';
 import { linearRegression, mean } from 'simple-statistics';
+import * as vega from "vega";
 import './inferential.css';
 
 function Inferential(props) {
@@ -39,9 +40,6 @@ function Inferential(props) {
       const returnCoin = CSD_60Index.returnData.map(item => Number(item.change));
       const returndGlobal = CSD_GlobalIndex.returnData.map(item => Number(item.change));
       const result = linearRegression([returndGlobal, returnCoin]);
-      console.log(result);
-      console.log(returnCoin)
-      console.log(returndGlobal)
       setRegressionResult({ beta: result.m.toFixed(5), alpha: result.b.toFixed(5) });
       const globalMean = mean(returndGlobal) * 365;
       const singleMean = mean(returnCoin) * 365;
