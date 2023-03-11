@@ -106,9 +106,9 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
                   <ErrorSpinner />
                 ) : (
                   <DotChart 
-                  lineData={lineData}
-                  timezone={timezone}
-                  isDaily={isDaily}
+                    lineData={lineData}
+                    timezone={timezone}
+                    isDaily={isDaily}
                   />
                 )
               }

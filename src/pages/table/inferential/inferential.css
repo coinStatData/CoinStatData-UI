@@ -42,6 +42,11 @@
   margin-top: 20px;
 }
 
+.CAPM-info-beta i {
+  font-size: 15px;
+  padding: 4px 0;
+}
+
 .CAPM-date {
   font-size: 12px;
   text-align: center;
@@ -100,6 +105,9 @@
   .CAPM-info-beta {
     width: 95%;
   }
+  .CAPM-info-beta i {
+    font-size: 13px;
+  }  
   .CAPM-inner-cont div {
     font-size: 12px;
   }
