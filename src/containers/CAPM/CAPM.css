@@ -1,42 +1,43 @@
-.CAPM-inner-cont {
+.CAPMM-inner-cont {
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center;
 }
 
-.CAPM-table-cont {
+.CAPMM-table-cont {
   margin-top: 20px;
   width: auto;
   max-height: 500px;
   overflow-y: auto;
 }
 
-.CAPM-graph-cont {
+.CAPMM-graph-cont {
   margin: 20px 20px;
   background-color: whitesmoke;
   padding: 10px;
   border-radius: 7px;
 }
 
-.CAPM-table-cont th {
+.CAPMM-table-cont th {
   padding: 7px;
   font-size: 13px;
 }
 
-.CAPM-table-cont td {
+.CAPMM-table-cont td {
   padding: 7px;
   font-size: 12px;
 }
 
-
 .loading-cont {
-  margin: 40px 0;
+  margin: 60px 0;
 }
 
 @media (max-width: 600px) {
-  .CAPM-inner-cont h4 {
+  .CAPMM-inner-cont h4 {
     font-size: 16px;
   }
-  
+  .loading-cont {
+    margin: 30px 0;
+  }
 }

@@ -9,7 +9,7 @@ import { linearRegression, mean } from 'simple-statistics';
 import { formatDate, calculateGraphWidth } from '../../util';
 import { CSD_LIST } from '../../util/constants/coins';
 import Table from 'react-bootstrap/Table'
-import { ScatterChart, Bar, XAxis, Scatter, YAxis, Tooltip, CartesianGrid, ZAxis, Legend, ResponsiveContainer } from 'recharts';
+import { ScatterChart, XAxis, Scatter, YAxis, Tooltip, CartesianGrid, ZAxis, Legend } from 'recharts';
 import './CAPM.css';
 
 const CAPM = (props) => {
@@ -89,16 +89,16 @@ const CAPM = (props) => {
   }
   
   return (
-    <div className="CAPM-outer-cont">
+    <div className="CAPMM-outer-cont">
       {capm.length === 0 ? (
         <div className="loading-cont">
           <LoadingSpinner />
         </div>
 
         ) : (
-          <div className="CAPM-inner-cont">
+          <div className="CAPMM-inner-cont">
             <h4>Capital Asset Pricing Model (CAPM)</h4>
-            <div className="CAPM-graph-cont">
+            <div className="CAPMM-graph-cont">
               <ScatterChart
                 width={graphWidth}
                 height={graphWidth/3}
@@ -112,7 +112,7 @@ const CAPM = (props) => {
                 <Scatter name="CAPM" data={capm} fill="#8884d8" />
               </ScatterChart>
             </div>
-            <div className="CAPM-table-cont"> 
+            <div className="CAPMM-table-cont"> 
               <Table striped bordered hover responsive>
                 <thead>
                   <tr>
