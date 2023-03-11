@@ -31,7 +31,7 @@ function App() {
               {/* pages with navbar */}
               <Route path="/" element={<HomePage screenWidth={screenWidth} />} />
               <Route path="/stat" element={<StatPage screenWidth={screenWidth}/>} />
-              <Route path="/optimization" element={<PortFolioOptV2 />} />
+              <Route path="/optimization" element={<PortFolioOptV2 screenWidth={screenWidth} />} />
               <Route path="/donate" element={<DonatePage />} />
               <Route path="/chat" element={<ChatPage />} />
               <Route path="/publicAPI" element={<PublicAPIPage />} />

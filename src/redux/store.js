@@ -14,6 +14,7 @@ import CSDCoinsReducer from './slices/CSDCoins';
 import userSettingReducer from './slices/userSettings';
 import marqueeReducer from './slices/marquee';
 import miniChartReducer from './slices/miniCharts';
+import capmReducer from './slices/capm';
 
 export default configureStore({
   reducer: {
@@ -30,7 +31,8 @@ export default configureStore({
     userSettings: userSettingReducer,
     marquee: marqueeReducer,
     miniChart: miniChartReducer,
-    candleDataV2: candleDataV2Reducer
+    candleDataV2: candleDataV2Reducer,
+    capm: capmReducer
   },
   middleware: (getDefaultMiddleware) => {
     return process.env?.REACT_APP_NODE_ENV === 'dev' ? 

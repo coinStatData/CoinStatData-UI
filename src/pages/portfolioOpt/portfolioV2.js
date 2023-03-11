@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import useTabNav from '../../hooks/useTabNav';
+import CAPM from '../../containers/CAPM/CAPM';
 import './portfolioV2.css';
 
 function PortFolioOpt(props) {
@@ -27,13 +28,7 @@ function PortFolioOpt(props) {
 					<PortfolioOptimization/>
 				</TabPanel>
 				<TabPanel value={tabValue} index={1}>
-					<div className="under-construction">
-						<ConstructionIcon />
-						<span>
-							Under construction. Coming Soon...
-						</span>
-						<ConstructionIcon />
-					</div>
+					<CAPM screenWidth={props.screenWidth} />
 				</TabPanel>
 				<TabPanel value={tabValue} index={2}>
 					<div className="under-construction">

@@ -20,6 +20,18 @@ export const fetchCSD60Index = ({ coin, interval, start, end }) => {
   }
 }
 
+export const fetchReturnCSD60Coin = async ({ coin, interval, start, end }) => {
+  try {
+    const resp = await CSDIndexService().fetchCSDIndex({ coin, interval, start, end });
+    const { returnData, actualEnd, actualStart } = _mutateResp(resp);
+    const payload = { returnData, metaData: { end: actualEnd, start: actualStart, coin } };
+    return payload;
+  } catch(e) {
+    console.error(e.message);
+    return false;
+  }
+}
+
 export const fetchCSDGlobalIndex = ({ interval, start, end }) => {
   return async dispatch => {
     dispatch(CSDGlobalReducers.begin_fetch({ interval, start, end }));
