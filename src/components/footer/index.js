@@ -38,7 +38,6 @@ function Footer() {
           </div>
           <div className="link-cont">
             <h5>Developer</h5>
-            <a target="_blank" href="https://ai.coinstatdata.com">Artificial Intelligence</a>
             <Link to="/publicAPI">Crypto API</Link>
             <a target="_blank" href="https://github.com/coinStatData">GitHub</a>
           </div>
