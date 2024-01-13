@@ -59,7 +59,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "client": "react-scripts start",
-    "build": "rm -rf build && mkdir build && npx esbuild src/index.js --bundle --outdir=build --loader:.js=jsx --loader:.woff2=file --loader:.woff=file --loader:.png=file --loader:.webp=file --loader:.svg=file --loader:.jpg=file"
+    "build": "rm -rf build && mkdir build && npx esbuild ./src/index.js --bundle --outdir=build --loader:.js=jsx --loader:.woff2=file --loader:.woff=file --loader:.png=file --loader:.webp=file --loader:.svg=file --loader:.jpg=file && cp -r ./public ./build"
   },
   "eslintConfig": {
     "extends": []
