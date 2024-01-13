@@ -49,18 +49,17 @@
     "socket.io-client": "^4.5.2",
     "style-loader": "^3.3.1",
     "vega": "^5.23.0",
-    "web-vitals": "^2.1.4",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "web-vitals": "^2.1.4"
+
   },
   "scripts": {
     "start": "webpack-dev-server",
     "build:webpack": "webpack",
-    "build": "react-scripts build",
+    "build1": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "client": "react-scripts start"
+    "client": "react-scripts start",
+    "build": "rm -rf build && mkdir build && npx esbuild src/index.js --bundle --outdir=build --loader:.js=jsx --loader:.woff2=file --loader:.woff=file --loader:.png=file --loader:.webp=file --loader:.svg=file --loader:.jpg=file"
   },
   "eslintConfig": {
     "extends": []
@@ -78,6 +77,10 @@
     ]
   },
   "devDependencies": {
-    "file-loader": "^6.2.0"
+    "esbuild": "0.19.11",
+    "file-loader": "^6.2.0",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.3"
   }
 }
