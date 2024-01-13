@@ -16,9 +16,6 @@
     "@mui/joy": "^5.0.0-alpha.49",
     "@mui/material": "^5.10.9",
     "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.35.5",
     "axios": "^0.27.2",
     "Babel": "^0.0.1",
@@ -55,11 +52,11 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build:webpack": "webpack",
-    "build1": "react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "client": "react-scripts start",
-    "build": "rm -rf build && mkdir build && npx esbuild ./src/index.js --bundle --outdir=build --loader:.js=jsx --loader:.woff2=file --loader:.woff=file --loader:.png=file --loader:.webp=file --loader:.svg=file --loader:.jpg=file && cp -r ./public ./build"
+    "esbuild": "rm -rf build && mkdir build && npx esbuild ./src/index.js --bundle --outdir=build --loader:.js=jsx --loader:.woff2=file --loader:.woff=file --loader:.png=file --loader:.webp=file --loader:.svg=file --loader:.jpg=file && cp -r ./public ./build"
   },
   "eslintConfig": {
     "extends": []
@@ -81,6 +78,9 @@
     "file-loader": "^6.2.0",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.9.3"
+    "webpack-dev-server": "^4.9.3",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^13.5.0"
   }
 }
