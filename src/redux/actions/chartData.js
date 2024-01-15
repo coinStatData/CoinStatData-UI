@@ -81,7 +81,7 @@ export const fetchLineData = (coin, days, interval) => {
       return resp.data;
     } catch(e) {
       console.log(e.message);
-      dispatch(LineReducers.update_fail(e.messagee));
+      dispatch(LineReducers.update_fail(e.message));
       throw e;
     }
   }
@@ -97,7 +97,7 @@ export const fetchMarqueeData = (coins) => {
       return resp.data;
     } catch(e) {
       console.log(e.message);
-      dispatch(LineReducers.update_fail(e.messagee));
+      dispatch(LineReducers.update_fail(e.message));
       throw e;
     }
   }
@@ -129,7 +129,7 @@ export const fetchLineDataAndCalculate_price = (coin, days, interval, timezone) 
       return true;
     } catch(e) {
       console.log(e.message);
-      dispatch(LineReducers.update_fail(e.messagee));
+      dispatch(LineReducers.update_fail(e.message));
       throw e;
     }
   }
@@ -161,7 +161,7 @@ export const fetchLineDataAndCalculate_volume = (coin, days, interval, timezone)
       return true;
     } catch(e) {
       console.log(e.message);
-      dispatch(LineReducers.update_fail(e.messagee));
+      dispatch(LineReducers.update_fail(e.message));
       throw e;
     }
   }

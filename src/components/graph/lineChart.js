@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import Button from 'react-bootstrap/Button';
 import { useSelector } from 'react-redux'
 import './style.css';
 
-function LineChartBoy(props) {
+const LineChartBoy = memo(function LineChartBoy(props) {
 
   const { startDate, endDate, coin, volumeOrPrice } = useSelector((state) => state.search);
   const { timezone } = useSelector((state) => state.userSettings);
@@ -71,6 +71,6 @@ function LineChartBoy(props) {
       </div>
     </div>
   );
-}
+});
 
 export default LineChartBoy;

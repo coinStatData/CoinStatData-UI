@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { connect } from 'react-redux';
 import Table2 from '../../../components/table/table';
 import SearchBar from '../../../components/searchBar/searchBar';
@@ -16,7 +16,7 @@ import LoadingSpinner from '../../../components/spinner/loading';
 import ErrorSpinner from '../../../components/spinner/error';
 import '../style.css';
 
-function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLineData }) {
+const TablePage = memo(function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLineData }) {
 
   const [isDaily, setIsDaily] = useState(true);
   const [graphWidth, setGraphWidth] = useState(calculateGraphWidth(screenWidth)[0]);
@@ -42,6 +42,10 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
   useEffect(() => {
     calculateSize(screenWidth);
   }, [screenWidth]);
+
+  const fetchLineDataCB = useCallback((coin, days, interval, timezone) =>{
+    fetchLineData(coin, days, interval, timezone);
+  }, [coin]);
 
   return (
     <>
@@ -122,7 +126,7 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
           <div className="half-page-cont">
             <SearchBar 
               fetchCandleData={fetchCandleData} 
-              fetchLineData={fetchLineData} 
+              fetchLineData={fetchLineDataCB} 
               lineData={lineData} 
             />
           </div>
@@ -133,7 +137,7 @@ function TablePage({ fetchCandleData, screenWidth, candleData, lineData, fetchLi
       </div>
     </>
   );
-}
+});
 
 function mapStateToProps(state) {
   return {

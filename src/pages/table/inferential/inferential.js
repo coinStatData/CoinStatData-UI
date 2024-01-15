@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { connect } from 'react-redux';
 import Tabs from 'react-bootstrap/Tabs'
 import Tab from 'react-bootstrap/Tab'
@@ -10,7 +10,7 @@ import * as CSDIndexActions from '../../../redux/actions/CSDIndex';
 import { linearRegression, mean } from 'simple-statistics';
 import './inferential.css';
 
-function Inferential(props) {
+const Inferential = memo(function Inferential(props) {
 
   const {
     CSD_GlobalIndex, CSD_60Index, fetchCSD60Index, fetchGlobalIndex
@@ -136,7 +136,7 @@ function Inferential(props) {
       </div>
     </>
   );
-}
+});
 
 function mapStateToProps(state) {
   return {

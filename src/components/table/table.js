@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, memo } from 'react';
 import Table from 'react-bootstrap/Table'
 import { formatDate } from '../../util'
 import { CSVLink } from "react-csv";
@@ -12,7 +12,7 @@ import Box from '@mui/joy/Box';
 import Stack from '@mui/joy/Stack';
 import './style.css';
 
-function Table2(props) {
+const Table2 = memo(function Table2(props) {
   const [tableD, setTableD] = useState();
   const [isLambda, setIsLambda] = useState();
   const dispatch = useDispatch()
@@ -151,6 +151,6 @@ function Table2(props) {
       }
     </>
   );
-}
+})
 
 export default Table2;
