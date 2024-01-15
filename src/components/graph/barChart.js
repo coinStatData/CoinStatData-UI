@@ -1,10 +1,10 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect, memo }  from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import './style.css';
 
-function BarChartBoy(props) {
+const BarChartBoy = memo(function BarChartBoy(props) {
 
   const { startDate, endDate, interval, volumeOrPrice } = useSelector((state) => state.search);
   const { graphWidth } = props;
@@ -56,6 +56,6 @@ function BarChartBoy(props) {
   return (
     renderGraph()
   );
-}
+});
 
 export default BarChartBoy;

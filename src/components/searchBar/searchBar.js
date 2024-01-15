@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { update_coin, update_interval } from '../../redux/slices/search';
@@ -16,7 +16,7 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import useErrorHandle from '../../hooks/useErrorHandle';
 import './style.css';
 
-function SearchBar({ fetchCandleData, fetchLineData, lineData }) {
+const SearchBar = memo(function SearchBar({ fetchCandleData, fetchLineData, lineData }) {
 
   const [start, setStart] = useState('2022.04.30');
   const [isInteger, setIsInteger] = useState(true);
@@ -28,14 +28,15 @@ function SearchBar({ fetchCandleData, fetchLineData, lineData }) {
   const interval = useSelector((state) => state.search.interval);
   const timezone = useSelector((state) => state.userSettings.timezone);
   const [tempInterval, setTempInterval] = useState(interval);
-  const [coinName, setCoinName] = useState(coin);
+  const [coinName, setCoinName] = useState("");
   const dispatch = useDispatch();
   const { errorResponse, errorMessage, showAlert, setErrorMessage, setShowAlert } = useErrorHandle();
 
   useEffect(() => {
-    fetchDataGecko(coin, days, tempInterval);
-    fetchCandleData(coin, days);
-  }, [coin]);
+    if(lineData?.resp?.data?.length < 2) {
+      fetchDataGecko(coin, days, tempInterval);
+    }
+  }, []);
 
   const handleSubmitDates = async (e) => {
     //for lambda
@@ -225,6 +226,6 @@ function SearchBar({ fetchCandleData, fetchLineData, lineData }) {
       </form>
     </div>
   );
-}
+})
 
 export default SearchBar;

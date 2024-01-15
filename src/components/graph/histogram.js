@@ -1,9 +1,9 @@
-import React, { useEffect }  from 'react';
+import React, { useEffect, memo }  from 'react';
 import Histogram from "../../stat-scripts/histogram";
 
 import './style.css';
 
-function HistogramD3({ 
+const HistogramD3 = memo(function HistogramD3({ 
   data, 
   width=500, 
   height=300, 
@@ -30,6 +30,6 @@ function HistogramD3({
     <div id="histogram-chart-cont">
     </div>
   );
-}
+});
 
 export default HistogramD3;

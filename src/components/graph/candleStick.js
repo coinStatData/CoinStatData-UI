@@ -1,10 +1,10 @@
-import React, { useState, useEffect }  from 'react';
+import React, { useState, useEffect, memo }  from 'react';
 import ApexCharts from 'apexcharts'
 import prepCandleData from './util/prepareCandleData';
 import { checkIfSameArrayCandle } from '../../util';
 import './style.css';
 
-function CandleStickChart({ graphWidth, coin, candleData, timezone }) {
+const CandleStickChart = memo(function CandleStickChart({ graphWidth, coin, candleData, timezone }) {
 
   const [candleChartCopy, setCandleChartCopy] = useState([{open: 0, close: 0}]); //copy due to double render
   const [mudatedDataCopy, setMudatedDataCopy] = useState([{x: 0, y: []}]); //copy due to double render
@@ -42,6 +42,6 @@ function CandleStickChart({ graphWidth, coin, candleData, timezone }) {
       </div>
     </div>
   );
-}
+})
 
 export default CandleStickChart;
