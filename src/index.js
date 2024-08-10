@@ -42,14 +42,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
     |__/     |__/ \______/  \______/ |__/  |__/   |__/
     `
   );
-  console.log(
-    "%c Luke 1:37", 
-    "color:gold; font-weight:bold;"
-  );
-  console.log(
-    "%c Philippians 4:13", 
-    "color:gold; font-weight:bold;"
-  );
 
   root.render(
     <Provider store={store}>

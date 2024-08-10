@@ -5,6 +5,8 @@ import TopRedditPosts from '../../components/topRedditPosts';
 import Chat from '../../containers/chat';
 import CoinGecko from '../../components/coinGecko';
 import Marquee from '../../containers/marquee';
+import Alert from 'react-bootstrap/Alert'
+import { DISCLAIMER } from './constants';
 
 import './home.css';
 
@@ -13,6 +15,14 @@ function HomePage({ screenWidth }) {
 	return (
     <>
       <Marquee/>
+      <div className="disclaimer-cont">
+        <Alert className="disclaimer-alert" variant="danger">
+          <Alert.Heading>Important Disclaimer!</Alert.Heading>
+          <div className="disclaimer-p">
+            {DISCLAIMER}
+          </div>
+        </Alert>
+      </div>
       <div className="flex-cont">
         <div className="homeTable-box">
           <HomeTable 

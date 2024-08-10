@@ -30,6 +30,10 @@
   width: 100%;
 }
 
+.disclaimer-alert {
+  margin: 0 !important;
+}
+
 #gecko-price-widget {
   pointer-events: none !important;
 }
