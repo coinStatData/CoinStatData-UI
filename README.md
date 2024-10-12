@@ -1,7 +1,5 @@
 # CoinStatData-UI
-This is the frontend application of CoinStatData. It has a user-friendly interface, which connects to the CoinStatData-Server. It is still under development. 
-
-- In the meantime, please visit https://coinstatdata.com.
+This is a project demo - not a real application. 
 
 # Indexes
 ## CSD 50 Index
